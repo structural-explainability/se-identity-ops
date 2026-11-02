@@ -1,0 +1,119 @@
+# examples/sbom/expected.toml
+# Expected results for Experiment B, recorded BEFORE the first run of
+# known_bad.ido and known_good.ido.
+#
+# EVIDENCE ROLE: engineering validation. Both cases were known during the design
+# of the pilot. The expected results below come from the pilot's own recorded
+# adjudication (VIOLATED_RELOCATED for the known-bad case, PRESERVED for the
+# known-good case). Reproducing them shows that the language can express the
+# frozen commitment's consequences on these two documents. It does not show that
+# the language generalizes, and it does not show that it finds anything new.
+#
+# Not opened: anything under generalization/ in the pilot repository.
+
+[meta]
+id = "EXP-B-sbom-purl-identity"
+evidence_role = "engineering_validation"
+freeze = "Freeze 01 (commitment/evaluator) of se-pilot-identity-preservation-supply-chain-software"
+
+# ---- known_bad.ido ----
+
+[[expect]]
+program = "known_bad.ido"
+label = "b_coverage"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "partial"
+basis = "Of 14 frames, 8 have no SHA-256 (4 source packages and 4 target components), so the anchor criterion is silent about them."
+
+[[expect]]
+program = "known_bad.ido"
+label = "b_canonical"
+kind = "engineering_validation"
+outcome = "refuted"
+word = "violated"
+basis = "The pilot records VIOLATED_RELOCATED for base-files, netbase, and tzdata: the PURL is not in component.purl of the target. Three anchored pairs should diverge."
+
+[[expect]]
+program = "known_bad.ido"
+label = "b_any_slot"
+kind = "engineering_validation"
+outcome = "established"
+word = "satisfied"
+basis = "The same PURL appears in a property value of the target component, so reading any slot does not split any anchored pair."
+
+[[expect]]
+program = "known_bad.ido"
+label = "c_pos"
+kind = "control_positive"
+outcome = "established"
+word = "satisfied"
+basis = "The probe is the anchor value itself."
+
+[[expect]]
+program = "known_bad.ido"
+label = "c_neg"
+kind = "control_negative"
+outcome = "refuted"
+word = "violated"
+basis = "The probe is the frame role (source or target); every anchored pair has one of each."
+
+# ---- known_good.ido ----
+
+[[expect]]
+program = "known_good.ido"
+label = "b_coverage"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "partial"
+basis = "Same 8 hash-less frames."
+
+[[expect]]
+program = "known_good.ido"
+label = "b_canonical"
+kind = "engineering_validation"
+outcome = "established"
+word = "satisfied"
+basis = "The pilot records PRESERVED for the three anchored components: component.purl carries the PURL."
+
+[[expect]]
+program = "known_good.ido"
+label = "b_any_slot"
+kind = "engineering_validation"
+outcome = "established"
+word = "satisfied"
+basis = "If the canonical slot is faithful, reading any slot is faithful."
+
+[[expect]]
+program = "known_good.ido"
+label = "c_pos"
+kind = "control_positive"
+outcome = "established"
+word = "satisfied"
+basis = "The probe is the anchor value itself."
+
+[[expect]]
+program = "known_good.ido"
+label = "c_neg"
+kind = "control_negative"
+outcome = "refuted"
+word = "violated"
+basis = "The probe is the frame role."
+
+[[relation]]
+name = "R1_three_anchored_classes"
+statement = "known_bad.b_canonical.related_classes == 3 and known_good.b_canonical.related_classes == 3"
+certain = false
+note = "Expected from the pilot's recorded results: three components have both a source and a target frame with the same hash."
+
+[[relation]]
+name = "R2_bad_case_diverges_in_three_classes"
+statement = "known_bad.b_canonical.divergent_classes == 3"
+certain = false
+
+[independent]
+# verify_independent.py reads the pilot's recorded evaluator results
+# (result.json for each case) and compares them component by component with the
+# run output, and re-reads the JSON documents without using extract_components.py.
+procedure = "examples/sbom/verify_independent.py"
+frozen_evaluator_note = "The pilot's evaluator is not run or reimplemented here; its recorded result.json files are read."

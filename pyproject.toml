@@ -1,0 +1,134 @@
+# ============================================================
+# pyproject.toml (Python project configuration)
+# ============================================================
+# Updated: 2026-11-02
+#
+# REQ: All Python src/ projects SHOULD include pyproject.toml.
+# WHAT: Defines project identity, dependencies, and build configuration.
+# WHY: Keeps Python project metadata and package requirements together.
+# CUSTOM: Update project identity, dependencies, and package paths.
+
+# ============================================================
+# === SECTION: PROJECT IDENTITY ===
+# ============================================================
+
+[project]
+authors = [{name = "Denise M. Case"}]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Science/Research",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.15",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Scientific/Engineering",
+  "Typing :: Typed",
+]
+description = "Research experiment: a small language for specifying, executing, and auditing identity-relevant operations under declared criteria"
+dynamic = ["version"] # WHY: Version is computed from git tags at build time (see [tool.hatch.version]).
+keywords = [
+  "structural-explainability",
+  "identity",
+  "entity-resolution",
+  "domain-specific-language",
+  "research-software",
+]
+license = "Apache-2.0" # WHY: SPDX expression (PEP 639); the license classifier is intentionally omitted.
+license-files = ["LICENSE"]
+maintainers = [{name = "Denise M. Case"}]
+name = "se-identity-ops"
+readme = "README.md"
+requires-python = ">=3.12" # WHY: Code uses `type` and union syntax from 3.12; CI tests 3.12 through 3.15.
+
+# ============================================================
+# === SECTION: PROJECT RUNTIME DEPENDENCIES ===
+# ============================================================
+
+dependencies = []
+
+# ============================================================
+# === SECTION: DEVELOPMENT AND DOCUMENTATION DEPENDENCIES ===
+# ============================================================
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "ty",
+  "clingo", # WHY: Runs the LACE-style encodings in lace/ and checks them against the interpreter.
+]
+docs = [
+  "zensical",
+]
+
+[project.scripts]
+se-identity-ops = "se_identity_ops.cli:main"
+
+[project.urls]
+Changelog = "https://github.com/structural-explainability/se-identity-ops/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/structural-explainability/se-identity-ops"
+Issues = "https://github.com/structural-explainability/se-identity-ops/issues"
+Repository = "https://github.com/structural-explainability/se-identity-ops"
+
+# ============================================================
+# === SECTION 2: TOOL CONFIGURATION ===
+# ============================================================
+
+# === MARKDOWNLINT (MARKDOWN LINTING) ===
+
+[tool.markdownlint]
+MD033 = false # WHY: Allow inline HTML such as details, summary, iframe, and video.
+
+# === UV (PYTHON ENVIRONMENT AND DEPENDENCY MANAGEMENT) ===
+
+[tool.uv]
+# WHY: Install all repository tooling with the canonical `uv sync`.
+default-groups = "all"
+
+# WHY: Give a bit of time to find hijacked releases before installing.
+# CUSTOM: Should match `uvx prek update --freeze --cooldown-days 7`.
+exclude-newer = "7 days"
+
+# ============================================================
+# SECTION 3: BUILD SYSTEM (boilerplate; CUSTOM src/ agreement)
+# ============================================================
+#
+# REQ.PROJECT: A build system MUST be declared for package discovery and publishing.
+# REQ.STRUCTURE: All importable code MUST live under src/.
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling", "hatch-vcs"]
+
+[tool.hatch.build.hooks.vcs]
+# WHY: Writes computed version into src/*/_version.py at build time.
+# CUSTOM: Must match src/ folders.
+version-file = "src/se_identity_ops/_version.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/se_identity_ops",
+  "CHANGELOG.md",
+  "CITATION.cff",
+  "LICENSE",
+  "README.md",
+  "SE_MANIFEST.toml",
+  "pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/se_identity_ops"]
+
+[tool.hatch.version]
+# Used when no git tags present (fresh clone, CI). Keep in sync with CITATION.cff.
+fallback-version = "0.1.0"
+source = "vcs"
+search_parent_directories = true
+tag-pattern = "^(?:v)?(?P<version>\\d+\\.\\d+\\.\\d+)$"

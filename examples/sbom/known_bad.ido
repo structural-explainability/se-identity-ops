@@ -1,0 +1,36 @@
+# examples/sbom/known_bad.ido
+# Experiment B, case 1: cyclonedx-cli 0.31.0 conversion of the Distroless SPDX SBOM.
+#
+# EVIDENCE ROLE: engineering validation. The failure shape was known during the
+# design of the pilot (issue cyclonedx-cli #424). This is not evidence of
+# generalization.
+#
+# Question: for components anchored by content hash, does the target keep the
+# PURL in the canonical slot, and if not, is it present anywhere in the target?
+
+source case
+    file "data/components_known_bad.csv"
+    sha256 "9ab14cc7387296c840f660741ff6fa870a810e976a4c062318bbcf441cf8780d"
+    note "source.spdx.json and cyclonedx-cli-424/target.cdx.json from the Freeze 01 validation case, read by extract_components.py"
+
+carrier component_frame from case key "frame"
+
+regime component_anchor on component_frame by "anchor_hash"
+    source case
+    meaning "frozen commitment purl_preservation_v1 anchor: source and target components are the same component when they share a content hash; a component with no hash is unanchored"
+
+probe canonical_slot_purl on component_frame column "canonical_purl" source case
+probe any_slot_purl on component_frame column "any_slot_purl" source case
+
+# Controls whose answers follow from the table layout alone.
+probe anchor_value on component_frame column "anchor_hash" source case
+probe frame_role on component_frame column "role" source case
+
+check b_coverage coverage component_anchor
+check b_canonical faithful component_anchor against canonical_slot_purl
+check b_any_slot faithful component_anchor against any_slot_purl
+check c_pos faithful component_anchor against anchor_value
+check c_neg faithful component_anchor against frame_role
+
+explain b_canonical
+explain b_coverage

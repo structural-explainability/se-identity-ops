@@ -1,0 +1,15 @@
+frame,role,ref,name,anchor_hash,canonical_purl,any_slot_purl
+s01,source,SPDXRef--slash--slash-base-colon-static-underscore-root-underscore-amd64-underscore-debian12,//base:static_root_amd64_debian12,,,
+s02,source,SPDXRef--at-rules-underscore-distroless~~apt~bookworm-underscore-base-files-underscore-12.4-p-deb12u10-underscore-amd64,base-files,sha256:1a6413c69d865036b6c3ffc90c92f8c028e4b9fd942fb62befe55ec04e8a362d,pkg:deb/debian/base-files@12.4%2Bdeb12u10?arch=amd64,pkg:deb/debian/base-files@12.4%2Bdeb12u10?arch=amd64
+s03,source,SPDXRef--at-bookworm-slash--slash-base-files-slash-amd64-colon-spdx,@bookworm//base-files/amd64:spdx,,,
+s04,source,SPDXRef--at-rules-underscore-distroless~~apt~bookworm-underscore-netbase-underscore-6.4-underscore-amd64,netbase,sha256:29b23c48c0fe6f878e56c5ddc9f65d1c05d729360f3690a593a8c795031cd867,pkg:deb/debian/netbase@6.4?arch=all,pkg:deb/debian/netbase@6.4?arch=all
+s05,source,SPDXRef--at-bookworm-slash--slash-netbase-slash-amd64-colon-spdx,@bookworm//netbase/amd64:spdx,,,
+s06,source,SPDXRef--at-rules-underscore-distroless~~apt~bookworm-underscore-tzdata-underscore-2025b-0-p-deb12u1-underscore-amd64,tzdata,sha256:a17042cb951b80d0c9462a73dec6ad31fc6adeae4ed92209601dc97d1019d7f2,pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all,pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all
+s07,source,SPDXRef--at-bookworm-slash--slash-tzdata-slash-amd64-colon-spdx,@bookworm//tzdata/amd64:spdx,,,
+t01,target,//base:static_root_amd64_debian12,//base:static_root_amd64_debian12,,,
+t02,target,base-files,base-files,sha256:1a6413c69d865036b6c3ffc90c92f8c028e4b9fd942fb62befe55ec04e8a362d,pkg:deb/debian/base-files@12.4%2Bdeb12u10?arch=amd64,pkg:deb/debian/base-files@12.4%2Bdeb12u10?arch=amd64
+t03,target,@bookworm//base-files/amd64:spdx,@bookworm//base-files/amd64:spdx,,,
+t04,target,netbase,netbase,sha256:29b23c48c0fe6f878e56c5ddc9f65d1c05d729360f3690a593a8c795031cd867,pkg:deb/debian/netbase@6.4?arch=all,pkg:deb/debian/netbase@6.4?arch=all
+t05,target,@bookworm//netbase/amd64:spdx,@bookworm//netbase/amd64:spdx,,,
+t06,target,tzdata,tzdata,sha256:a17042cb951b80d0c9462a73dec6ad31fc6adeae4ed92209601dc97d1019d7f2,pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all,pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all
+t07,target,@bookworm//tzdata/amd64:spdx,@bookworm//tzdata/amd64:spdx,,,

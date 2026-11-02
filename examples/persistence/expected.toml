@@ -1,0 +1,117 @@
+# examples/persistence/expected.toml
+# Expected results for the synthetic persistence controls, recorded BEFORE the
+# first run of program.ido.
+#
+# EVIDENCE ROLE: synthetic interpreter controls. These are not evidence about any
+# real object and they do not test whether the language handles real persistence
+# data. They test that the interpreter does what SEMANTICS.md says on cases whose
+# answers I can derive by hand.
+
+[meta]
+id = "EXP-C-persistence-synthetic-controls"
+evidence_role = "synthetic_control"
+
+[[expect]]
+label = "a_rekey"
+kind = "control_positive"
+outcome = "established"
+word = "licensed"
+basis = "A preserving step with no distinct judgment is licensed."
+
+[[expect]]
+label = "c_rekey"
+kind = "control_positive"
+outcome = "established"
+word = "required"
+basis = "After the licensed step, r0 and r1 are generated-identical."
+
+[[expect]]
+label = "a_f1"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "ignoring"
+basis = "An identity-ignoring operator licenses nothing by classification alone."
+
+[[expect]]
+label = "c_lineage_not_identity"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "undetermined"
+basis = "f1 and f2 share a predecessor but no licensed step joins them: lineage is not identity."
+
+[[expect]]
+label = "a_g1"
+kind = "control_positive"
+outcome = "established"
+word = "licensed"
+basis = "First branch of the guarded fork."
+
+[[expect]]
+label = "a_g2"
+kind = "control_negative"
+outcome = "refuted"
+word = "blocked"
+basis = "Licensing g0 -> g2 would join g1 and g2, which j_g asserts distinct."
+
+[[expect]]
+label = "c_g_siblings"
+kind = "control_negative"
+outcome = "refuted"
+word = "forbidden"
+basis = "g1 and g2 are asserted distinct."
+
+[[expect]]
+label = "a_h2"
+kind = "control_positive"
+outcome = "established"
+word = "licensed"
+basis = "With no distinction, both preserving branches are licensed."
+
+[[expect]]
+label = "c_h_siblings"
+kind = "control_positive"
+outcome = "established"
+word = "required"
+basis = "Two licensed successors of one state are generated-identical (a consequence of equivalence, which is why licensing both branches is a strong claim)."
+
+[[expect]]
+label = "a_m1"
+kind = "control_positive"
+outcome = "established"
+word = "licensed"
+basis = "First predecessor continues into the merge result."
+
+[[expect]]
+label = "a_m2"
+kind = "control_negative"
+outcome = "refuted"
+word = "blocked"
+basis = "Licensing m1 -> m2 would join m0 and m1 through m2, which j_m asserts distinct."
+
+[[expect]]
+label = "a_split"
+kind = "control_negative"
+outcome = "refuted"
+word = "broken"
+basis = "A breaking operator does not license continuation."
+
+[[expect]]
+label = "c_split"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "undetermined"
+basis = "Breaking does not assert that k0 and k1 are distinct."
+
+[[expect]]
+label = "a_reorder"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "inapplicable"
+basis = "An inapplicable operator is not executed."
+
+[[expect]]
+label = "c_consistent"
+kind = "control_positive"
+outcome = "established"
+word = "consistent"
+basis = "Every blocked application left the commitments consistent."

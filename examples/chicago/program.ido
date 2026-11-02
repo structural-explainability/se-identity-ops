@@ -1,0 +1,52 @@
+# examples/chicago/program.ido
+# Experiment A: Chicago vendor records.
+#
+# Question: where does the US-IL localization step, as an existing mechanism,
+# treat records the same although the declared criterion does not require it,
+# and where does it separate records the criterion relates?
+#
+# OBS: The criterion is registration-level: two records are the same registration
+#      when the City publishes the same Vendor ID. It is not a legal-entity
+#      criterion. No documented legal-entity criterion was found in the
+#      inspected repositories (see DOUBTS.md).
+# OBS: Expected results are in expected.toml and were committed before the first
+#      run of this program on this data.
+
+source chicago_observed
+    file "data/vendors_20k_observed.csv"
+    sha256 "6a821da98aaedc2011f011d4c8ecb05786eed9256eda295f7510129660a618f5"
+    note "20,000-row sample from civic-interconnect/civic-data-identity-us-il plus the output of cep_core::common::localization::apply_localization_name(name, US-IL); see README.md"
+
+carrier vendor_record from chicago_observed key "row"
+
+regime city_vendor_registration on vendor_record by "vendor_id"
+    source chicago_observed
+    meaning "same Vendor ID as published by the City; registration-level, not legal-entity identity"
+
+# Same criterion with no source named: used only as the indeterminate control.
+regime unsourced_registration on vendor_record by "vendor_id"
+    meaning "same column, no grounding source"
+
+surface us_il_localized_name on vendor_record column "localized_name" source chicago_observed
+surface raw_vendor_name on vendor_record column "vendor_name" source chicago_observed
+
+# Controls whose answers follow from the data layout alone.
+surface vendor_id_value on vendor_record column "vendor_id" source chicago_observed
+surface row_key_value on vendor_record column "row" source chicago_observed
+
+check a_coverage coverage city_vendor_registration
+check a_consistent consistent city_vendor_registration
+
+check a_faithful_localized faithful city_vendor_registration against us_il_localized_name
+check a_collisions_localized collisions us_il_localized_name against city_vendor_registration
+check a_faithful_raw faithful city_vendor_registration against raw_vendor_name
+check a_collisions_raw collisions raw_vendor_name against city_vendor_registration
+
+check c_pos_faithful faithful city_vendor_registration against vendor_id_value
+check c_pos_collisions collisions vendor_id_value against city_vendor_registration
+check c_neg_faithful faithful city_vendor_registration against row_key_value
+check c_unwarranted faithful unsourced_registration against us_il_localized_name
+
+explain a_faithful_localized
+explain a_collisions_localized
+explain c_unwarranted

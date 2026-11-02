@@ -1,0 +1,74 @@
+# examples/persistence/program.ido
+# Experiment C: persistence under transformation.
+#
+# EVIDENCE ROLE: synthetic interpreter controls only. No adequate state-history
+# dataset was found in the inspected SE repositories (see LIMITATION.md), so this
+# program does NOT test whether the language handles real persistence data.
+# Nothing here is evidence about any real object.
+#
+# It checks that the interpreter keeps lineage apart from identity, treats a
+# preserving fork as a source of identity between siblings only when licensed,
+# lets a distinction block the second branch, and reports ignoring, breaking, and
+# inapplicable operators as what they are.
+
+source note
+    file "data/synthetic_note.csv"
+    sha256 "80a05492bfe0995008d8bc799d4ebd9721617a7ca7178ca04e889f03e378f735"
+    note "states that every item below is synthetic"
+
+carrier stage items r0 r1  f0 f1 f2  g0 g1 g2  h0 h1 h2  m0 m1 m2  k0 k1  n0 n1
+
+regime persistent_asset on stage explicit source note
+    meaning "synthetic criterion: a step continues identity only if its operator is classified preserving and no distinct judgment forbids it"
+
+operator rename classified prs under persistent_asset
+operator copy_out classified ign under persistent_asset
+operator split classified brk under persistent_asset
+operator reorder classified na under persistent_asset
+
+# 1. Rekey: a preserving step is licensed.
+propose p_rekey rename r0 -> r1 under persistent_asset
+apply a_rekey p_rekey
+check c_rekey status r0 r1 under persistent_asset
+
+# 2. Fork with an identity-ignoring operator: lineage is recorded, identity is not.
+propose p_f1 copy_out f0 -> f1 under persistent_asset
+propose p_f2 copy_out f0 -> f2 under persistent_asset
+apply a_f1 p_f1
+apply a_f2 p_f2
+check c_lineage_not_identity status f1 f2 under persistent_asset
+
+# 3. Fork with a preserving operator and a distinction: the second branch is blocked.
+propose p_g1 rename g0 -> g1 under persistent_asset
+propose p_g2 rename g0 -> g2 under persistent_asset
+judge j_g distinct g1 g2 under persistent_asset from note scope "synthetic: the kind of object keeps its two branches distinct"
+apply a_g1 p_g1
+apply a_g2 p_g2
+check c_g_siblings status g1 g2 under persistent_asset
+
+# 4. Fork with a preserving operator and no distinction: siblings are required identical.
+propose p_h1 rename h0 -> h1 under persistent_asset
+propose p_h2 rename h0 -> h2 under persistent_asset
+apply a_h1 p_h1
+apply a_h2 p_h2
+check c_h_siblings status h1 h2 under persistent_asset
+
+# 5. Merge with a distinction: the second predecessor cannot also continue into the result.
+propose p_m1 rename m0 -> m2 under persistent_asset
+propose p_m2 rename m1 -> m2 under persistent_asset
+judge j_m distinct m0 m1 under persistent_asset from note scope "synthetic: the two predecessors are distinct"
+apply a_m1 p_m1
+apply a_m2 p_m2
+
+# 6. Breaking and inapplicable operators.
+propose p_split split k0 -> k1 under persistent_asset
+apply a_split p_split
+check c_split status k0 k1 under persistent_asset
+propose p_reorder reorder n0 -> n1 under persistent_asset
+apply a_reorder p_reorder
+
+check c_consistent consistent persistent_asset
+
+explain a_g2
+explain c_lineage_not_identity
+explain a_split

@@ -1,0 +1,20 @@
+# Cargo.toml for the one-off observation harness (not part of the Python package).
+#
+# WHAT: Calls the Civic Interconnect Rust function that the US-IL vendor adapter
+#       uses to localize and normalize a vendor name, once per input line.
+# WHY: IdentityOps audits the behavior of an existing mechanism. This harness
+#      records that behavior; it does not reimplement it.
+# HOW: Set CEP_CORE_PATH in your copy to the cep-core crate of a checkout of
+#      civic-interconnect/civic-interconnect at the commit recorded in
+#      examples/chicago/README.md, then run:
+#      cargo build --release
+# OBS: The path below is the path used for the recorded run. Edit it for your machine.
+
+[package]
+name = "cep-harness"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+cep-core = { path = "/home/claude/civic-interconnect/civic-interconnect/src/rust/cep-core" }

@@ -1,0 +1,138 @@
+# examples/chicago/expected.toml
+# Expected results for Experiment A, recorded BEFORE the first run of
+# program.ido on data/vendors_20k_observed.csv.
+#
+# Date recorded: 2026-11-02. The git commit that adds this file precedes every
+# result file; verify_independent.py prints that commit's hash.
+#
+# What I knew when writing this: the data layout (columns, 20,000 rows, no empty
+# Vendor ID or Vendor Name), the mechanism's documented pipeline, and a few
+# spot rows. I had not computed any divergence or collision statistic.
+#
+# Kinds of entry:
+#   control_positive    follows from the table layout alone; the interpreter must agree
+#   control_negative    follows from the table layout alone; the interpreter must agree
+#   indeterminate       the declared inputs cannot settle it; must be reported so
+#   prediction          my informed expectation; may be wrong; a wrong one is recorded as such
+#   relation            an arithmetic relation among counts that must hold
+
+[meta]
+id = "EXP-A-chicago-vendor-identity"
+evidence_role = "exploratory real-data run; not held-out; no prior result for this mechanism-criterion pair is claimed"
+program = "program.ido"
+
+[[expect]]
+label = "a_coverage"
+kind = "control_positive"
+outcome = "established"
+word = "complete"
+basis = "Every one of the 20,000 rows has a non-empty Vendor ID (checked while reading the CSV), so the key criterion places every row in a class."
+
+[[expect]]
+label = "a_consistent"
+kind = "control_positive"
+outcome = "established"
+word = "consistent"
+basis = "No distinct judgments are recorded, so consistency holds vacuously."
+
+[[expect]]
+label = "c_pos_faithful"
+kind = "control_positive"
+outcome = "established"
+word = "satisfied"
+basis = "The surface is the Vendor ID itself, which cannot split a Vendor ID class."
+
+[[expect]]
+label = "c_pos_collisions"
+kind = "control_positive"
+outcome = "established"
+word = "supported"
+basis = "A surface that groups by Vendor ID merges only records the criterion already relates."
+
+[[expect]]
+label = "c_neg_faithful"
+kind = "control_negative"
+outcome = "refuted"
+word = "violated"
+basis = "The surface is the unique row key, which separates every pair; any Vendor ID shared by two rows is split."
+
+[[expect]]
+label = "c_unwarranted"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "unwarranted"
+basis = "The regime names no source, so no verdict is warranted whatever the counts are."
+
+[[expect]]
+label = "a_collisions_localized"
+kind = "prediction"
+outcome = "undetermined"
+word = "unsupported"
+confidence = "high (about 90%)"
+basis = "Different Vendor IDs are likely to share a localized name (for example one name registered twice, or names that differ only in punctuation, case, or a suffix the localization rewrites). No distinct judgments exist, so the result must be unsupported and never contradicted."
+
+[[expect]]
+label = "a_faithful_localized"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+confidence = "moderate (about 80%)"
+basis = "A single Vendor ID is likely to appear under more than one spelling in the City data, and the localization rules are unlikely to unify every spelling."
+
+[[expect]]
+label = "a_faithful_raw"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+confidence = "moderate (about 80%)"
+basis = "Same reason as a_faithful_localized; raw spellings differ at least as often as localized ones."
+
+[[expect]]
+label = "a_collisions_raw"
+kind = "prediction"
+outcome = "undetermined"
+word = "unsupported"
+confidence = "moderate (about 70%)"
+basis = "The same raw name is likely to be published under more than one Vendor ID somewhere in 20,000 rows."
+
+[[relation]]
+name = "R1_divergent_classes_bounded"
+statement = "a_faithful_localized.divergent_classes <= a_faithful_localized.related_classes"
+certain = true
+
+[[relation]]
+name = "R2_negative_control_splits_every_related_class"
+statement = "c_neg_faithful.divergent_classes == c_neg_faithful.related_classes"
+certain = true
+
+[[relation]]
+name = "R3_no_forbidden_without_distinct_judgments"
+statement = "a_collisions_localized.forbidden_class_pairs == 0"
+certain = true
+
+[[relation]]
+name = "R4_localization_is_a_function_of_the_raw_name"
+statement = "a_collisions_localized.surface_values <= a_collisions_raw.surface_values"
+certain = true
+note = "If two rows have the same raw name they have the same localized name, so localization can only merge surface values."
+
+[[relation]]
+name = "R5_positive_control_has_no_cross_class_groups"
+statement = "c_pos_collisions.cross_class_groups == 0"
+certain = true
+
+[[relation]]
+name = "R6_all_checks_see_20000_items"
+statement = "a_faithful_localized.items == 20000"
+certain = true
+
+[[relation]]
+name = "R7_unsupported_pairs_at_least_groups"
+statement = "a_collisions_localized.unsupported_class_pairs >= a_collisions_localized.cross_class_groups"
+certain = true
+note = "Each cross-class group contains at least one pair of classes."
+
+[independent]
+# verify_independent.py recomputes every count above two ways (plain Python and
+# SQLite) without importing se_identity_ops, and replays every reported example.
+procedure = "examples/chicago/verify_independent.py"
