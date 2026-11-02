@@ -1,0 +1,58 @@
+# ============================================================
+# lakefile.toml
+# ============================================================
+# Declares the public Lean package identity, import surface,
+# build targets, and dependencies.
+
+# Run with:
+# lake build
+# lake test
+
+# ============================================================
+# === PROJECT IDENTITY ===
+# ============================================================
+
+name = "se-identity-ops"
+version = "0.1.0" # CUSTOM: Sets the current release version
+license = "Apache-2.0"
+
+# ============================================================
+# === BUILD SURFACE ===
+# ============================================================
+# defaultTargets must include the public Lean library root.
+
+defaultTargets = ["SE.IdentityOps"]
+testDriver = "SETest"
+
+# ============================================================
+# === DEPENDENCIES ===
+# ============================================================
+# Persistence owns the commitment calculus (Generated, Consistent, Required,
+# Forbidden, Undetermined, Extend). IdentityOps imports it and adds a command
+# language and its state semantics. It does not redefine those notions.
+
+[[require]]
+name = "se-theory-persistence"
+git = "https://github.com/structural-explainability/se-theory-persistence"
+rev = "v0.6.1"
+
+# ============================================================
+# === PUBLIC LIBRARY ===
+# ============================================================
+# The library claims only the module family owned by this package.
+# Do not claim the shared top-level module "SE".
+
+[[lean_lib]]
+name = "SE.IdentityOps"
+roots = ["SE.IdentityOps"]
+globs = ["SE", "SE.IdentityOps.*"]
+
+# ============================================================
+# === TEST LIBRARY ===
+# ============================================================
+# Internal verification; not part of the downstream public import surface.
+
+[[lean_lib]]
+name = "SETest"
+roots = ["SETest.IdentityOps"]
+globs = ["SETest", "SETest.IdentityOps.*"]
