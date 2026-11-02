@@ -33,6 +33,15 @@ the pilot.
 `extract_components.py` reads those fields into the two tables under `data/`. It does
 not run or reimplement the pilot's evaluator.
 
+**PURL normalization is not defined here.** It is delegated to the reference library
+`packageurl-python` (`PackageURL.from_string(raw).to_string()`), recorded with its
+version and digests in [`adapter.toml`](./adapter.toml). Each row keeps the PURL strings
+as the document wrote them (`original_purl`), the library's normalized form
+(`canonical_purl`, `any_slot_purl`), and any library rejection (`purl_errors`). An
+earlier script-local canonicalizer was replaced; on all 9 PURL occurrences in these two
+cases it gave identical output, so no outcome changed. Equal normalized strings are
+evidence for the PURL criterion, not a claim that two components are the same.
+
 ## Declared Criterion
 
 `component_anchor`: a source package and a target component are the same component
@@ -76,5 +85,5 @@ resolved. IdentityOps pins the digest of the bytes it read.
 ## What This Does Not Show
 
 - Nothing about Freeze 02 or any generalization claim.
-- Nothing about the PURL standard beyond the canonicalization needed for these inputs.
+- Anything about the PURL specification beyond what the library does on these inputs (nine `pkg:deb` PURLs).
 - That IdentityOps handles qualifiers, namespaces, or other formats.

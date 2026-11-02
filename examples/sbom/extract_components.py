@@ -14,11 +14,15 @@ OBS: Columns written:
        ref           SPDXID or bom-ref/name of the component
        name          component name
        anchor_hash   "sha256:<hex>" or empty when the component has no SHA-256
-       canonical_purl  PURLs in the format's canonical slot, canonical form, joined by "|"
-       any_slot_purl   PURLs in the canonical slot or in any property value, canonical form
-OBS: "Canonical form" here percent-encodes the name and version segments after
-     decoding them; it is checked against the pilot's recorded canonical PURLs in
-     verify_extraction.py.
+       original_purl   every PURL string as the document wrote it (slot, then properties)
+       canonical_purl  PURLs in the format's canonical slot, as normalized by packageurl-python
+       any_slot_purl   PURLs in the canonical slot or in any property value, normalized the same way
+       purl_errors     library rejection messages, empty when every PURL parsed
+OBS: ADAPTER: Package URL normalization is delegated to the reference library
+     packageurl-python (PackageURL.from_string / to_string). This script does not
+     define normalization rules. Its version is written to adapter.toml by
+     record_adapter.py. Normalized-string equality is evidence for the PURL
+     criterion only; it is not by itself a claim that two components are the same.
 """
 
 import argparse
@@ -27,7 +31,8 @@ import hashlib
 import json
 from pathlib import Path
 import sys
-from urllib.parse import quote, unquote
+
+from packageurl import PackageURL
 
 CASES = {
     "known_bad": "cyclonedx-cli-424",
@@ -35,30 +40,34 @@ CASES = {
 }
 
 
-def canonical_purl(raw: str) -> str:
-    """Return a canonical spelling of a Package URL string.
+def normalize_purl(raw: str) -> tuple[str, str]:
+    """Return (normalized PURL, error text) using the reference Package URL library.
 
-    The name and version segments are percent-decoded and then percent-encoded
-    with no safe characters, so `+` is written `%2B`. Qualifiers are kept as given.
+    The library parses and re-serializes; this script adds no rules of its own.
+    A string the library rejects yields an empty normalized form and the error text,
+    so the rejection is recorded rather than silently repaired.
     """
-    if not raw:
-        return ""
-    base, question, qualifiers = raw.partition("?")
-    path, at, version = base.partition("@")
-    head, slash, name = path.rpartition("/")
-    encoded_name = quote(unquote(name), safe="")
-    encoded_version = quote(unquote(version), safe="")
-    rebuilt = f"{head}{slash}{encoded_name}"
-    if at:
-        rebuilt += f"@{encoded_version}"
-    if question:
-        rebuilt += f"?{qualifiers}"
-    return rebuilt
+    try:
+        return PackageURL.from_string(raw).to_string(), ""
+    except ValueError as error:
+        return "", str(error)
 
 
 def joined(purls: list[str]) -> str:
-    """Return distinct canonical PURLs, sorted and joined by '|'."""
-    return "|".join(sorted({canonical_purl(purl) for purl in purls if purl}))
+    """Return distinct library-normalized PURLs, sorted and joined by '|'."""
+    return "|".join(sorted({normalize_purl(purl)[0] for purl in purls if purl} - {""}))
+
+
+def originals(purls: list[str]) -> str:
+    """Return the PURL strings exactly as the document wrote them, joined by '|'."""
+    return "|".join(purl for purl in purls if purl)
+
+
+def errors(purls: list[str]) -> str:
+    """Return library rejection messages for the PURLs, joined by '|'."""
+    return "|".join(
+        message for purl in purls if purl and (message := normalize_purl(purl)[1])
+    )
 
 
 def source_rows(document: dict) -> list[dict[str, str]]:
@@ -83,8 +92,10 @@ def source_rows(document: dict) -> list[dict[str, str]]:
                 "ref": package["SPDXID"],
                 "name": package["name"],
                 "anchor_hash": f"sha256:{checksums[0]}" if checksums else "",
+                "original_purl": originals(purls),
                 "canonical_purl": joined(purls),
                 "any_slot_purl": joined(purls),
+                "purl_errors": errors(purls),
             }
         )
     return rows
@@ -112,8 +123,10 @@ def target_rows(document: dict) -> list[dict[str, str]]:
                 "ref": component.get("bom-ref", component["name"]),
                 "name": component["name"],
                 "anchor_hash": f"sha256:{hashes[0]}" if hashes else "",
+                "original_purl": originals(slot + elsewhere),
                 "canonical_purl": joined(slot),
                 "any_slot_purl": joined(slot + elsewhere),
+                "purl_errors": errors(slot + elsewhere),
             }
         )
     return rows
@@ -137,8 +150,10 @@ def main() -> int:
         "ref",
         "name",
         "anchor_hash",
+        "original_purl",
         "canonical_purl",
         "any_slot_purl",
+        "purl_errors",
     ]
     for case, folder in CASES.items():
         target_path = validation / folder / "target.cdx.json"

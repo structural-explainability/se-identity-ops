@@ -11,11 +11,25 @@ and this project adheres to **[Semantic Versioning](https://semver.org/spec/v2.0
 
 ## [Unreleased]
 
+### Changed
+
+- Experiment B delegates PURL normalization to `packageurl-python` instead of a
+  script-local canonicalizer; identical output on all 9 PURLs, component tables gain
+  `original_purl` and `purl_errors` columns, and input digests are re-pinned.
+- Experiment A states Vendor ID as a source-provided identifier whose referential
+  meaning has not yet been independently established; the regime is renamed
+  `source_vendor_id`. No count changed.
+
+### Added
+
+- `adapter.toml` provenance records for Experiments A and B, `tests/test_adapters.py`,
+  and decision D-013 (domain semantics come from external authorities).
+
 ### Planned
 
 - A real persistence dataset (see `examples/persistence/LIMITATION.md`).
 - Run ASPEN and ASPEN+ on the Chicago slice and compare explanations.
-- A legal-entity criterion for the Chicago audit, with expectations recorded first.
+- An independently documented criterion for what Vendor ID denotes, with expectations recorded first.
 - A differential test of the Python interpreter against a compiled Lean executable.
 - Report distinct class pairs next to the per-group sum in `collisions`.
 - Decide whether probes need a check of their own.

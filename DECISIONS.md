@@ -81,6 +81,24 @@ lemmas. For a program with no `judge`, the generated condition is
 `run_preserves_consistency`. This would prove properties of programs written in the monad
 rather than of the Python interpreter.
 
+### D-013. Domain semantics come from external authorities
+
+IdentityOps is domain neutral. It owns the structure of its operations, the meaning of
+its outcomes, and the interface contract through which a domain connects. It does not
+define what any domain's identifiers, names, or encodings mean. Where an experiment
+needs such semantics, an adapter supplies them from an external authority: a
+specification, a reference implementation, or an existing mechanism whose behavior is
+under audit.
+
+Each adapter states its authority, implementation, exact version or digest, operation,
+input and output evidence, and limitations (`adapter.toml` beside each experiment). The
+mapping to the authority is an explicit, testable obligation: a test checks that the
+recorded version is the one used. Equal normalized forms are evidence for a declared
+criterion; they are not by themselves a claim that two things are the same thing.
+
+This is a standing principle, not a record of findings. Findings stay in the experiment
+READMEs and `DOUBTS.md`.
+
 ## Rejected Designs
 
 ### R-001. The first seven-construct proposal

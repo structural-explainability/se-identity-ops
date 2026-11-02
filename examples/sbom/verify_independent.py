@@ -13,6 +13,9 @@ OBS: Imports nothing from se_identity_ops and does not run the pilot's evaluator
 OBS: It records, without judging them, the digests declared in each case's
      metadata.toml next to the digests of the files actually read.
 OBS: Nothing under generalization/ is opened.
+OBS: Independent of the IdentityOps interpreter, not of the Package URL library:
+     both this script and extract_components.py delegate PURL normalization to
+     packageurl-python, so the library is a shared external authority here.
 """
 
 import argparse
@@ -21,7 +24,8 @@ import json
 from pathlib import Path
 import sys
 import tomllib
-from urllib.parse import quote, unquote
+
+from packageurl import PackageURL
 
 HERE = Path(__file__).parent
 CASES = {
@@ -31,14 +35,8 @@ CASES = {
 
 
 def canonical(purl: str) -> str:
-    """Return a canonical spelling of a Package URL (name and version percent-encoded)."""
-    base, question, qualifiers = purl.partition("?")
-    path, at, version = base.partition("@")
-    head, slash, name = path.rpartition("/")
-    rebuilt = f"{head}{slash}{quote(unquote(name), safe='')}"
-    if at:
-        rebuilt += f"@{quote(unquote(version), safe='')}"
-    return rebuilt + (f"?{qualifiers}" if question else "")
+    """Return the Package URL normalized by the reference library packageurl-python."""
+    return PackageURL.from_string(purl).to_string()
 
 
 def sha256_of(path: Path) -> str:

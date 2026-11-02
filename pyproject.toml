@@ -63,6 +63,7 @@ dev = [
   "ruff",
   "ty",
   "clingo", # WHY: Runs the LACE-style encodings in lace/ and checks them against the interpreter.
+  "packageurl-python>=0.17.6",
 ]
 docs = [
   "zensical",

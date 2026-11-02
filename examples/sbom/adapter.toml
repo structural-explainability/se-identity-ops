@@ -1,0 +1,28 @@
+# adapter.toml - Where the Experiment B domain semantics come from.
+#
+# WHAT: Records, for each place an experiment uses semantics it does not define, the
+#       external authority, the implementation used, its exact version and digests,
+#       the operation applied, the input and output evidence, and known limits.
+# WHY: IdentityOps is domain neutral. It owns the structure of its operations and
+#      their outcomes. It does not define what a Package URL means or how it is
+#      normalized. That mapping is an explicit, testable obligation (see DECISIONS.md).
+# OBS: tests/test_adapters.py checks the installed library version against this file.
+
+[[adapter]]
+id = "purl_normalization"
+authority = "Package URL (PURL) specification"
+authority_note = "Which edition or standards body now maintains the specification was not verified here."
+implementation = "packageurl-python"
+version = "0.17.6"
+source = "PyPI"
+sdist_sha256 = "1252ce3a102372ca6f86eb968e16f9014c4ba511c5c37d95a7f023e2ca6e5c25"
+wheel_sha256 = "31a85c2717bc41dd818f3c62908685ff9eebcb68588213745b14a6ee9e7df7c9"
+operation = "PackageURL.from_string(raw).to_string()"
+input_evidence = "original_purl column: each PURL string exactly as the SPDX or CycloneDX document wrote it"
+output_evidence = "canonical_purl and any_slot_purl columns: the library's serialization; purl_errors column: library rejections"
+comparison = "Replaced a script-local percent-encoding canonicalizer. On all 9 PURL occurrences in the two authorized cases the old and the library outputs were identical, so no value changed."
+limitations = [
+  "Only Debian (pkg:deb) PURLs with an arch qualifier occur in these two cases; other types are untested.",
+  "The library defines the normal form used here. Library versions may differ.",
+  "Equal normalized PURL strings are evidence for the PURL criterion only. They are not a claim that two components are the same component.",
+]

@@ -15,7 +15,7 @@ This assessment is a summary of the present evidence.
 | Criterion                | Current assessment                                                                                                                                                                                                                                                                              |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Mathematical Correctness | The Lean files state the command semantics and prove properties of it, using only the standard axioms. The Python interpreter is checked against Persistence-level definitions by exhaustive small-state comparison, not by proof. Correspondence between Lean and Python is an open obligation. |
-| Scientific Adequacy      | Open. The Chicago criterion is registration-level. The SBOM run reproduces known cases. The persistence experiment used only synthetic controls and has no real data.                                                                                                                           |
+| Scientific Adequacy      | Open. The meaning of a Vendor ID is not established. The SBOM run reproduces known cases. The persistence experiment used only synthetic controls and has no real data.                                                                                                                           |
 | Theoretical Contribution | None established. Each audit capability was reproduced by a LACE-style encoding. The differences demonstrated are of vocabulary and cost. See [Prior Art](./docs/en/prior-art.md).                                                                                                              |
 
 The doubts below identify specific issues affecting these assessments.
@@ -29,7 +29,7 @@ The doubts below identify specific issues affecting these assessments.
 These questions concern the premises of an argument.
 Even if a result is correctly computed, can we establish the assumptions necessary to apply it?
 
-### UM-001. (OPEN) Registration-Level Criterion Is Not Legal-Entity Identity
+### UM-001. (OPEN) Referential Meaning of Vendor ID Is Not Established
 
 #### Research criterion
 
@@ -38,18 +38,21 @@ Scientific Adequacy
 #### Concern
 
 Experiment A compares the localization step with "same published Vendor ID".
-That is a registration-level criterion. One legal entity may hold several Vendor IDs
-and one Vendor ID may be reused.
+Vendor ID is a source-provided identifier whose referential meaning has not yet been
+independently established. The experiment does not claim it denotes a registration, a
+legal entity, or anything else.
 
 #### Current Knowledge
 
-No documented legal-entity criterion was found in the inspected repositories, so none
-was written. Different Vendor IDs are treated as undetermined, not distinct.
+No documentation of what Vendor ID denotes was read: the City's data dictionary page
+could not be fetched, and no such definition was found in the inspected repositories.
+Different Vendor IDs are treated as undetermined, not distinct.
 
 #### Remaining Work
 
-Identify an independently documented legal-entity criterion and re-run the audit
-against it with the expectations recorded first.
+Obtain the City's own statement of what Vendor ID denotes, and any independently
+documented criterion for the entity of interest, then re-run the audit against it with
+the expectations recorded first.
 
 ### UM-002. (OPEN) Observation Fidelity and Sample Selection
 
@@ -175,7 +178,7 @@ See [LACE Attempts](./docs/en/lace-attempts.md).
 
 Run ASPEN+ on the Chicago slice and compare explanations.
 
-### UM-008. (OPEN) PURL Canonicalization Is Minimal
+### UM-008. (OPEN) PURL Normalization Is Delegated to a Library, Tested on Few Cases
 
 #### Research criterion
 
@@ -183,17 +186,24 @@ Mathematical Correctness
 
 #### Concern
 
-`extract_components.py` canonicalizes the name and version of a PURL by decoding and
-re-encoding. This is not the PURL specification.
+Normalization is now delegated to `packageurl-python` (version recorded in
+`examples/sbom/adapter.toml`). That removes a script-local approximation, but the
+result depends on the library's behavior and version, and on whether the library
+matches the intended specification. It was exercised on 9 PURL occurrences, all
+`pkg:deb` with an `arch` qualifier.
 
 #### Current Knowledge
 
-It was checked against the pilot's recorded canonical PURLs for the three components
-and agrees. Qualifiers, namespaces, and other types are untested.
+The earlier script-local canonicalizer and the library gave identical output on all 9
+occurrences, so no value in the tables or the results changed; only the evidence
+columns (`original_purl`, `purl_errors`) and the pinned input digests did. Other types,
+namespaces, and qualifiers are untested. Which body now maintains the specification
+was not verified.
 
 #### Remaining Work
 
-Use the specification's canonicalization or the pilot's frozen module under its freeze.
+Confirm the specification's current edition and the library's conformance to it.
+Compare the library with the pilot's frozen module under its freeze. Test other types.
 
 ## Register 2. Doubts About Conclusions (Rebutting Doubts)
 
@@ -208,7 +218,7 @@ Scientific Adequacy
 #### Concern
 
 The 51 localized cross-class groups are "unsupported" only relative to the
-registration-level criterion. A different criterion could require some of them or
+declared Vendor ID criterion. A different criterion could require some of them or
 forbid some. The class-pair count (55) sums pairs per group, so a class pair meeting in two
 groups is counted twice.
 
