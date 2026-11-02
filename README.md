@@ -72,6 +72,13 @@ Met only in the weak sense:
   generalization.
 - **C. Persistence** (synthetic only). Fifteen expectations on invented items were met.
   This tests the interpreter, not the language on real data.
+- **D. Substituting the PURL authority** ([examples/purl_authorities](./examples/purl_authorities/README.md)).
+  The same program was run on the outputs of three independently developed Package URL
+  implementations (Python, JavaScript, Go) over a synthetic 37-input corpus. Python
+  separates 2 of 12 declared spelling sets and JS and Go separate 1 each; Python's
+  classes are finer than the other two, which agree. Four predictions and one relation
+  were missed and are kept as written. Not shown: which implementation is right, or how
+  common these inputs are in real SBOMs.
 
 ## What Is Proved in Lean
 

@@ -21,5 +21,5 @@ model state, in three different settings.
 
 ## Results
 
-See the README for the recorded results of the three experiments and what each
+See the README for the recorded results of the four experiments and what each
 does and does not show.

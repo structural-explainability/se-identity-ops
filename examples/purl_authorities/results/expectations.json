@@ -1,0 +1,163 @@
+[
+  {
+    "actual": "established/complete",
+    "expected": "established/complete",
+    "kind": "control_positive",
+    "name": "n_coverage",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "control_positive",
+    "name": "c_pos_faithful",
+    "status": "met"
+  },
+  {
+    "actual": "established/supported",
+    "expected": "established/supported",
+    "kind": "control_positive",
+    "name": "c_pos_collisions",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "control_negative",
+    "name": "c_neg_faithful",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/unwarranted",
+    "expected": "undetermined/unwarranted",
+    "kind": "indeterminate",
+    "name": "c_unwarranted",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_go_spec",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_js_spec",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_py_spec",
+    "status": "met"
+  },
+  {
+    "actual": "established/supported",
+    "expected": "established/supported",
+    "kind": "prediction",
+    "name": "n_py_merge",
+    "status": "met"
+  },
+  {
+    "actual": "established/supported",
+    "expected": "established/supported",
+    "kind": "prediction",
+    "name": "n_js_merge",
+    "status": "met"
+  },
+  {
+    "actual": "established/supported",
+    "expected": "established/supported",
+    "kind": "prediction",
+    "name": "n_go_merge",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_diff_py_go",
+    "status": "not_met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_diff_go_py",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_diff_js_go",
+    "status": "not_met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_diff_go_js",
+    "status": "not_met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_diff_py_js",
+    "status": "not_met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "n_diff_js_py",
+    "status": "met"
+  },
+  {
+    "actual": "37 == 37",
+    "expected": "n_py_spec.items == 37",
+    "kind": "relation",
+    "name": "R1_all_checks_see_37_items",
+    "status": "holds"
+  },
+  {
+    "actual": "12 == 12",
+    "expected": "c_neg_faithful.divergent_classes == c_neg_faithful.related_classes",
+    "kind": "relation",
+    "name": "R2_negative_control_splits_every_related_class",
+    "status": "holds"
+  },
+  {
+    "actual": "2 <= 12",
+    "expected": "n_py_spec.divergent_classes <= n_py_spec.related_classes",
+    "kind": "relation",
+    "name": "R3_divergent_classes_bounded",
+    "status": "holds"
+  },
+  {
+    "actual": "12 == 12",
+    "expected": "n_py_spec.related_classes == 12",
+    "kind": "relation",
+    "name": "R4_twelve_multi_spelling_sets",
+    "status": "holds"
+  },
+  {
+    "actual": "1 >= 2",
+    "expected": "n_go_spec.divergent_classes >= n_py_spec.divergent_classes",
+    "kind": "relation",
+    "name": "R5_go_separates_at_least_as_many_sets_as_python",
+    "status": "fails"
+  },
+  {
+    "actual": "0 == 0",
+    "expected": "c_pos_collisions.cross_class_groups == 0",
+    "kind": "relation",
+    "name": "R6_positive_control_has_no_cross_class_groups",
+    "status": "holds"
+  }
+]

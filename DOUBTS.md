@@ -205,6 +205,33 @@ was not verified.
 Confirm the specification's current edition and the library's conformance to it.
 Compare the library with the pilot's frozen module under its freeze. Test other types.
 
+### UM-009. (OPEN) The Authority Substitution Used a Synthetic Corpus and a Stipulated Criterion
+
+#### Research criterion
+
+Scientific Adequacy
+
+#### Concern
+
+Experiment D shows that three Package URL implementations differ on 37 hand-written
+inputs. The inputs were chosen to provoke differences, the declared spelling sets are
+the experimenter's stipulation, and `packageurl-java` was not run. The result says
+nothing about how often these cases occur or which behavior the specification requires.
+
+#### Current Knowledge
+
+The differential checks (one implementation's output as the criterion for another) need
+no stipulation, and an independent recomputation agreed with every count. The Go module
+was fetched without the Go checksum database because it could not be reached; its h1
+hash is the one recorded at that fetch.
+
+#### Remaining Work
+
+Draw inputs from real SBOMs rather than writing them, add `packageurl-java` where the
+network allows, and compare each divergence with the specification and the relevant
+type definition, then record conformance as an authority-supplied criterion with the
+expectations written first.
+
 ## Register 2. Doubts About Conclusions (Rebutting Doubts)
 
 These questions concern whether a claimed conclusion is false.

@@ -1,0 +1,42 @@
+# examples/purl_authorities/posthoc_validity.ido
+# POST HOC. Written after the first run of program.ido, once its result showed that
+# partition checks cannot see an implementation that accepts an input another rejects
+# when that input stands alone (for example pkg:deb/debian/@1.0). It has no entry in
+# expected.toml and no recorded prediction; its results are reported as post hoc.
+#
+# Question: on which rows do the implementations disagree about whether the input is
+# a valid Package URL at all?
+
+source authorities
+    file "data/purl_authorities.csv"
+    sha256 "bae537dd33c3eeac2012b126d6adf5abde39ddd3b5a1add1592bda7fb65811bc"
+    note "same table as program.ido"
+
+carrier purl_row from authorities key "row"
+
+regime py_accepts on purl_row by "py_valid"
+    source authorities
+    meaning "rows that packageurl-python accepted are related to each other, and rows it rejected are related to each other"
+
+surface valid_py on purl_row column "py_valid" source authorities
+regime js_accepts on purl_row by "js_valid"
+    source authorities
+    meaning "rows that packageurl-js accepted are related to each other, and rows it rejected are related to each other"
+
+surface valid_js on purl_row column "js_valid" source authorities
+regime go_accepts on purl_row by "go_valid"
+    source authorities
+    meaning "rows that packageurl-go accepted are related to each other, and rows it rejected are related to each other"
+
+surface valid_go on purl_row column "go_valid" source authorities
+
+check v_py_js faithful py_accepts against valid_js
+check v_py_go faithful py_accepts against valid_go
+check v_js_py faithful js_accepts against valid_py
+check v_js_go faithful js_accepts against valid_go
+check v_go_py faithful go_accepts against valid_py
+check v_go_js faithful go_accepts against valid_js
+
+explain v_py_js
+explain v_js_go
+explain v_py_go

@@ -12,6 +12,7 @@ OBS: No normalization rules are defined here. A rejected input is recorded with 
                     spellings of one set agree with each other
        <impl>_row   rejected inputs are written REJECTED:<row>, so a rejected input
                     is never related to anything by that implementation
+       <impl>_valid accepted or rejected (used only by the post hoc validity program)
 OBS: Needs node and go on PATH, and `npm ci` run in drivers/js beforehand.
 """
 
@@ -79,6 +80,7 @@ def main() -> int:
     header = ["row", "set_id", "family", "input"]
     header += [f"{name}_norm" for name in IMPLEMENTATIONS]
     header += [f"{name}_row" for name in IMPLEMENTATIONS]
+    header += [f"{name}_valid" for name in IMPLEMENTATIONS]
     rows = []
     for record in corpus:
         line = dict(record)
@@ -90,6 +92,7 @@ def main() -> int:
             line[f"{name}_row"] = (
                 result["output"] if result["ok"] else f"REJECTED:{record['row']}"
             )
+            line[f"{name}_valid"] = "accepted" if result["ok"] else "rejected"
         rows.append(line)
     (HERE / "data").mkdir(exist_ok=True)
     (HERE / "results").mkdir(exist_ok=True)

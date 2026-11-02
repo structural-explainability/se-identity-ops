@@ -1,0 +1,64 @@
+# adapter.toml - Where the Experiment D domain semantics come from.
+#
+# WHAT: Three independently developed implementations of the Package URL
+#       specification, each used as an external authority for the same operation.
+# WHY: IdentityOps is domain neutral. The program in this folder names no
+#      implementation; each implementation supplies columns of one table. Recording
+#      them side by side makes the substitution an explicit, checkable obligation.
+# OBS: Which edition or standards body now maintains the Package URL specification, and
+#      which type-specific rules apply, was not verified here. Differences found below
+#      are conformance questions for that specification, not verdicts.
+# OBS: tests/test_adapters.py checks the recorded versions against what is installed.
+
+[[adapter]]
+id = "purl_python"
+authority = "Package URL (PURL) specification"
+implementation = "packageurl-python"
+version = "0.17.6"
+source = "PyPI"
+sdist_sha256 = "1252ce3a102372ca6f86eb968e16f9014c4ba511c5c37d95a7f023e2ca6e5c25"
+wheel_sha256 = "31a85c2717bc41dd818f3c62908685ff9eebcb68588213745b14a6ee9e7df7c9"
+operation = "PackageURL.from_string(raw).to_string() (drivers/python_driver.py)"
+input_evidence = "corpus.csv input column"
+output_evidence = "results/implementations.json; columns py_norm, py_row, py_valid"
+limitations = [
+  "The library defines the normal form used for this column.",
+  "Rejection is recorded as a marker value, never repaired.",
+]
+
+[[adapter]]
+id = "purl_js"
+authority = "Package URL (PURL) specification"
+implementation = "packageurl-js"
+version = "2.0.1"
+source = "npm"
+integrity = "sha512-N5ixXjzTy4QDQH0Q9YFjqIWd6zH6936Djpl2m9QNFmDv5Fum8q8BjkpAcHNMzOFE0IwQrFhJWex3AN6kS0OSwg=="
+runtime = "node v22.23.4"
+operation = "PackageURL.fromString(raw).toString() (drivers/js/driver.mjs)"
+input_evidence = "corpus.csv input column"
+output_evidence = "results/implementations.json; columns js_norm, js_row, js_valid"
+limitations = [
+  "The library defines the normal form used for this column.",
+  "The driver reads the corpus with a line split, which is sufficient only because the corpus has no quoted commas or newlines.",
+]
+
+[[adapter]]
+id = "purl_go"
+authority = "Package URL (PURL) specification"
+implementation = "packageurl-go"
+version = "v0.1.7"
+source = "Go module, fetched directly from GitHub"
+go_sum_h1 = "iFWg6tzAjLA6F/qX3M5nZaiMHJgc+p2zxVyr/fY+sZY="
+runtime = "go1.24.7"
+operation = "packageurl.FromString(raw) then ToString() (drivers/go/main.go)"
+input_evidence = "corpus.csv input column"
+output_evidence = "results/implementations.json; columns go_norm, go_row, go_valid"
+limitations = [
+  "The Go checksum database (sum.golang.org) could not be reached from the workspace, so the module was fetched with GOPROXY=direct and GOSUMDB=off. The h1 hash above is the one go recorded in go.sum from that direct fetch; it was not cross-checked against the checksum database.",
+  "v0.1.7 is what `latest` resolved to at fetch time; whether a newer release exists was not checked.",
+  "run_drivers.py runs it with GOPROXY=off, so the module must already be in the local module cache.",
+]
+
+[[not_run]]
+implementation = "packageurl-java"
+reason = "Maven Central could not be reached from the workspace. No result is claimed for it."

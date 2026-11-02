@@ -1,0 +1,462 @@
+{
+  "final_state": {
+    "index": 0,
+    "judgments": [],
+    "log": [],
+    "steps": []
+  },
+  "program": "posthoc_validity.ido",
+  "results": [
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 4,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "faithful py_accepts against valid_js: violated",
+      "explanation": {
+        "inputs": [
+          "py_accepts",
+          "valid_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "py_valid=rejected",
+              "first": "r05",
+              "ground": "key",
+              "second": "r31",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_py_js",
+        "summary": "valid_js gives different values to items that py_accepts relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r05",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r31",
+          "example_01.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_py_js",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 5,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "faithful py_accepts against valid_go: violated",
+      "explanation": {
+        "inputs": [
+          "py_accepts",
+          "valid_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "py_valid=accepted",
+              "first": "r01",
+              "ground": "key",
+              "second": "r35",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "py_valid=rejected",
+              "first": "r05",
+              "ground": "key",
+              "second": "r31",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_py_go",
+        "summary": "valid_go gives different values to items that py_accepts relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r35",
+          "example_01.second_value": "rejected",
+          "example_02.first": "r05",
+          "example_02.first_value": "accepted",
+          "example_02.second": "r31",
+          "example_02.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_py_go",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "faithful js_accepts against valid_py: violated",
+      "explanation": {
+        "inputs": [
+          "js_accepts",
+          "valid_py",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "js_valid=accepted",
+              "first": "r01",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_js_py",
+        "summary": "valid_py gives different values to items that js_accepts relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r05",
+          "example_01.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_js_py",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "faithful js_accepts against valid_go: violated",
+      "explanation": {
+        "inputs": [
+          "js_accepts",
+          "valid_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "js_valid=accepted",
+              "first": "r01",
+              "ground": "key",
+              "second": "r35",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_js_go",
+        "summary": "valid_go gives different values to items that js_accepts relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r35",
+          "example_01.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_js_go",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 2,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "faithful go_accepts against valid_py: violated",
+      "explanation": {
+        "inputs": [
+          "go_accepts",
+          "valid_py",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "go_valid=accepted",
+              "first": "r01",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "go_valid=rejected",
+              "first": "r31",
+              "ground": "key",
+              "second": "r35",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_go_py",
+        "summary": "valid_py gives different values to items that go_accepts relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r05",
+          "example_01.second_value": "rejected",
+          "example_02.first": "r31",
+          "example_02.first_value": "rejected",
+          "example_02.second": "r35",
+          "example_02.second_value": "accepted",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_go_py",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "faithful go_accepts against valid_js: violated",
+      "explanation": {
+        "inputs": [
+          "go_accepts",
+          "valid_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "go_valid=rejected",
+              "first": "r31",
+              "ground": "key",
+              "second": "r35",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_go_js",
+        "summary": "valid_js gives different values to items that go_accepts relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r31",
+          "example_01.first_value": "rejected",
+          "example_01.second": "r35",
+          "example_01.second_value": "accepted",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_go_js",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 4,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "valid_js gives different values to items that py_accepts relates (1 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "py_accepts",
+          "valid_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "py_valid=rejected",
+              "first": "r05",
+              "ground": "key",
+              "second": "r31",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_py_js",
+        "summary": "valid_js gives different values to items that py_accepts relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r05",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r31",
+          "example_01.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_py_js",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "valid_go gives different values to items that js_accepts relates (1 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "js_accepts",
+          "valid_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "js_valid=accepted",
+              "first": "r01",
+              "ground": "key",
+              "second": "r35",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_js_go",
+        "summary": "valid_go gives different values to items that js_accepts relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r35",
+          "example_01.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_js_go",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 5,
+        "items": 37,
+        "related_classes": 2
+      },
+      "detail": "valid_go gives different values to items that py_accepts relates (2 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "py_accepts",
+          "valid_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "py_valid=accepted",
+              "first": "r01",
+              "ground": "key",
+              "second": "r35",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "py_valid=rejected",
+              "first": "r05",
+              "ground": "key",
+              "second": "r31",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "v_py_go",
+        "summary": "valid_go gives different values to items that py_accepts relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "accepted",
+          "example_01.second": "r35",
+          "example_01.second_value": "rejected",
+          "example_02.first": "r05",
+          "example_02.first_value": "accepted",
+          "example_02.second": "r31",
+          "example_02.second_value": "rejected",
+          "kind": "divergence"
+        }
+      },
+      "label": "v_py_go",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    }
+  ],
+  "sources": [
+    {
+      "name": "authorities",
+      "rows": 37,
+      "sha256": "bae537dd33c3eeac2012b126d6adf5abde39ddd3b5a1add1592bda7fb65811bc"
+    }
+  ]
+}

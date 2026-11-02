@@ -19,7 +19,21 @@ EXAMPLES = ROOT / "examples"
 PROGRAMS = {
     "chicago": ["program"],
     "persistence": ["program"],
+    "purl_authorities": ["program"],
     "sbom": ["known_bad", "known_good"],
+}
+
+
+# Predictions that were recorded first and not met. They stay reported as not met; this
+# pins the list so a change in either direction is noticed.
+MISSED_PREDICTIONS = {
+    "purl_authorities": {
+        "n_diff_py_js",
+        "n_diff_py_go",
+        "n_diff_js_go",
+        "n_diff_go_js",
+        "R5_go_separates_at_least_as_many_sets_as_python",
+    },
 }
 
 
@@ -34,7 +48,7 @@ def run_to_json(folder: Path, name: str) -> str:
 
 @pytest.mark.parametrize("experiment", sorted(PROGRAMS))
 def test_every_recorded_expectation_is_met_or_reported(experiment: str) -> None:
-    """No expectation is unmet, unresolved, or a failed relation."""
+    """Every expectation is met, except the recorded misses that are pinned by name."""
     folder = EXAMPLES / experiment
     run_files = []
     for name in PROGRAMS[experiment]:
@@ -44,8 +58,8 @@ def test_every_recorded_expectation_is_met_or_reported(experiment: str) -> None:
         run_files.append(target)
     findings = compare(folder / "expected.toml", run_files)
     assert findings, experiment
-    bad = [f for f in findings if f.status not in ("met", "holds")]
-    assert not bad, bad
+    bad = {f.name for f in findings if f.status not in ("met", "holds")}
+    assert bad == MISSED_PREDICTIONS.get(experiment, set()), bad
 
 
 @pytest.mark.parametrize(
@@ -53,6 +67,8 @@ def test_every_recorded_expectation_is_met_or_reported(experiment: str) -> None:
     [
         ("chicago", "program", "run.json"),
         ("persistence", "program", "run.json"),
+        ("purl_authorities", "program", "run.json"),
+        ("purl_authorities", "posthoc_validity", "posthoc_validity.json"),
         ("sbom", "known_bad", "known_bad.json"),
         ("sbom", "known_good", "known_good.json"),
     ],

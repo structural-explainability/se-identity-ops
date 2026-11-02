@@ -1,0 +1,712 @@
+{
+  "versions": {
+    "py": "packageurl-python 0.17.6",
+    "js": "packageurl-js 2.0.1",
+    "go": "packageurl-go v0.1.7"
+  },
+  "results": [
+    {
+      "row": "r01",
+      "input": "pkg:deb/debian/tzdata@2025b-0+deb12u1?arch=all",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/tzdata@2025b-0+deb12u1?arch=all",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+        "error": ""
+      }
+    },
+    {
+      "row": "r02",
+      "input": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/tzdata@2025b-0+deb12u1?arch=all",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+        "error": ""
+      }
+    },
+    {
+      "row": "r03",
+      "input": "pkg:deb/debian/netbase@6.4?arch=all",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/netbase@6.4?arch=all",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/netbase@6.4?arch=all",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/netbase@6.4?arch=all",
+        "error": ""
+      }
+    },
+    {
+      "row": "r04",
+      "input": "pkg:deb/debian/base-files@12.4",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      }
+    },
+    {
+      "row": "r05",
+      "input": "PKG:deb/debian/base-files@12.4",
+      "py": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing the required \"pkg\" scheme component: 'PKG:deb/debian/base-files@12.4'."
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      }
+    },
+    {
+      "row": "r06",
+      "input": "pkg:DEB/debian/base-files@12.4",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/base-files@12.4",
+        "error": ""
+      }
+    },
+    {
+      "row": "r07",
+      "input": "pkg:pypi/Django@4.2",
+      "py": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.2",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.2",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.2",
+        "error": ""
+      }
+    },
+    {
+      "row": "r08",
+      "input": "pkg:pypi/django@4.2",
+      "py": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.2",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.2",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.2",
+        "error": ""
+      }
+    },
+    {
+      "row": "r09",
+      "input": "pkg:pypi/my_package@1.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:pypi/my-package@1.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:pypi/my-package@1.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:pypi/my-package@1.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r10",
+      "input": "pkg:pypi/my-package@1.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:pypi/my-package@1.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:pypi/my-package@1.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:pypi/my-package@1.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r11",
+      "input": "pkg:npm/%40angular/core@16.0.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:npm/%40angular/core@16.0.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:npm/%40angular/core@16.0.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:npm/%40angular/core@16.0.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r12",
+      "input": "pkg:npm/@angular/core@16.0.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:npm/%40angular/core@16.0.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:npm/%40angular/core@16.0.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:npm/%40angular/core@16.0.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r13",
+      "input": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      }
+    },
+    {
+      "row": "r14",
+      "input": "pkg:deb/debian/curl@7.88?distro=bookworm&arch=amd64",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      }
+    },
+    {
+      "row": "r15",
+      "input": "pkg:deb/debian/curl@7.88?ARCH=amd64&distro=bookworm",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/curl@7.88?arch=amd64&distro=bookworm",
+        "error": ""
+      }
+    },
+    {
+      "row": "r16",
+      "input": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?type=jar&classifier=sources",
+      "py": {
+        "ok": true,
+        "output": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+        "error": ""
+      }
+    },
+    {
+      "row": "r17",
+      "input": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+      "py": {
+        "ok": true,
+        "output": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:maven/org.apache.commons/commons-lang3@3.12.0?classifier=sources&type=jar",
+        "error": ""
+      }
+    },
+    {
+      "row": "r18",
+      "input": "pkg:generic/openssl@3.0.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r19",
+      "input": "pkg:generic/openssl@3.0.0?",
+      "py": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r20",
+      "input": "pkg:generic/openssl@3.0.0#",
+      "py": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:generic/openssl@3.0.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r21",
+      "input": "pkg:deb/debian/zlib@1.2",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      }
+    },
+    {
+      "row": "r22",
+      "input": "pkg:/deb/debian/zlib@1.2",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      }
+    },
+    {
+      "row": "r23",
+      "input": "pkg://deb/debian/zlib@1.2",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2",
+        "error": ""
+      }
+    },
+    {
+      "row": "r24",
+      "input": "pkg:deb/debian/zlib@1.2/",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2/",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2%2F",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/zlib@1.2%2F",
+        "error": ""
+      }
+    },
+    {
+      "row": "r25",
+      "input": "pkg:generic/foo%20bar@1.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:generic/foo%20bar@1.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:generic/foo%20bar@1.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:generic/foo%20bar@1.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r26",
+      "input": "pkg:generic/foo bar@1.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:generic/foo%20bar@1.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:generic/foo%20bar@1.0",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:generic/foo%20bar@1.0",
+        "error": ""
+      }
+    },
+    {
+      "row": "r27",
+      "input": "pkg:npm/lodash",
+      "py": {
+        "ok": true,
+        "output": "pkg:npm/lodash",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:npm/lodash",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:npm/lodash",
+        "error": ""
+      }
+    },
+    {
+      "row": "r28",
+      "input": "pkg:npm/lodash@",
+      "py": {
+        "ok": true,
+        "output": "pkg:npm/lodash",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:npm/lodash",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:npm/lodash",
+        "error": ""
+      }
+    },
+    {
+      "row": "r29",
+      "input": "pkg:github/Package-URL/purl-spec@244fd47",
+      "py": {
+        "ok": true,
+        "output": "pkg:github/package-url/purl-spec@244fd47",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:github/package-url/purl-spec@244fd47",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:github/package-url/purl-spec@244fd47",
+        "error": ""
+      }
+    },
+    {
+      "row": "r30",
+      "input": "pkg:github/package-url/purl-spec@244fd47",
+      "py": {
+        "ok": true,
+        "output": "pkg:github/package-url/purl-spec@244fd47",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:github/package-url/purl-spec@244fd47",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:github/package-url/purl-spec@244fd47",
+        "error": ""
+      }
+    },
+    {
+      "row": "r31",
+      "input": "pkg:deb",
+      "py": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing the required type component: 'pkg:deb'."
+      },
+      "js": {
+        "ok": false,
+        "output": "",
+        "error": "Invalid purl: \"name\" is a required component"
+      },
+      "go": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing type or name"
+      }
+    },
+    {
+      "row": "r32",
+      "input": "deb/debian/netbase@6.4",
+      "py": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing the required \"pkg\" scheme component: 'deb/debian/netbase@6.4'."
+      },
+      "js": {
+        "ok": false,
+        "output": "",
+        "error": "Invalid purl: missing required \"pkg\" scheme component"
+      },
+      "go": {
+        "ok": false,
+        "output": "",
+        "error": "purl scheme is not \"pkg\": \"deb/debian/netbase@6.4\""
+      }
+    },
+    {
+      "row": "r33",
+      "input": "pkg:/@1.0",
+      "py": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing the required type component: 'pkg:/@1.0'."
+      },
+      "js": {
+        "ok": false,
+        "output": "",
+        "error": "Invalid purl: type \"@1.0\" contains an illegal character"
+      },
+      "go": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing type or name"
+      }
+    },
+    {
+      "row": "r34",
+      "input": "",
+      "py": {
+        "ok": false,
+        "output": "",
+        "error": "A purl string argument is required."
+      },
+      "js": {
+        "ok": false,
+        "output": "",
+        "error": "Invalid purl: \"type\" is a required component"
+      },
+      "go": {
+        "ok": false,
+        "output": "",
+        "error": "purl scheme is not \"pkg\": \"\""
+      }
+    },
+    {
+      "row": "r35",
+      "input": "pkg:deb/debian/@1.0",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian@1.0",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/%401.0",
+        "error": ""
+      },
+      "go": {
+        "ok": false,
+        "output": "",
+        "error": "purl is missing name"
+      }
+    },
+    {
+      "row": "r36",
+      "input": "pkg:deb/debian/netbase@6.5?arch=all",
+      "py": {
+        "ok": true,
+        "output": "pkg:deb/debian/netbase@6.5?arch=all",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:deb/debian/netbase@6.5?arch=all",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:deb/debian/netbase@6.5?arch=all",
+        "error": ""
+      }
+    },
+    {
+      "row": "r37",
+      "input": "pkg:pypi/django@4.3",
+      "py": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.3",
+        "error": ""
+      },
+      "js": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.3",
+        "error": ""
+      },
+      "go": {
+        "ok": true,
+        "output": "pkg:pypi/django@4.3",
+        "error": ""
+      }
+    }
+  ]
+}

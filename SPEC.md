@@ -219,6 +219,10 @@ discovery.
   inspected repositories, so only synthetic interpreter controls were run. They
   do not test whether the language handles real persistence data. See
   [examples/persistence](./examples/persistence/LIMITATION.md).
+- **D. Substituting the authority** (domain neutrality). Runs one program over the
+  outputs of three independently developed Package URL implementations and reports where
+  their identity commitments and validity decisions differ. Exploratory, on a synthetic
+  corpus. See [examples/purl_authorities](./examples/purl_authorities/README.md).
 
 ## Novelty
 

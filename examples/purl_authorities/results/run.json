@@ -1,0 +1,1005 @@
+{
+  "final_state": {
+    "index": 0,
+    "judgments": [],
+    "log": [],
+    "steps": []
+  },
+  "program": "program.ido",
+  "results": [
+    {
+      "counts": {
+        "items": 37,
+        "silent_items": 0
+      },
+      "detail": "coverage spelling_set: complete",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_coverage",
+        "summary": "spelling_set places every item in a class.",
+        "witness": {}
+      },
+      "label": "n_coverage",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "complete"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful spelling_set against set_value: satisfied",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "set_value",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_pos_faithful",
+        "summary": "Every class related by spelling_set has one value under set_value.",
+        "witness": {}
+      },
+      "label": "c_pos_faithful",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 12,
+        "required_groups": 12,
+        "surface_values": 20,
+        "unsupported_class_pairs": 0
+      },
+      "detail": "collisions set_value against spelling_set: supported",
+      "explanation": {
+        "inputs": [
+          "set_value",
+          "spelling_set",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_pos_collisions",
+        "summary": "Every merge made by set_value lies inside one class of spelling_set.",
+        "witness": {}
+      },
+      "label": "c_pos_collisions",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "supported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 12,
+        "divergent_items": 17,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful spelling_set against row_value: violated",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "row_value",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p01",
+              "first": "r01",
+              "ground": "key",
+              "second": "r02",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p03",
+              "first": "r04",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p04",
+              "first": "r07",
+              "ground": "key",
+              "second": "r08",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p05",
+              "first": "r09",
+              "ground": "key",
+              "second": "r10",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p06",
+              "first": "r11",
+              "ground": "key",
+              "second": "r12",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p07",
+              "first": "r13",
+              "ground": "key",
+              "second": "r14",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p08",
+              "first": "r16",
+              "ground": "key",
+              "second": "r17",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p09",
+              "first": "r18",
+              "ground": "key",
+              "second": "r19",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r22",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p11",
+              "first": "r25",
+              "ground": "key",
+              "second": "r26",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p12",
+              "first": "r27",
+              "ground": "key",
+              "second": "r28",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p13",
+              "first": "r29",
+              "ground": "key",
+              "second": "r30",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "c_neg_faithful",
+        "summary": "row_value gives different values to items that spelling_set relates (12 related classes affected).",
+        "witness": {
+          "example_01.first": "r01",
+          "example_01.first_value": "r01",
+          "example_01.second": "r02",
+          "example_01.second_value": "r02",
+          "example_02.first": "r04",
+          "example_02.first_value": "r04",
+          "example_02.second": "r05",
+          "example_02.second_value": "r05",
+          "example_03.first": "r07",
+          "example_03.first_value": "r07",
+          "example_03.second": "r08",
+          "example_03.second_value": "r08",
+          "example_04.first": "r09",
+          "example_04.first_value": "r09",
+          "example_04.second": "r10",
+          "example_04.second_value": "r10",
+          "example_05.first": "r11",
+          "example_05.first_value": "r11",
+          "example_05.second": "r12",
+          "example_05.second_value": "r12",
+          "example_06.first": "r13",
+          "example_06.first_value": "r13",
+          "example_06.second": "r14",
+          "example_06.second_value": "r14",
+          "example_07.first": "r16",
+          "example_07.first_value": "r16",
+          "example_07.second": "r17",
+          "example_07.second_value": "r17",
+          "example_08.first": "r18",
+          "example_08.first_value": "r18",
+          "example_08.second": "r19",
+          "example_08.second_value": "r19",
+          "example_09.first": "r21",
+          "example_09.first_value": "r21",
+          "example_09.second": "r22",
+          "example_09.second_value": "r22",
+          "example_10.first": "r25",
+          "example_10.first_value": "r25",
+          "example_10.second": "r26",
+          "example_10.second_value": "r26",
+          "example_11.first": "r27",
+          "example_11.first_value": "r27",
+          "example_11.second": "r28",
+          "example_11.second_value": "r28",
+          "example_12.first": "r29",
+          "example_12.first_value": "r29",
+          "example_12.second": "r30",
+          "example_12.second_value": "r30",
+          "kind": "divergence"
+        }
+      },
+      "label": "c_neg_faithful",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 2,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful unsourced_set against norm_py: unwarranted",
+      "explanation": {
+        "inputs": [
+          "unsourced_set",
+          "norm_py",
+          "authorities"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_unwarranted",
+        "summary": "A divergence was computed but the check is not warranted: regime unsourced_set names no source.",
+        "witness": {}
+      },
+      "label": "c_unwarranted",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 0,
+      "word": "unwarranted"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 2,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful spelling_set against norm_py: violated",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "norm_py",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p03",
+              "first": "r04",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r24",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_py_spec",
+        "summary": "norm_py gives different values to items that spelling_set relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r04",
+          "example_01.first_value": "pkg:deb/debian/base-files@12.4",
+          "example_01.second": "r05",
+          "example_01.second_value": "REJECTED:p03",
+          "example_02.first": "r21",
+          "example_02.first_value": "pkg:deb/debian/zlib@1.2",
+          "example_02.second": "r24",
+          "example_02.second_value": "pkg:deb/debian/zlib@1.2/",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_py_spec",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 12,
+        "required_groups": 12,
+        "surface_values": 22,
+        "unsupported_class_pairs": 0
+      },
+      "detail": "collisions norm_py against spelling_set: supported",
+      "explanation": {
+        "inputs": [
+          "norm_py",
+          "spelling_set",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_py_merge",
+        "summary": "Every merge made by norm_py lies inside one class of spelling_set.",
+        "witness": {}
+      },
+      "label": "n_py_merge",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "supported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful spelling_set against norm_js: violated",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "norm_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r24",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_js_spec",
+        "summary": "norm_js gives different values to items that spelling_set relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r21",
+          "example_01.first_value": "pkg:deb/debian/zlib@1.2",
+          "example_01.second": "r24",
+          "example_01.second_value": "pkg:deb/debian/zlib@1.2%2F",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_js_spec",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 12,
+        "required_groups": 12,
+        "surface_values": 21,
+        "unsupported_class_pairs": 0
+      },
+      "detail": "collisions norm_js against spelling_set: supported",
+      "explanation": {
+        "inputs": [
+          "norm_js",
+          "spelling_set",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_js_merge",
+        "summary": "Every merge made by norm_js lies inside one class of spelling_set.",
+        "witness": {}
+      },
+      "label": "n_js_merge",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "supported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful spelling_set against norm_go: violated",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "norm_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r24",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_go_spec",
+        "summary": "norm_go gives different values to items that spelling_set relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r21",
+          "example_01.first_value": "pkg:deb/debian/zlib@1.2",
+          "example_01.second": "r24",
+          "example_01.second_value": "pkg:deb/debian/zlib@1.2%2F",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_go_spec",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 12,
+        "required_groups": 12,
+        "surface_values": 21,
+        "unsupported_class_pairs": 0
+      },
+      "detail": "collisions norm_go against spelling_set: supported",
+      "explanation": {
+        "inputs": [
+          "norm_go",
+          "spelling_set",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_go_merge",
+        "summary": "Every merge made by norm_go lies inside one class of spelling_set.",
+        "witness": {}
+      },
+      "label": "n_go_merge",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "supported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful py_as_criterion against row_js: satisfied",
+      "explanation": {
+        "inputs": [
+          "py_as_criterion",
+          "row_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_py_js",
+        "summary": "Every class related by py_as_criterion has one value under row_js.",
+        "witness": {}
+      },
+      "label": "n_diff_py_js",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful py_as_criterion against row_go: satisfied",
+      "explanation": {
+        "inputs": [
+          "py_as_criterion",
+          "row_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_py_go",
+        "summary": "Every class related by py_as_criterion has one value under row_go.",
+        "witness": {}
+      },
+      "label": "n_diff_py_go",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful js_as_criterion against row_py: violated",
+      "explanation": {
+        "inputs": [
+          "js_as_criterion",
+          "row_py",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "js_row=pkg:deb/debian/base-files@12.4",
+              "first": "r04",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_diff_js_py",
+        "summary": "row_py gives different values to items that js_as_criterion relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r04",
+          "example_01.first_value": "pkg:deb/debian/base-files@12.4",
+          "example_01.second": "r05",
+          "example_01.second_value": "REJECTED:r05",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_diff_js_py",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful js_as_criterion against row_go: satisfied",
+      "explanation": {
+        "inputs": [
+          "js_as_criterion",
+          "row_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_js_go",
+        "summary": "Every class related by js_as_criterion has one value under row_go.",
+        "witness": {}
+      },
+      "label": "n_diff_js_go",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful go_as_criterion against row_py: violated",
+      "explanation": {
+        "inputs": [
+          "go_as_criterion",
+          "row_py",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "go_row=pkg:deb/debian/base-files@12.4",
+              "first": "r04",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_diff_go_py",
+        "summary": "row_py gives different values to items that go_as_criterion relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r04",
+          "example_01.first_value": "pkg:deb/debian/base-files@12.4",
+          "example_01.second": "r05",
+          "example_01.second_value": "REJECTED:r05",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_diff_go_py",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "faithful go_as_criterion against row_js: satisfied",
+      "explanation": {
+        "inputs": [
+          "go_as_criterion",
+          "row_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_go_js",
+        "summary": "Every class related by go_as_criterion has one value under row_js.",
+        "witness": {}
+      },
+      "label": "n_diff_go_js",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 2,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "norm_py gives different values to items that spelling_set relates (2 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "norm_py",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p03",
+              "first": "r04",
+              "ground": "key",
+              "second": "r05",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r24",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_py_spec",
+        "summary": "norm_py gives different values to items that spelling_set relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r04",
+          "example_01.first_value": "pkg:deb/debian/base-files@12.4",
+          "example_01.second": "r05",
+          "example_01.second_value": "REJECTED:p03",
+          "example_02.first": "r21",
+          "example_02.first_value": "pkg:deb/debian/zlib@1.2",
+          "example_02.second": "r24",
+          "example_02.second_value": "pkg:deb/debian/zlib@1.2/",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_py_spec",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "norm_js gives different values to items that spelling_set relates (1 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "norm_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r24",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_js_spec",
+        "summary": "norm_js gives different values to items that spelling_set relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r21",
+          "example_01.first_value": "pkg:deb/debian/zlib@1.2",
+          "example_01.second": "r24",
+          "example_01.second_value": "pkg:deb/debian/zlib@1.2%2F",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_js_spec",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    },
+    {
+      "counts": {
+        "divergent_classes": 1,
+        "divergent_items": 1,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "norm_go gives different values to items that spelling_set relates (1 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "spelling_set",
+          "norm_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "set_id=p10",
+              "first": "r21",
+              "ground": "key",
+              "second": "r24",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "n_go_spec",
+        "summary": "norm_go gives different values to items that spelling_set relates (1 related classes affected).",
+        "witness": {
+          "example_01.first": "r21",
+          "example_01.first_value": "pkg:deb/debian/zlib@1.2",
+          "example_01.second": "r24",
+          "example_01.second_value": "pkg:deb/debian/zlib@1.2%2F",
+          "kind": "divergence"
+        }
+      },
+      "label": "n_go_spec",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "Every class related by py_as_criterion has one value under row_js.",
+      "explanation": {
+        "inputs": [
+          "py_as_criterion",
+          "row_js",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_py_js",
+        "summary": "Every class related by py_as_criterion has one value under row_js.",
+        "witness": {}
+      },
+      "label": "n_diff_py_js",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "derivation"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "Every class related by py_as_criterion has one value under row_go.",
+      "explanation": {
+        "inputs": [
+          "py_as_criterion",
+          "row_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_py_go",
+        "summary": "Every class related by py_as_criterion has one value under row_go.",
+        "witness": {}
+      },
+      "label": "n_diff_py_go",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "derivation"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 37,
+        "related_classes": 12
+      },
+      "detail": "Every class related by js_as_criterion has one value under row_go.",
+      "explanation": {
+        "inputs": [
+          "js_as_criterion",
+          "row_go",
+          "authorities",
+          "authorities"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "n_diff_js_go",
+        "summary": "Every class related by js_as_criterion has one value under row_go.",
+        "witness": {}
+      },
+      "label": "n_diff_js_go",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "derivation"
+    }
+  ],
+  "sources": [
+    {
+      "name": "authorities",
+      "rows": 37,
+      "sha256": "bae537dd33c3eeac2012b126d6adf5abde39ddd3b5a1add1592bda7fb65811bc"
+    }
+  ]
+}

@@ -22,6 +22,9 @@ and this project adheres to **[Semantic Versioning](https://semver.org/spec/v2.0
 
 ### Added
 
+- Experiment D (`examples/purl_authorities`): the same program over three independent
+  Package URL implementations, with predictions committed before the first run, a post
+  hoc validity program, an independent recomputation, and `adapter.toml` records.
 - `adapter.toml` provenance records for Experiments A and B, `tests/test_adapters.py`,
   and decision D-013 (domain semantics come from external authorities).
 

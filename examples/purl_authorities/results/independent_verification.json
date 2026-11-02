@@ -1,0 +1,99 @@
+{
+  "all_counts_agree": true,
+  "comparisons": [
+    {
+      "label": "n_py_spec",
+      "independent": 2,
+      "interpreter": 2
+    },
+    {
+      "label": "n_js_spec",
+      "independent": 1,
+      "interpreter": 1
+    },
+    {
+      "label": "n_go_spec",
+      "independent": 1,
+      "interpreter": 1
+    },
+    {
+      "label": "n_diff_py_js",
+      "independent": 0,
+      "interpreter": 0
+    },
+    {
+      "label": "n_diff_py_go",
+      "independent": 0,
+      "interpreter": 0
+    },
+    {
+      "label": "n_diff_js_py",
+      "independent": 1,
+      "interpreter": 1
+    },
+    {
+      "label": "n_diff_js_go",
+      "independent": 0,
+      "interpreter": 0
+    },
+    {
+      "label": "n_diff_go_py",
+      "independent": 1,
+      "interpreter": 1
+    },
+    {
+      "label": "n_diff_go_js",
+      "independent": 0,
+      "interpreter": 0
+    }
+  ],
+  "validity_disagreement_rows": {
+    "py_js": [
+      "r05"
+    ],
+    "py_go": [
+      "r05",
+      "r35"
+    ],
+    "js_go": [
+      "r35"
+    ]
+  },
+  "rows_where_output_strings_differ": [
+    {
+      "row": "r01",
+      "input": "pkg:deb/debian/tzdata@2025b-0+deb12u1?arch=all",
+      "py": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+      "js": "pkg:deb/debian/tzdata@2025b-0+deb12u1?arch=all",
+      "go": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all"
+    },
+    {
+      "row": "r02",
+      "input": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+      "py": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all",
+      "js": "pkg:deb/debian/tzdata@2025b-0+deb12u1?arch=all",
+      "go": "pkg:deb/debian/tzdata@2025b-0%2Bdeb12u1?arch=all"
+    },
+    {
+      "row": "r05",
+      "input": "PKG:deb/debian/base-files@12.4",
+      "py": "",
+      "js": "pkg:deb/debian/base-files@12.4",
+      "go": "pkg:deb/debian/base-files@12.4"
+    },
+    {
+      "row": "r24",
+      "input": "pkg:deb/debian/zlib@1.2/",
+      "py": "pkg:deb/debian/zlib@1.2/",
+      "js": "pkg:deb/debian/zlib@1.2%2F",
+      "go": "pkg:deb/debian/zlib@1.2%2F"
+    },
+    {
+      "row": "r35",
+      "input": "pkg:deb/debian/@1.0",
+      "py": "pkg:deb/debian@1.0",
+      "js": "pkg:deb/debian/%401.0",
+      "go": ""
+    }
+  ]
+}

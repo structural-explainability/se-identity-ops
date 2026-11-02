@@ -1,0 +1,87 @@
+# examples/purl_authorities/program.ido
+# Experiment D: does the IdentityOps program stay the same when the external authority
+# for Package URL normalization changes?
+#
+# The program names no implementation. Its inputs are columns of one table, one pair of
+# columns per implementation, written by run_drivers.py. Substituting an authority
+# means substituting a column; nothing in the language changes.
+#
+# Question: for the same inputs, do independently developed implementations of the
+# Package URL specification make the same identity commitments, and where they differ,
+# what is the reproducible witness?
+#
+# OBS: spelling_set is a SYNTHETIC criterion: spellings under one set_id are declared
+#      by the experimenter to be intended as one package. It is not an authority's
+#      statement. The differential checks use one implementation's output as the
+#      criterion and another's as the surface, and need no stipulation.
+# OBS: A rejected input is a marker value (see run_drivers.py), so rejection shows as a
+#      divergence and is never repaired.
+# OBS: Expected results are in expected.toml and were committed before any driver was
+#      run on this corpus.
+
+source authorities
+    file "data/purl_authorities.csv"
+    sha256 "bae537dd33c3eeac2012b126d6adf5abde39ddd3b5a1add1592bda7fb65811bc"
+    note "corpus.csv run through packageurl-python, packageurl-js and packageurl-go by run_drivers.py; versions in results/implementations.json and adapter.toml"
+
+carrier purl_row from authorities key "row"
+
+regime spelling_set on purl_row by "set_id"
+    source authorities
+    meaning "experimenter-declared: spellings under one set_id are intended as one package (synthetic; not an authority's statement)"
+
+regime unsourced_set on purl_row by "set_id"
+    meaning "same column, no grounding source"
+
+regime py_as_criterion on purl_row by "py_row"
+    source authorities
+    meaning "rows that packageurl-python gives the same normalized form; a rejected row is related to nothing"
+
+regime js_as_criterion on purl_row by "js_row"
+    source authorities
+    meaning "rows that packageurl-js gives the same normalized form; a rejected row is related to nothing"
+
+regime go_as_criterion on purl_row by "go_row"
+    source authorities
+    meaning "rows that packageurl-go gives the same normalized form; a rejected row is related to nothing"
+
+surface norm_py on purl_row column "py_norm" source authorities
+surface row_py on purl_row column "py_row" source authorities
+surface norm_js on purl_row column "js_norm" source authorities
+surface row_js on purl_row column "js_row" source authorities
+surface norm_go on purl_row column "go_norm" source authorities
+surface row_go on purl_row column "go_row" source authorities
+
+# Controls whose answers follow from the table layout alone.
+surface set_value on purl_row column "set_id" source authorities
+surface row_value on purl_row column "row" source authorities
+
+check n_coverage coverage spelling_set
+
+check c_pos_faithful faithful spelling_set against set_value
+check c_pos_collisions collisions set_value against spelling_set
+check c_neg_faithful faithful spelling_set against row_value
+check c_unwarranted faithful unsourced_set against norm_py
+
+# Each implementation against the declared spelling sets.
+check n_py_spec faithful spelling_set against norm_py
+check n_py_merge collisions norm_py against spelling_set
+check n_js_spec faithful spelling_set against norm_js
+check n_js_merge collisions norm_js against spelling_set
+check n_go_spec faithful spelling_set against norm_go
+check n_go_merge collisions norm_go against spelling_set
+
+# Each implementation as the criterion for each other implementation.
+check n_diff_py_js faithful py_as_criterion against row_js
+check n_diff_py_go faithful py_as_criterion against row_go
+check n_diff_js_py faithful js_as_criterion against row_py
+check n_diff_js_go faithful js_as_criterion against row_go
+check n_diff_go_py faithful go_as_criterion against row_py
+check n_diff_go_js faithful go_as_criterion against row_js
+
+explain n_py_spec
+explain n_js_spec
+explain n_go_spec
+explain n_diff_py_js
+explain n_diff_py_go
+explain n_diff_js_go
