@@ -1,0 +1,10 @@
+{
+  "name": "purl-authorities-js-driver",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Runs packageurl-js on the corpus. Adds no normalization rules.",
+  "dependencies": {
+    "packageurl-js": "2.0.1"
+  }
+}

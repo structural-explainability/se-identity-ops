@@ -1,0 +1,182 @@
+# examples/purl_authorities/expected.toml
+# Expected results for Experiment D (substituting the external authority for Package
+# URL normalization), recorded BEFORE any driver was run on corpus.csv.
+#
+# Date recorded: 2026-11-02. The git commit that adds this file precedes every result
+# file and the data table the program reads.
+#
+# What I knew when writing this: the corpus rows (I wrote them), the layout of the
+# table (set ids, row ids), packageurl-python's output on the 9 PURLs of Experiment B
+# (all pkg:deb, all matching a script-local canonicalizer), and the output of
+# packageurl-js on one string, pkg:deb/debian/netbase@6.4?arch=all. I had not run any
+# corpus row through any of the three implementations. I do not remember in detail how
+# packageurl-go or packageurl-js treat case, rejected inputs, or empty parts.
+#
+# Criterion (SYNTHETIC): spelling_set. Spellings listed under one set_id are declared
+# by me, the experimenter, to be intended as one package. This is not an authority's
+# statement; it is a stipulation used to ask which implementation keeps them together.
+# The differential checks (one implementation's output as the criterion, another's as
+# the surface) need no such stipulation.
+#
+# Kinds of entry:
+#   control_positive    follows from the table layout alone; the interpreter must agree
+#   control_negative    follows from the table layout alone; the interpreter must agree
+#   indeterminate       the declared inputs cannot settle it; must be reported so
+#   prediction          my informed expectation; may be wrong; a wrong one is recorded as such
+#   relation            an arithmetic relation among counts that must hold
+
+[meta]
+id = "EXP-D-purl-authority-substitution"
+evidence_role = "exploratory; synthetic corpus chosen to provoke differences; not held-out, and no frequency of these inputs in real SBOMs is claimed"
+program = "program.ido"
+
+[[expect]]
+label = "n_coverage"
+kind = "control_positive"
+outcome = "established"
+word = "complete"
+basis = "Every row has a non-empty set_id, so the key criterion places all 37 rows in a class (12 sets of two to four spellings, 8 singletons)."
+
+[[expect]]
+label = "c_pos_faithful"
+kind = "control_positive"
+outcome = "established"
+word = "satisfied"
+basis = "The surface is the set id itself."
+
+[[expect]]
+label = "c_pos_collisions"
+kind = "control_positive"
+outcome = "established"
+word = "supported"
+basis = "The set id as a surface merges nothing outside a set."
+
+[[expect]]
+label = "c_neg_faithful"
+kind = "control_negative"
+outcome = "refuted"
+word = "violated"
+basis = "The surface is the row id; every set with two or more spellings has distinct row ids."
+
+[[expect]]
+label = "c_unwarranted"
+kind = "indeterminate"
+outcome = "undetermined"
+word = "unwarranted"
+basis = "The same grouping column with no grounding source cannot support a verdict."
+
+[[expect]]
+label = "n_go_spec"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "High confidence. I expect packageurl-go to leave at least one spelling set apart (for example case, empty parts, or an unencoded character), because I believe it applies fewer type-specific rules."
+
+[[expect]]
+label = "n_js_spec"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "Medium confidence. Adversarial sets such as the unencoded space, trailing slash, or leading slashes are likely to separate at least one set in an independent implementation."
+
+[[expect]]
+label = "n_py_spec"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "Low confidence. packageurl-python is lenient and normalizes several types, so it may keep every set together; I record violated because rejection of some spelling is plausible."
+
+[[expect]]
+label = "n_py_merge"
+kind = "prediction"
+outcome = "established"
+word = "supported"
+basis = "Medium confidence. I expect no implementation to give one normalized value to spellings from two different sets (the sets name different packages), so py should not merge across sets."
+
+[[expect]]
+label = "n_js_merge"
+kind = "prediction"
+outcome = "established"
+word = "supported"
+basis = "Medium confidence. I expect no implementation to give one normalized value to spellings from two different sets (the sets name different packages), so js should not merge across sets."
+
+[[expect]]
+label = "n_go_merge"
+kind = "prediction"
+outcome = "established"
+word = "supported"
+basis = "Medium confidence. I expect no implementation to give one normalized value to spellings from two different sets (the sets name different packages), so go should not merge across sets."
+
+[[expect]]
+label = "n_diff_py_go"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "High confidence. Using py's output as the criterion, I expect go to give a different value to at least one pair of rows py relates (a different normal form, or a rejection by go only)."
+
+[[expect]]
+label = "n_diff_go_py"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "High confidence. Using go's output as the criterion, I expect py to give a different value to at least one pair of rows go relates (a different normal form, or a rejection by py only)."
+
+[[expect]]
+label = "n_diff_js_go"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "High confidence. Using js's output as the criterion, I expect go to give a different value to at least one pair of rows js relates (a different normal form, or a rejection by go only)."
+
+[[expect]]
+label = "n_diff_go_js"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "High confidence. Using go's output as the criterion, I expect js to give a different value to at least one pair of rows go relates (a different normal form, or a rejection by js only)."
+
+[[expect]]
+label = "n_diff_py_js"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "Low confidence. Using py's output as the criterion, I expect js to give a different value to at least one pair of rows py relates (a different normal form, or a rejection by js only)."
+
+[[expect]]
+label = "n_diff_js_py"
+kind = "prediction"
+outcome = "refuted"
+word = "violated"
+basis = "Low confidence. Using js's output as the criterion, I expect py to give a different value to at least one pair of rows js relates (a different normal form, or a rejection by py only)."
+
+[[relation]]
+name = "R1_all_checks_see_37_items"
+statement = "n_py_spec.items == 37"
+certain = true
+
+[[relation]]
+name = "R2_negative_control_splits_every_related_class"
+statement = "c_neg_faithful.divergent_classes == c_neg_faithful.related_classes"
+certain = true
+
+[[relation]]
+name = "R3_divergent_classes_bounded"
+statement = "n_py_spec.divergent_classes <= n_py_spec.related_classes"
+certain = true
+
+[[relation]]
+name = "R4_twelve_multi_spelling_sets"
+statement = "n_py_spec.related_classes == 12"
+certain = true
+note = "By the corpus layout: sets p01 and p03 to p13 have two to four spellings."
+
+[[relation]]
+name = "R5_go_separates_at_least_as_many_sets_as_python"
+statement = "n_go_spec.divergent_classes >= n_py_spec.divergent_classes"
+certain = false
+note = "A prediction: I expect packageurl-go to be the least normalizing."
+
+[[relation]]
+name = "R6_positive_control_has_no_cross_class_groups"
+statement = "c_pos_collisions.cross_class_groups == 0"
+certain = true
