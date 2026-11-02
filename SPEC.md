@@ -208,8 +208,9 @@ and expected results. Expected results are committed before the first run on the
 real data. A disagreement that is typed into a program is a unit test, not a
 discovery.
 
-- **A. Chicago vendor identity** (operational identity). Compares a
-  registration-level criterion (same published Vendor ID) with the existing US-IL
+- **A. Chicago vendor identity** (operational identity). Compares the
+  criterion "same published Vendor ID" (a source-provided identifier whose referential
+  meaning has not yet been independently established) with the existing US-IL
   localization step. See [examples/chicago](./examples/chicago/README.md).
 - **B. SBOM and PURL** (representation preservation). Reads the two
   authorized Freeze 01 validation cases. These are engineering validation, not

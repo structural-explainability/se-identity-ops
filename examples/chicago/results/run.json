@@ -12,10 +12,10 @@
         "items": 20000,
         "silent_items": 0
       },
-      "detail": "coverage city_vendor_registration: complete",
+      "detail": "coverage source_vendor_id: complete",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "chicago_observed"
         ],
         "kind": "derivation",
@@ -23,7 +23,7 @@
         "omitted": 0,
         "steps": [],
         "subject": "a_coverage",
-        "summary": "city_vendor_registration places every item in a class.",
+        "summary": "source_vendor_id places every item in a class.",
         "witness": {}
       },
       "label": "a_coverage",
@@ -38,10 +38,10 @@
         "distinct_judgments": 0,
         "same_judgments": 0
       },
-      "detail": "consistent city_vendor_registration: consistent",
+      "detail": "consistent source_vendor_id: consistent",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "chicago_observed"
         ],
         "kind": "derivation",
@@ -65,10 +65,10 @@
         "items": 20000,
         "related_classes": 2073
       },
-      "detail": "faithful city_vendor_registration against us_il_localized_name: violated",
+      "detail": "faithful source_vendor_id against us_il_localized_name: violated",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "us_il_localized_name",
           "chicago_observed",
           "chicago_observed"
@@ -97,7 +97,7 @@
           ]
         ],
         "subject": "a_faithful_localized",
-        "summary": "us_il_localized_name gives different values to items that city_vendor_registration relates (2 related classes affected).",
+        "summary": "us_il_localized_name gives different values to items that source_vendor_id relates (2 related classes affected).",
         "witness": {
           "example_01.first": "r00640",
           "example_01.first_value": "industrial council of near west city of chicago",
@@ -126,11 +126,11 @@
         "surface_values": 3675,
         "unsupported_class_pairs": 55
       },
-      "detail": "collisions us_il_localized_name against city_vendor_registration: unsupported",
+      "detail": "collisions us_il_localized_name against source_vendor_id: unsupported",
       "explanation": {
         "inputs": [
           "us_il_localized_name",
-          "city_vendor_registration",
+          "source_vendor_id",
           "chicago_observed",
           "chicago_observed"
         ],
@@ -139,7 +139,7 @@
         "omitted": 31,
         "steps": [],
         "subject": "a_collisions_localized",
-        "summary": "us_il_localized_name merges items across 55 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+        "summary": "us_il_localized_name merges items across 55 class pairs that source_vendor_id neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
         "witness": {
           "example_01.criterion_classes": "2",
           "example_01.first": "r00023",
@@ -276,10 +276,10 @@
         "items": 20000,
         "related_classes": 2073
       },
-      "detail": "faithful city_vendor_registration against raw_vendor_name: violated",
+      "detail": "faithful source_vendor_id against raw_vendor_name: violated",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "raw_vendor_name",
           "chicago_observed",
           "chicago_observed"
@@ -326,7 +326,7 @@
           ]
         ],
         "subject": "a_faithful_raw",
-        "summary": "raw_vendor_name gives different values to items that city_vendor_registration relates (4 related classes affected).",
+        "summary": "raw_vendor_name gives different values to items that source_vendor_id relates (4 related classes affected).",
         "witness": {
           "example_01.first": "r00640",
           "example_01.first_value": "INDUSTRIAL COUNCIL OF NEAR WEST CHICAGO",
@@ -363,11 +363,11 @@
         "surface_values": 3714,
         "unsupported_class_pairs": 16
       },
-      "detail": "collisions raw_vendor_name against city_vendor_registration: unsupported",
+      "detail": "collisions raw_vendor_name against source_vendor_id: unsupported",
       "explanation": {
         "inputs": [
           "raw_vendor_name",
-          "city_vendor_registration",
+          "source_vendor_id",
           "chicago_observed",
           "chicago_observed"
         ],
@@ -376,7 +376,7 @@
         "omitted": 0,
         "steps": [],
         "subject": "a_collisions_raw",
-        "summary": "raw_vendor_name merges items across 16 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+        "summary": "raw_vendor_name merges items across 16 class pairs that source_vendor_id neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
         "witness": {
           "example_01.criterion_classes": "2",
           "example_01.first": "r00062",
@@ -489,10 +489,10 @@
         "items": 20000,
         "related_classes": 2073
       },
-      "detail": "faithful city_vendor_registration against vendor_id_value: satisfied",
+      "detail": "faithful source_vendor_id against vendor_id_value: satisfied",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "vendor_id_value",
           "chicago_observed",
           "chicago_observed"
@@ -502,7 +502,7 @@
         "omitted": 0,
         "steps": [],
         "subject": "c_pos_faithful",
-        "summary": "Every class related by city_vendor_registration has one value under vendor_id_value.",
+        "summary": "Every class related by source_vendor_id has one value under vendor_id_value.",
         "witness": {}
       },
       "label": "c_pos_faithful",
@@ -521,11 +521,11 @@
         "surface_values": 3726,
         "unsupported_class_pairs": 0
       },
-      "detail": "collisions vendor_id_value against city_vendor_registration: supported",
+      "detail": "collisions vendor_id_value against source_vendor_id: supported",
       "explanation": {
         "inputs": [
           "vendor_id_value",
-          "city_vendor_registration",
+          "source_vendor_id",
           "chicago_observed",
           "chicago_observed"
         ],
@@ -534,7 +534,7 @@
         "omitted": 0,
         "steps": [],
         "subject": "c_pos_collisions",
-        "summary": "Every merge made by vendor_id_value lies inside one class of city_vendor_registration.",
+        "summary": "Every merge made by vendor_id_value lies inside one class of source_vendor_id.",
         "witness": {}
       },
       "label": "c_pos_collisions",
@@ -550,10 +550,10 @@
         "items": 20000,
         "related_classes": 2073
       },
-      "detail": "faithful city_vendor_registration against row_key_value: violated",
+      "detail": "faithful source_vendor_id against row_key_value: violated",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "row_key_value",
           "chicago_observed",
           "chicago_observed"
@@ -744,7 +744,7 @@
           ]
         ],
         "subject": "c_neg_faithful",
-        "summary": "row_key_value gives different values to items that city_vendor_registration relates (2073 related classes affected).",
+        "summary": "row_key_value gives different values to items that source_vendor_id relates (2073 related classes affected).",
         "witness": {
           "example_01.first": "r00001",
           "example_01.first_value": "r00001",
@@ -870,10 +870,10 @@
         "items": 20000,
         "related_classes": 2073
       },
-      "detail": "us_il_localized_name gives different values to items that city_vendor_registration relates (2 related classes affected).",
+      "detail": "us_il_localized_name gives different values to items that source_vendor_id relates (2 related classes affected).",
       "explanation": {
         "inputs": [
-          "city_vendor_registration",
+          "source_vendor_id",
           "us_il_localized_name",
           "chicago_observed",
           "chicago_observed"
@@ -902,7 +902,7 @@
           ]
         ],
         "subject": "a_faithful_localized",
-        "summary": "us_il_localized_name gives different values to items that city_vendor_registration relates (2 related classes affected).",
+        "summary": "us_il_localized_name gives different values to items that source_vendor_id relates (2 related classes affected).",
         "witness": {
           "example_01.first": "r00640",
           "example_01.first_value": "industrial council of near west city of chicago",
@@ -931,11 +931,11 @@
         "surface_values": 3675,
         "unsupported_class_pairs": 55
       },
-      "detail": "us_il_localized_name merges items across 55 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+      "detail": "us_il_localized_name merges items across 55 class pairs that source_vendor_id neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
       "explanation": {
         "inputs": [
           "us_il_localized_name",
-          "city_vendor_registration",
+          "source_vendor_id",
           "chicago_observed",
           "chicago_observed"
         ],
@@ -944,7 +944,7 @@
         "omitted": 31,
         "steps": [],
         "subject": "a_collisions_localized",
-        "summary": "us_il_localized_name merges items across 55 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+        "summary": "us_il_localized_name merges items across 55 class pairs that source_vendor_id neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
         "witness": {
           "example_01.criterion_classes": "2",
           "example_01.first": "r00023",

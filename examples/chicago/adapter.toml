@@ -1,0 +1,35 @@
+# adapter.toml - Where the Experiment A domain semantics come from.
+#
+# WHAT: Records each external authority or mechanism the experiment relies on, with
+#       exact versions, operation, evidence, and limits.
+# WHY: IdentityOps is domain neutral. Chicago's Vendor ID and the project's name
+#      localization are not defined by IdentityOps; they are supplied from outside
+#      and recorded here so the mapping can be checked and challenged.
+# OBS: The City's data dictionary could not be read during this work (page fetch was
+#      blocked), so what the City says Vendor ID denotes is not asserted here.
+
+[[adapter]]
+id = "vendor_id"
+authority = "City of Chicago open data (source of the published records)"
+implementation = "none: values read as published"
+version = "civic-data-identity-us-il commit ef04dc182d90f21e828a3d187ebe32cf80392baa"
+operation = "read the vendor_id column; no transformation"
+input_evidence = "data/vendors_20k_observed.csv, sha256 6a821da98aaedc2011f011d4c8ecb05786eed9256eda295f7510129660a618f5"
+output_evidence = "regime source_vendor_id in program.ido"
+limitations = [
+  "Vendor ID is a source-provided identifier whose referential meaning has not yet been independently established.",
+  "The experiment uses equal Vendor ID only as the declared criterion, and does not claim it denotes a legal entity, a registration, or anything else.",
+]
+
+[[adapter]]
+id = "name_localization"
+authority = "civic-interconnect cep_core localization behavior (existing implementation, not a specification)"
+implementation = "cep_core::common::localization::apply_localization_name(name, \"US-IL\")"
+version = "civic-interconnect commit 93b7e282e3958b7dc4b6051276de2cebf4fc6e51"
+operation = "apply to each raw vendor name through a throwaway Rust harness (examples/chicago/harness/)"
+input_evidence = "raw names in data/vendors_20k_observed.csv"
+output_evidence = "localized name column; independently re-derived grouping in results/independent_verification.json"
+limitations = [
+  "The mechanism is an implementation, so the commitments found are those of its observed behavior, not of any stated intent.",
+  "The harness was written for this experiment; it calls the mechanism and adds no rules.",
+]

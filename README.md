@@ -59,12 +59,12 @@ Met only in the weak sense:
 ## What the Experiments Showed
 
 - **A. Chicago vendor identity** ([examples/chicago](./examples/chicago/README.md)).
-  Against a registration-level criterion (same Vendor ID), the US-IL localization step
+  Against the criterion "same published Vendor ID", the US-IL localization step
   split two Vendor IDs' records (an ampersand against "and"; two different names under
   one ID) and merged records across Vendor IDs in 51 groups, which the criterion neither
   requires nor forbids. All ten recorded expectations were met. Two independent
-  recomputations agreed. Not shown: that the localization is wrong, or anything about
-  legal-entity identity.
+  recomputations agreed. Not shown: that the localization is wrong, or what a Vendor ID
+  denotes.
 - **B. SBOM and PURL** ([examples/sbom](./examples/sbom/README.md)). The known-bad
   conversion splits three hash-anchored components under the canonical PURL slot; reading
   any slot, none. The known-good conversion splits none. This reproduces the pilot's
@@ -129,7 +129,7 @@ upstream checkout; see [examples/chicago/README.md](./examples/chicago/README.md
 
 See [DOUBTS.md](./DOUBTS.md). The main ones:
 
-- The Chicago criterion is registration-level, not legal-entity.
+- Vendor ID is a source-provided identifier whose referential meaning has not yet been independently established.
 - Experiment B reproduces known cases only; Experiment C has no real data.
 - The interpreter, programs, expectations, and encodings have one author.
 - ASPEN and ASPEN+ were not run.

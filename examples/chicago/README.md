@@ -43,11 +43,13 @@ the sheet.
 
 ## Declared Criterion
 
-`city_vendor_registration`: two records are the same when the City publishes the same
-**Vendor ID**. This is a **registration-level** criterion. It is **not** a legal-entity
-criterion: one legal entity may hold more than one Vendor ID, and one Vendor ID may be
-reused for a renamed vendor. No documented legal-entity criterion was found in the
-inspected repositories, so none was written. See [DOUBTS.md](../../DOUBTS.md).
+`source_vendor_id`: two records are the same when the City publishes the same
+**Vendor ID**. Vendor ID is a source-provided identifier whose referential meaning has
+not yet been independently established. This experiment does not say whether it denotes
+a registration, a legal entity, or something else; it uses equal Vendor ID only as the
+declared criterion. The City's data dictionary could not be read during this work, so
+nothing is asserted from it. See [DOUBTS.md](../../DOUBTS.md) and
+[`adapter.toml`](./adapter.toml).
 
 Different Vendor IDs are **not** declared distinct. The criterion is silent about them.
 
@@ -104,8 +106,8 @@ A post-hoc breakdown, **not a recorded expectation**, in
 `results/independent_verification.json`: of the 51 localized cross-class groups, 16 are
 the same raw name published under several Vendor IDs, and 35 join different raw names.
 Examples of the 35: a trailing number such as 01 or 02, a `|CLEANED-UP` marker, `INC` against
-`INC.`, `LLP` against `LLP 01`. Whether any of these pairs is the same legal entity is
-not known.
+`INC.`, `LLP` against `LLP 01`. What these pairs
+denote is not established here.
 
 ## Independent Verification
 
@@ -119,7 +121,7 @@ divergent counts and the distinct class-pair counts.
 
 - It does not show that the localization is wrong. A merge the criterion does not
   support may be correct.
-- It does not show anything about legal-entity identity.
+- It does not show what a Vendor ID denotes, or anything about legal-entity identity.
 - It does not compare the SE-based deduplication of this dataset with the original
   deduplication. Neither mechanism was located in the inspected repositories; the
   six-record difference reported on a 20,000-record test is not reproduced here.

@@ -5,10 +5,10 @@
 # treat records the same although the declared criterion does not require it,
 # and where does it separate records the criterion relates?
 #
-# OBS: The criterion is registration-level: two records are the same registration
-#      when the City publishes the same Vendor ID. It is not a legal-entity
-#      criterion. No documented legal-entity criterion was found in the
-#      inspected repositories (see DOUBTS.md).
+# OBS: The criterion is "same Vendor ID as published". Vendor ID is a
+#      source-provided identifier whose referential meaning has not yet been
+#      independently established. This program does not say what it denotes
+#      (see DOUBTS.md).
 # OBS: Expected results are in expected.toml and were committed before the first
 #      run of this program on this data.
 
@@ -19,9 +19,9 @@ source chicago_observed
 
 carrier vendor_record from chicago_observed key "row"
 
-regime city_vendor_registration on vendor_record by "vendor_id"
+regime source_vendor_id on vendor_record by "vendor_id"
     source chicago_observed
-    meaning "same Vendor ID as published by the City; registration-level, not legal-entity identity"
+    meaning "same Vendor ID as published; a source-provided identifier whose referential meaning has not yet been independently established"
 
 # Same criterion with no source named: used only as the indeterminate control.
 regime unsourced_registration on vendor_record by "vendor_id"
@@ -34,17 +34,17 @@ surface raw_vendor_name on vendor_record column "vendor_name" source chicago_obs
 surface vendor_id_value on vendor_record column "vendor_id" source chicago_observed
 surface row_key_value on vendor_record column "row" source chicago_observed
 
-check a_coverage coverage city_vendor_registration
-check a_consistent consistent city_vendor_registration
+check a_coverage coverage source_vendor_id
+check a_consistent consistent source_vendor_id
 
-check a_faithful_localized faithful city_vendor_registration against us_il_localized_name
-check a_collisions_localized collisions us_il_localized_name against city_vendor_registration
-check a_faithful_raw faithful city_vendor_registration against raw_vendor_name
-check a_collisions_raw collisions raw_vendor_name against city_vendor_registration
+check a_faithful_localized faithful source_vendor_id against us_il_localized_name
+check a_collisions_localized collisions us_il_localized_name against source_vendor_id
+check a_faithful_raw faithful source_vendor_id against raw_vendor_name
+check a_collisions_raw collisions raw_vendor_name against source_vendor_id
 
-check c_pos_faithful faithful city_vendor_registration against vendor_id_value
-check c_pos_collisions collisions vendor_id_value against city_vendor_registration
-check c_neg_faithful faithful city_vendor_registration against row_key_value
+check c_pos_faithful faithful source_vendor_id against vendor_id_value
+check c_pos_collisions collisions vendor_id_value against source_vendor_id
+check c_neg_faithful faithful source_vendor_id against row_key_value
 check c_unwarranted faithful unsourced_registration against us_il_localized_name
 
 explain a_faithful_localized
