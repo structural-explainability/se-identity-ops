@@ -65,20 +65,28 @@ def oracle_status(
 
 
 def closure_status(
-    names: tuple[str, ...], same: list[tuple[int, int]], distinct: list[tuple[int, int]], x: int, y: int
+    names: tuple[str, ...],
+    same: list[tuple[int, int]],
+    distinct: list[tuple[int, int]],
+    x: int,
+    y: int,
 ) -> str:
     """Return the status of (x, y) from the interpreter's relation code."""
     relation = Relation(
         names,
         None,
         "",
-        tuple(SamePair(names[a], names[b], "judgment", f"s{a}{b}", "") for a, b in same),
+        tuple(
+            SamePair(names[a], names[b], "judgment", f"s{a}{b}", "") for a, b in same
+        ),
         tuple(DistinctPair(names[a], names[b], f"d{a}{b}", "") for a, b in distinct),
     )
     return relation.status(names[x], names[y])
 
 
-def assignments_all(size: int) -> list[tuple[list[tuple[int, int]], list[tuple[int, int]]]]:
+def assignments_all(
+    size: int,
+) -> list[tuple[list[tuple[int, int]], list[tuple[int, int]]]]:
     """Return every (same, distinct) assignment over the pairs of a carrier."""
     pairs = list(combinations(range(size), 2))
     out = []
@@ -102,8 +110,16 @@ def check_size(size: int, sample: int | None) -> int:
             choice = [generator.choice((0, 0, 1, 2)) for _ in pairs]
             cases.append(
                 (
-                    [pair for pair, mark in zip(pairs, choice, strict=True) if mark == 1],
-                    [pair for pair, mark in zip(pairs, choice, strict=True) if mark == 2],
+                    [
+                        pair
+                        for pair, mark in zip(pairs, choice, strict=True)
+                        if mark == 1
+                    ],
+                    [
+                        pair
+                        for pair, mark in zip(pairs, choice, strict=True)
+                        if mark == 2
+                    ],
                 )
             )
     compared = 0
@@ -116,7 +132,9 @@ def check_size(size: int, sample: int | None) -> int:
     return compared
 
 
-def test_closure_matches_enumeration_on_all_assignments_for_three_and_four_items() -> None:
+def test_closure_matches_enumeration_on_all_assignments_for_three_and_four_items() -> (
+    None
+):
     """Every assignment on 3 and 4 items gives the same status both ways."""
     assert check_size(3, None) == 27 * 3
     assert check_size(4, None) == 729 * 6
@@ -128,7 +146,9 @@ def test_closure_matches_enumeration_on_a_fixed_sample_for_five_and_six_items() 
     assert check_size(6, 300) == 300 * 15
 
 
-def test_interpreter_end_to_end_matches_enumeration_on_three_items(tmp_path: Path) -> None:
+def test_interpreter_end_to_end_matches_enumeration_on_three_items(
+    tmp_path: Path,
+) -> None:
     """Judgments given to the interpreter, in a fixed order, give the oracle's statuses.
 
     The interpreter records every judgment, including contradictory ones, so for
@@ -146,10 +166,14 @@ def test_interpreter_end_to_end_matches_enumeration_on_three_items(tmp_path: Pat
         ]
         number = 0
         for a, b in same:
-            lines.append(f'judge j{number} same {names[a]} {names[b]} under r from s scope "t"')
+            lines.append(
+                f'judge j{number} same {names[a]} {names[b]} under r from s scope "t"'
+            )
             number += 1
         for a, b in distinct:
-            lines.append(f'judge j{number} distinct {names[a]} {names[b]} under r from s scope "t"')
+            lines.append(
+                f'judge j{number} distinct {names[a]} {names[b]} under r from s scope "t"'
+            )
             number += 1
         for x, y in pairs:
             lines.append(f"check q{x}{y} status {names[x]} {names[y]} under r")

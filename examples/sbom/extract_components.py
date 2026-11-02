@@ -73,7 +73,8 @@ def source_rows(document: dict) -> list[dict[str, str]]:
         purls = [
             ref["referenceLocator"]
             for ref in package.get("externalRefs", [])
-            if ref.get("referenceCategory") == "PACKAGE-MANAGER" and ref.get("referenceType") == "purl"
+            if ref.get("referenceCategory") == "PACKAGE-MANAGER"
+            and ref.get("referenceType") == "purl"
         ]
         rows.append(
             {
@@ -93,7 +94,11 @@ def target_rows(document: dict) -> list[dict[str, str]]:
     """Return one row per CycloneDX component."""
     rows = []
     for number, component in enumerate(document["components"], start=1):
-        hashes = [item["content"] for item in component.get("hashes", []) if item.get("alg") == "SHA-256"]
+        hashes = [
+            item["content"]
+            for item in component.get("hashes", [])
+            if item.get("alg") == "SHA-256"
+        ]
         slot = [component["purl"]] if component.get("purl") else []
         elsewhere = [
             prop["value"]
@@ -117,14 +122,24 @@ def target_rows(document: dict) -> list[dict[str, str]]:
 def main() -> int:
     """Write one table per authorized case."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--pilot", type=Path, required=True, help="checkout of the SBOM pilot repo")
+    parser.add_argument(
+        "--pilot", type=Path, required=True, help="checkout of the SBOM pilot repo"
+    )
     parser.add_argument("--output", type=Path, default=Path(__file__).parent / "data")
     args = parser.parse_args()
     validation = args.pilot / "validation"
     source_path = validation / CASES["known_bad"] / "source.spdx.json"
     source = json.loads(source_path.read_text(encoding="utf-8"))
     args.output.mkdir(parents=True, exist_ok=True)
-    header = ["frame", "role", "ref", "name", "anchor_hash", "canonical_purl", "any_slot_purl"]
+    header = [
+        "frame",
+        "role",
+        "ref",
+        "name",
+        "anchor_hash",
+        "canonical_purl",
+        "any_slot_purl",
+    ]
     for case, folder in CASES.items():
         target_path = validation / folder / "target.cdx.json"
         target = json.loads(target_path.read_text(encoding="utf-8"))
@@ -136,8 +151,12 @@ def main() -> int:
             writer.writerows(rows)
         digest = hashlib.sha256(out_path.read_bytes()).hexdigest()
         sys.stdout.write(f"{out_path.name} rows={len(rows)} sha256={digest}\n")
-        sys.stdout.write(f"  target {folder}/target.cdx.json sha256={hashlib.sha256(target_path.read_bytes()).hexdigest()}\n")
-    sys.stdout.write(f"  source sha256={hashlib.sha256(source_path.read_bytes()).hexdigest()}\n")
+        sys.stdout.write(
+            f"  target {folder}/target.cdx.json sha256={hashlib.sha256(target_path.read_bytes()).hexdigest()}\n"
+        )
+    sys.stdout.write(
+        f"  source sha256={hashlib.sha256(source_path.read_bytes()).hexdigest()}\n"
+    )
     return 0
 
 

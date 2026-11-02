@@ -51,11 +51,16 @@ def read_source(path: Path) -> list[dict[str, str]]:
     document = json.loads(path.read_text(encoding="utf-8"))
     found = []
     for number, package in enumerate(document["packages"], start=1):
-        hashes = [c["checksumValue"] for c in package.get("checksums", []) if c["algorithm"] == "SHA256"]
+        hashes = [
+            c["checksumValue"]
+            for c in package.get("checksums", [])
+            if c["algorithm"] == "SHA256"
+        ]
         purls = [
             r["referenceLocator"]
             for r in package.get("externalRefs", [])
-            if r.get("referenceCategory") == "PACKAGE-MANAGER" and r.get("referenceType") == "purl"
+            if r.get("referenceCategory") == "PACKAGE-MANAGER"
+            and r.get("referenceType") == "purl"
         ]
         found.append(
             {
@@ -73,9 +78,13 @@ def read_target(path: Path) -> list[dict[str, str]]:
     document = json.loads(path.read_text(encoding="utf-8"))
     found = []
     for number, component in enumerate(document["components"], start=1):
-        hashes = [h["content"] for h in component.get("hashes", []) if h["alg"] == "SHA-256"]
+        hashes = [
+            h["content"] for h in component.get("hashes", []) if h["alg"] == "SHA-256"
+        ]
         properties = [
-            canonical(p["value"]) for p in component.get("properties", []) if str(p.get("value", "")).startswith("pkg:")
+            canonical(p["value"])
+            for p in component.get("properties", [])
+            if str(p.get("value", "")).startswith("pkg:")
         ]
         found.append(
             {
@@ -119,15 +128,31 @@ def main() -> int:
     for case, (folder, _unused) in CASES.items():
         target_path = validation / folder / "target.cdx.json"
         targets = read_target(target_path)
-        recorded = json.loads((validation / folder / "result.json").read_text(encoding="utf-8"))["results"]
+        recorded = json.loads(
+            (validation / folder / "result.json").read_text(encoding="utf-8")
+        )["results"]
         verdict_by_ref = {entry["ref"]: entry["verdict"] for entry in recorded}
-        metadata = tomllib.loads((validation / folder / "metadata.toml").read_text(encoding="utf-8"))
-        run = json.loads((HERE / "results" / f"{case}.json").read_text(encoding="utf-8"))
-        canonical_result = next(r for r in run["results"] if r["label"] == "b_canonical" and r["operation"] == "check")
-        any_slot_result = next(r for r in run["results"] if r["label"] == "b_any_slot" and r["operation"] == "check")
+        metadata = tomllib.loads(
+            (validation / folder / "metadata.toml").read_text(encoding="utf-8")
+        )
+        run = json.loads(
+            (HERE / "results" / f"{case}.json").read_text(encoding="utf-8")
+        )
+        canonical_result = next(
+            r
+            for r in run["results"]
+            if r["label"] == "b_canonical" and r["operation"] == "check"
+        )
+        any_slot_result = next(
+            r
+            for r in run["results"]
+            if r["label"] == "b_any_slot" and r["operation"] == "check"
+        )
         witness = canonical_result["explanation"]["witness"]
         diverging_sources = {
-            witness[name] for name in witness if name.endswith(".first") and name.startswith("example_")
+            witness[name]
+            for name in witness
+            if name.endswith(".first") and name.startswith("example_")
         }
         rows = []
         for source in sources:
@@ -136,10 +161,9 @@ def main() -> int:
             decision = decide(source, targets)
             interpreter_split = source["frame"] in diverging_sources
             evaluator = verdict_by_ref.get(source["ref"], "absent")
-            consistent = (
-                EVALUATOR_TO_DECISION.get(evaluator) == decision["decision"]
-                and interpreter_split == (decision["decision"] != "preserved")
-            )
+            consistent = EVALUATOR_TO_DECISION.get(evaluator) == decision[
+                "decision"
+            ] and interpreter_split == (decision["decision"] != "preserved")
             ok = ok and consistent
             rows.append(
                 {
@@ -160,17 +184,24 @@ def main() -> int:
                 "source_actual": sha256_of(source_path),
                 "target_declared": declared_target.lower(),
                 "target_actual": sha256_of(target_path),
-                "target_matches_declared": declared_target.lower() == sha256_of(target_path),
+                "target_matches_declared": declared_target.lower()
+                == sha256_of(target_path),
             },
         }
     report["all_agree"] = ok
     out = HERE / "results" / "independent_verification.json"
-    out.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    out.write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     for case, body in report["cases"].items():  # type: ignore[union-attr]
         for row in body["components"]:
-            sys.stdout.write(f"{case:11} {row['source_frame']} {row['independent_decision']:10} pilot={row['pilot_recorded_verdict']:20} agree={row['agree']}\n")
+            sys.stdout.write(
+                f"{case:11} {row['source_frame']} {row['independent_decision']:10} pilot={row['pilot_recorded_verdict']:20} agree={row['agree']}\n"
+            )
         digests = body["digests"]
-        sys.stdout.write(f"{case:11} target digest matches metadata.toml: {digests['target_matches_declared']}\n")
+        sys.stdout.write(
+            f"{case:11} target digest matches metadata.toml: {digests['target_matches_declared']}\n"
+        )
     sys.stdout.write(f"all agree: {ok}\n")
     return 0 if ok else 1
 

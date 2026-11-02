@@ -27,7 +27,9 @@ def run_to_json(folder: Path, name: str) -> str:
     """Run an example program and return its serialized result."""
     path = folder / f"{name}.ido"
     run = run_program(parse(path.read_text(encoding="utf-8"), path.name), folder)
-    return json.dumps(run.to_dict(), indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    return (
+        json.dumps(run.to_dict(), indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    )
 
 
 @pytest.mark.parametrize("experiment", sorted(PROGRAMS))
@@ -36,7 +38,9 @@ def test_every_recorded_expectation_is_met_or_reported(experiment: str) -> None:
     folder = EXAMPLES / experiment
     run_files = []
     for name in PROGRAMS[experiment]:
-        target = folder / "results" / ("run.json" if name == "program" else f"{name}.json")
+        target = (
+            folder / "results" / ("run.json" if name == "program" else f"{name}.json")
+        )
         run_files.append(target)
     findings = compare(folder / "expected.toml", run_files)
     assert findings, experiment
@@ -53,7 +57,9 @@ def test_every_recorded_expectation_is_met_or_reported(experiment: str) -> None:
         ("sbom", "known_good", "known_good.json"),
     ],
 )
-def test_rerun_reproduces_the_committed_result_file(experiment: str, name: str, result_name: str) -> None:
+def test_rerun_reproduces_the_committed_result_file(
+    experiment: str, name: str, result_name: str
+) -> None:
     """Running again gives exactly the committed JSON."""
     folder = EXAMPLES / experiment
     committed = (folder / "results" / result_name).read_text(encoding="utf-8")
@@ -62,26 +68,46 @@ def test_rerun_reproduces_the_committed_result_file(experiment: str, name: str, 
 
 def test_expected_files_were_committed_before_results() -> None:
     """The recorded order is visible in git: expected.toml precedes its results."""
-    import subprocess  # noqa: PLC0415
+    import subprocess
 
     for experiment in PROGRAMS:
         added = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%H", "--", f"examples/{experiment}/expected.toml"],
+            [
+                "git",
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                f"examples/{experiment}/expected.toml",
+            ],
             cwd=ROOT,
             capture_output=True,
             text=True,
             check=False,
         ).stdout.split()
         results = subprocess.run(
-            ["git", "log", "--diff-filter=A", "--format=%H", "--", f"examples/{experiment}/results"],
+            [
+                "git",
+                "log",
+                "--diff-filter=A",
+                "--format=%H",
+                "--",
+                f"examples/{experiment}/results",
+            ],
             cwd=ROOT,
             capture_output=True,
             text=True,
             check=False,
         ).stdout.split()
         if not added or not results:
-            pytest.skip("repository history not available (shallow copy or uncommitted results)")
+            pytest.skip(
+                "repository history not available (shallow copy or uncommitted results)"
+            )
         order = subprocess.run(
-            ["git", "rev-list", "--topo-order", "HEAD"], cwd=ROOT, capture_output=True, text=True, check=True
+            ["git", "rev-list", "--topo-order", "HEAD"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
         ).stdout.split()
         assert order.index(added[-1]) > order.index(results[-1]), experiment

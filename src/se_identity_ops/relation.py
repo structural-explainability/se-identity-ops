@@ -135,7 +135,11 @@ class Relation:
 
     def conflicts(self) -> tuple[DistinctPair, ...]:
         """Return distinct-commitments whose endpoints are generated-identical."""
-        return tuple(pair for pair in self.distinct_pairs if self.required(pair.first, pair.second))
+        return tuple(
+            pair
+            for pair in self.distinct_pairs
+            if self.required(pair.first, pair.second)
+        )
 
     def consistent(self) -> bool:
         """Return whether no distinct-commitment lies inside a class."""
@@ -192,10 +196,20 @@ class Relation:
             a = self.index[pair.first]
             b = self.index[pair.second]
             adjacency.setdefault(a, []).append(
-                (b, DerivationStep(pair.first, pair.second, pair.ground, pair.detail, pair.source))
+                (
+                    b,
+                    DerivationStep(
+                        pair.first, pair.second, pair.ground, pair.detail, pair.source
+                    ),
+                )
             )
             adjacency.setdefault(b, []).append(
-                (a, DerivationStep(pair.second, pair.first, pair.ground, pair.detail, pair.source))
+                (
+                    a,
+                    DerivationStep(
+                        pair.second, pair.first, pair.ground, pair.detail, pair.source
+                    ),
+                )
             )
         start = self.index[first]
         goal = self.index[second]
@@ -233,7 +247,13 @@ class Relation:
                 found.append(
                     (
                         representative,
-                        DerivationStep(self.items[here], self.items[representative], "key", detail, ""),
+                        DerivationStep(
+                            self.items[here],
+                            self.items[representative],
+                            "key",
+                            detail,
+                            "",
+                        ),
                     )
                 )
             else:
@@ -243,7 +263,11 @@ class Relation:
                             (
                                 position,
                                 DerivationStep(
-                                    self.items[here], self.items[position], "key", detail, ""
+                                    self.items[here],
+                                    self.items[position],
+                                    "key",
+                                    detail,
+                                    "",
                                 ),
                             )
                         )

@@ -103,7 +103,8 @@ class Run:
         return {
             "program": self.program.path,
             "sources": [
-                {"name": name, "sha256": digest, "rows": rows} for name, digest, rows in self.tables
+                {"name": name, "sha256": digest, "rows": rows}
+                for name, digest, rows in self.tables
             ],
             "results": [_plain(result) for result in self.results],
             "final_state": _plain(self.final_state),
@@ -123,7 +124,9 @@ def _plain(value: object) -> object:
     if isinstance(value, dict):
         return {key: _plain(entry) for key, entry in value.items()}
     if is_dataclass(value) and not isinstance(value, type):
-        converted = {field.name: _plain(getattr(value, field.name)) for field in fields(value)}
+        converted = {
+            field.name: _plain(getattr(value, field.name)) for field in fields(value)
+        }
         for name in ("counts", "witness"):
             pairs = converted.get(name)
             if isinstance(pairs, list):
@@ -185,7 +188,9 @@ class _Machine:
             items = stmt.inline_items
         index = {name: position for position, name in enumerate(items)}
         if len(index) != len(items):
-            raise RunError(f"line {stmt.line}: carrier '{stmt.name}' has repeated item names")
+            raise RunError(
+                f"line {stmt.line}: carrier '{stmt.name}' has repeated item names"
+            )
         self.carrier_items[stmt.name] = items
         self.carrier_index[stmt.name] = index
 
@@ -236,18 +241,30 @@ class _Machine:
             if judgment.polarity == "same":
                 same.append(
                     SamePair(
-                        judgment.first, judgment.second, "judgment", judgment.label, judgment.source
+                        judgment.first,
+                        judgment.second,
+                        "judgment",
+                        judgment.label,
+                        judgment.source,
                     )
                 )
             else:
                 distinct.append(
-                    DistinctPair(judgment.first, judgment.second, judgment.label, judgment.source)
+                    DistinctPair(
+                        judgment.first, judgment.second, judgment.label, judgment.source
+                    )
                 )
         for step in state.steps:
             if step.regime == regime_name and step.licensed:
-                same.append(SamePair(step.first, step.second, "step", step.label, step.source))
+                same.append(
+                    SamePair(step.first, step.second, "step", step.label, step.source)
+                )
         built = Relation(
-            self.carrier_items[regime.carrier], keys, column, tuple(same), tuple(distinct)
+            self.carrier_items[regime.carrier],
+            keys,
+            column,
+            tuple(same),
+            tuple(distinct),
         )
         self._relations[(regime_name, state.index)] = built
         return built
@@ -257,7 +274,9 @@ class _Machine:
         index = self.carrier_index[carrier]
         for item in items:
             if item not in index:
-                raise RunError(f"line {line}: '{item}' is not an item of carrier '{carrier}'")
+                raise RunError(
+                    f"line {line}: '{item}' is not an item of carrier '{carrier}'"
+                )
 
     # ------------------------------------------------------------------
     # Recording
@@ -351,7 +370,9 @@ class _Machine:
                 )
             forbidding = before.forbidden_by(stmt.first, stmt.second)
             if forbidding is None:
-                raise RunError("internal: conflicting same judgment without a forbidding pair")
+                raise RunError(
+                    "internal: conflicting same judgment without a forbidding pair"
+                )
             return self._forbidden_explanation(
                 stmt.label, before, stmt.first, stmt.second, forbidding, inputs
             )
@@ -369,7 +390,9 @@ class _Machine:
                 )
             forbidding = before.forbidden_by(stmt.first, stmt.second)
             if forbidding is None:
-                raise RunError("internal: redundant distinct judgment without a forbidding pair")
+                raise RunError(
+                    "internal: redundant distinct judgment without a forbidding pair"
+                )
             return self._forbidden_explanation(
                 stmt.label, before, stmt.first, stmt.second, forbidding, inputs
             )
@@ -420,7 +443,11 @@ class _Machine:
         )
 
     def _conflict_explanation(
-        self, label: str, relation: Relation, conflict: DistinctPair, inputs: tuple[str, ...]
+        self,
+        label: str,
+        relation: Relation,
+        conflict: DistinctPair,
+        inputs: tuple[str, ...],
     ) -> Explanation:
         """Explain an inconsistency: a distinct pair inside one generated class."""
         chain = relation.path(conflict.first, conflict.second)
@@ -478,7 +505,9 @@ class _Machine:
         classification = self.operators[proposal.operator].classification
         relation = self.relation(proposal.regime)
         inputs = tuple(
-            name for name in (proposal.regime, proposal.operator, proposal.source) if name
+            name
+            for name in (proposal.regime, proposal.operator, proposal.source)
+            if name
         )
         first, second = proposal.first, proposal.second
         record_step = False
@@ -540,8 +569,18 @@ class _Machine:
                     ExplanationKind.DERIVATION,
                     f"Operator {proposal.operator} is preserving under {proposal.regime} and "
                     f"no distinct judgment forbids {first} and {second}; the step is licensed"
-                    + (" (the pair was already required identical)." if already else "."),
-                    ((DerivationStep(first, second, "step", stmt.label, proposal.source),),),
+                    + (
+                        " (the pair was already required identical)."
+                        if already
+                        else "."
+                    ),
+                    (
+                        (
+                            DerivationStep(
+                                first, second, "step", stmt.label, proposal.source
+                            ),
+                        ),
+                    ),
                     (),
                     None,
                     inputs,
@@ -561,7 +600,10 @@ class _Machine:
                 ),
             )
         new_state = State(
-            previous.index + 1, previous.judgments, steps, previous.log + ((stmt.label, word),)
+            previous.index + 1,
+            previous.judgments,
+            steps,
+            previous.log + ((stmt.label, word),),
         )
         self._push_state(new_state)
         self._record(
@@ -639,7 +681,11 @@ class _Machine:
                 if class_number not in divergent_classes:
                     divergent_classes[class_number] = position
         reasons = self._unwarranted(regime, relation)
-        inputs = tuple(name for name in (regime.name, surface.name, regime.source, surface.source) if name)
+        inputs = tuple(
+            name
+            for name in (regime.name, surface.name, regime.source, surface.source)
+            if name
+        )
         counts = _counts(
             divergent_classes=len(divergent_classes),
             divergent_items=divergent_items,
@@ -730,7 +776,9 @@ class _Machine:
             if len(positions) < 2:
                 continue
             merging_groups += 1
-            class_numbers = sorted({relation.class_of(items[position]) for position in positions})
+            class_numbers = sorted(
+                {relation.class_of(items[position]) for position in positions}
+            )
             if len(class_numbers) == 1:
                 pure_groups += 1
             else:
@@ -745,11 +793,19 @@ class _Machine:
             for pair in relation.distinct_pairs:
                 class_u = relation.class_of(pair.first)
                 class_v = relation.class_of(pair.second)
-                if class_u != class_v and class_u in member_set and class_v in member_set:
+                if (
+                    class_u != class_v
+                    and class_u in member_set
+                    and class_v in member_set
+                ):
                     forbidden_pairs.add((min(class_u, class_v), max(class_u, class_v)))
         unsupported_pairs = cross_pairs - len(forbidden_pairs)
         reasons = self._unwarranted(regime, relation)
-        inputs = tuple(name for name in (surface.name, regime.name, surface.source, regime.source) if name)
+        inputs = tuple(
+            name
+            for name in (surface.name, regime.name, surface.source, regime.source)
+            if name
+        )
         counts = _counts(
             cross_class_groups=len(cross_groups),
             cross_class_pairs=cross_pairs,
@@ -760,7 +816,9 @@ class _Machine:
             unsupported_class_pairs=unsupported_pairs,
         )
         fields: dict[str, str] = {}
-        for number, (value, positions, class_numbers) in enumerate(cross_groups[:MAX_EXAMPLES], start=1):
+        for number, (value, positions, class_numbers) in enumerate(
+            cross_groups[:MAX_EXAMPLES], start=1
+        ):
             tag = f"example_{number:02d}"
             by_class: dict[int, int] = {}
             for position in positions:
@@ -848,7 +906,9 @@ class _Machine:
         )
         if conflicts:
             outcome, word = Outcome.REFUTED, "inconsistent"
-            explanation = self._conflict_explanation(stmt.label, relation, conflicts[0], inputs)
+            explanation = self._conflict_explanation(
+                stmt.label, relation, conflicts[0], inputs
+            )
         else:
             outcome, word = Outcome.ESTABLISHED, "consistent"
             vacuous = not relation.distinct_pairs
@@ -856,7 +916,11 @@ class _Machine:
                 stmt.label,
                 ExplanationKind.DERIVATION,
                 "No distinct judgment lies inside a same-class."
-                + (" There are no distinct judgments, so consistency is vacuous." if vacuous else ""),
+                + (
+                    " There are no distinct judgments, so consistency is vacuous."
+                    if vacuous
+                    else ""
+                ),
                 (),
                 (),
                 None,
@@ -892,7 +956,10 @@ class _Machine:
         counts = _counts(items=len(relation.items), silent_items=len(silent))
         if silent:
             outcome, word = Outcome.UNDETERMINED, "partial"
-            fields = {f"silent_{number:02d}": item for number, item in enumerate(silent[:MAX_EXAMPLES], start=1)}
+            fields = {
+                f"silent_{number:02d}": item
+                for number, item in enumerate(silent[:MAX_EXAMPLES], start=1)
+            }
             explanation = Explanation(
                 stmt.label,
                 ExplanationKind.LIMITATION,
@@ -1061,5 +1128,12 @@ def run_program(program: Program, base_dir: Path) -> Run:
         grouped: dict[int, list[str]] = {}
         for item in relation.items:
             grouped.setdefault(relation.class_of(item), []).append(item)
-        classes.append((regime_name, tuple(tuple(group) for _number, group in sorted(grouped.items()))))
-    return Run(program, tables, tuple(machine.results), tuple(machine.states), tuple(classes))
+        classes.append(
+            (
+                regime_name,
+                tuple(tuple(group) for _number, group in sorted(grouped.items())),
+            )
+        )
+    return Run(
+        program, tables, tuple(machine.results), tuple(machine.states), tuple(classes)
+    )

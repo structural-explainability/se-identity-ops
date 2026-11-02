@@ -8,8 +8,8 @@ OBS: Files are read as UTF-8 with the standard `csv` module. The first row names
 """
 
 import csv
-import hashlib
 from dataclasses import dataclass
+import hashlib
 from pathlib import Path
 
 from .syntax import SourceDecl
@@ -85,7 +85,9 @@ def load_table(decl: SourceDecl, base_dir: Path) -> Table:
         try:
             header = tuple(next(reader))
         except StopIteration:
-            raise SourceError(f"line {decl.line}: source file is empty: {decl.file}") from None
+            raise SourceError(
+                f"line {decl.line}: source file is empty: {decl.file}"
+            ) from None
         rows: list[tuple[str, ...]] = []
         for number, row in enumerate(reader, start=2):
             if len(row) != len(header):

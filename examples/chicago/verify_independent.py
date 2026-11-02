@@ -12,8 +12,8 @@ OBS: It also writes a post-hoc breakdown of the cross-class groups. That
      breakdown was not among the recorded expectations; it is exploratory.
 """
 
-import csv
 from collections import defaultdict
+import csv
 import json
 from pathlib import Path
 import sqlite3
@@ -91,7 +91,13 @@ def build_database(rows: list[dict[str, str]]) -> sqlite3.Connection:
     connection.executemany(
         "INSERT INTO v (n, row, vendor_id, vendor_name, localized_name) VALUES (?, ?, ?, ?, ?)",
         [
-            (number, row["row"], row["vendor_id"], row["vendor_name"], row["localized_name"])
+            (
+                number,
+                row["row"],
+                row["vendor_id"],
+                row["vendor_name"],
+                row["localized_name"],
+            )
             for number, row in enumerate(rows, start=1)
         ],
     )
@@ -132,7 +138,9 @@ def faithful_counts_sql(connection: sqlite3.Connection, column: str) -> dict[str
 
 def collision_counts_sql(connection: sqlite3.Connection, column: str) -> dict[str, int]:
     """Count surface groups and cross-class groups, by SQL."""
-    surface_values = connection.execute(f"SELECT COUNT(DISTINCT {column}) FROM v").fetchone()[0]
+    surface_values = connection.execute(
+        f"SELECT COUNT(DISTINCT {column}) FROM v"
+    ).fetchone()[0]
     merging = connection.execute(
         f"SELECT COUNT(*) FROM (SELECT {column} FROM v GROUP BY {column} HAVING COUNT(*) >= 2)"
     ).fetchone()[0]
@@ -168,32 +176,53 @@ def result_witness(run: dict, label: str) -> dict[str, str]:
     raise KeyError(label)
 
 
-def replay_faithful(rows_by_key: dict[str, dict[str, str]], witness: dict[str, str], column: str) -> list[str]:
+def replay_faithful(
+    rows_by_key: dict[str, dict[str, str]], witness: dict[str, str], column: str
+) -> list[str]:
     """Check each reported divergence example against the rows; return problems."""
     problems: list[str] = []
-    for tag in sorted({name.split(".")[0] for name in witness if name.startswith("example_")}):
+    for tag in sorted(
+        {name.split(".")[0] for name in witness if name.startswith("example_")}
+    ):
         first = rows_by_key[witness[f"{tag}.first"]]
         second = rows_by_key[witness[f"{tag}.second"]]
         if first["vendor_id"] != second["vendor_id"]:
             problems.append(f"{tag}: items do not share a Vendor ID")
-        if first[column] != witness[f"{tag}.first_value"] or second[column] != witness[f"{tag}.second_value"]:
+        if (
+            first[column] != witness[f"{tag}.first_value"]
+            or second[column] != witness[f"{tag}.second_value"]
+        ):
             problems.append(f"{tag}: reported values differ from the data")
         if first[column] == second[column]:
             problems.append(f"{tag}: values are equal, so this is not a divergence")
     return problems
 
 
-def replay_collisions(rows_by_key: dict[str, dict[str, str]], witness: dict[str, str], column: str) -> list[str]:
+def replay_collisions(
+    rows_by_key: dict[str, dict[str, str]], witness: dict[str, str], column: str
+) -> list[str]:
     """Check each reported collision example against the rows; return problems."""
     problems: list[str] = []
-    for tag in sorted({name.split(".")[0] for name in witness if name.startswith("example_")}):
+    for tag in sorted(
+        {name.split(".")[0] for name in witness if name.startswith("example_")}
+    ):
         first = rows_by_key[witness[f"{tag}.first"]]
         second = rows_by_key[witness[f"{tag}.second"]]
-        if first[column] != second[column] or first[column] != witness[f"{tag}.surface_value"]:
-            problems.append(f"{tag}: surface values are not equal to the reported value")
+        if (
+            first[column] != second[column]
+            or first[column] != witness[f"{tag}.surface_value"]
+        ):
+            problems.append(
+                f"{tag}: surface values are not equal to the reported value"
+            )
         if first["vendor_id"] == second["vendor_id"]:
-            problems.append(f"{tag}: items share a Vendor ID, so this is not a cross-class merge")
-        if (first["vendor_id"], second["vendor_id"]) != (witness[f"{tag}.first_key"], witness[f"{tag}.second_key"]):
+            problems.append(
+                f"{tag}: items share a Vendor ID, so this is not a cross-class merge"
+            )
+        if (first["vendor_id"], second["vendor_id"]) != (
+            witness[f"{tag}.first_key"],
+            witness[f"{tag}.second_key"],
+        ):
             problems.append(f"{tag}: reported keys differ from the data")
     return problems
 
@@ -226,7 +255,11 @@ def breakdown(rows: list[dict[str, str]]) -> dict[str, object]:
             induced += 1
             if len(induced_examples) < 8:
                 induced_examples.append(
-                    {"localized": localized, "raw_names": sorted(raw_names), "vendor_ids": sorted(ids)}
+                    {
+                        "localized": localized,
+                        "raw_names": sorted(raw_names),
+                        "vendor_ids": sorted(ids),
+                    }
                 )
     return {
         "cross_class_groups": raw_equal + induced,
@@ -240,7 +273,15 @@ def git_order() -> dict[str, str]:
     """Report which commit added expected.toml and whether results are committed yet."""
     root = HERE.parent.parent
     added = subprocess.run(
-        ["git", "log", "--diff-filter=A", "--format=%H", "-1", "--", "examples/chicago/expected.toml"],
+        [
+            "git",
+            "log",
+            "--diff-filter=A",
+            "--format=%H",
+            "-1",
+            "--",
+            "examples/chicago/expected.toml",
+        ],
         cwd=root,
         capture_output=True,
         text=True,
@@ -255,7 +296,9 @@ def git_order() -> dict[str, str]:
     )
     return {
         "expected_added_in_commit": added or "not committed",
-        "results_already_committed": "yes" if tracked.returncode == 0 else "no (committed after verification)",
+        "results_already_committed": "yes"
+        if tracked.returncode == 0
+        else "no (committed after verification)",
     }
 
 
@@ -265,7 +308,12 @@ def main() -> int:
     rows_by_key = {row["row"]: row for row in rows}
     run = json.loads(RUN.read_text(encoding="utf-8"))
     connection = build_database(rows)
-    report: dict[str, object] = {"rows": len(rows), "comparisons": [], "replay_problems": [], "git": git_order()}
+    report: dict[str, object] = {
+        "rows": len(rows),
+        "comparisons": [],
+        "replay_problems": [],
+        "git": git_order(),
+    }
     comparisons: list[dict[str, object]] = []
     for label, column in SURFACES.items():
         python_counts = faithful_counts_python(rows, column)
@@ -295,16 +343,29 @@ def main() -> int:
         )
     report["comparisons"] = comparisons
     problems: list[str] = []
-    problems += replay_faithful(rows_by_key, result_witness(run, "a_faithful_localized"), "localized_name")
-    problems += replay_faithful(rows_by_key, result_witness(run, "a_faithful_raw"), "vendor_name")
-    problems += replay_collisions(rows_by_key, result_witness(run, "a_collisions_localized"), "localized_name")
-    problems += replay_collisions(rows_by_key, result_witness(run, "a_collisions_raw"), "vendor_name")
+    problems += replay_faithful(
+        rows_by_key, result_witness(run, "a_faithful_localized"), "localized_name"
+    )
+    problems += replay_faithful(
+        rows_by_key, result_witness(run, "a_faithful_raw"), "vendor_name"
+    )
+    problems += replay_collisions(
+        rows_by_key, result_witness(run, "a_collisions_localized"), "localized_name"
+    )
+    problems += replay_collisions(
+        rows_by_key, result_witness(run, "a_collisions_raw"), "vendor_name"
+    )
     report["replay_problems"] = problems
     report["post_hoc_breakdown_not_a_recorded_expectation"] = breakdown(rows)
     report["all_agree"] = all(item["agree"] for item in comparisons) and not problems
-    OUT.write_text(json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUT.write_text(
+        json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
     for item in comparisons:
-        sys.stdout.write(f"{item['label']:26} {'agree' if item['agree'] else 'DISAGREE'}\n")
+        sys.stdout.write(
+            f"{item['label']:26} {'agree' if item['agree'] else 'DISAGREE'}\n"
+        )
     sys.stdout.write(f"replay problems: {len(problems)}\n")
     sys.stdout.write(f"git: {report['git']}\n")
     sys.stdout.write(f"all agree: {report['all_agree']}\n")

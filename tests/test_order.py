@@ -40,10 +40,14 @@ def test_judgments_on_disjoint_pairs_commute(tmp_path: Path) -> None:
     first = run_in_order([j1, j2], tmp_path)
     second = run_in_order([j2, j1], tmp_path)
     assert classes(first) == classes(second)
-    assert {(r.label, r.word) for r in first.results} == {(r.label, r.word) for r in second.results}
+    assert {(r.label, r.word) for r in first.results} == {
+        (r.label, r.word) for r in second.results
+    }
 
 
-def test_checks_and_proposals_do_not_change_what_later_operations_do(tmp_path: Path) -> None:
+def test_checks_and_proposals_do_not_change_what_later_operations_do(
+    tmp_path: Path,
+) -> None:
     """Inserting check, propose, or explain anywhere leaves judge and apply outcomes unchanged."""
     core = [
         'judge j1 distinct a b under r from s scope "t"',
@@ -91,15 +95,27 @@ def test_licensing_order_changes_the_outcome(tmp_path: Path) -> None:
 
 def test_which_branch_is_licensed_depends_on_order(tmp_path: Path) -> None:
     """With a and z asserted distinct, a->b then b->z licenses the first and blocks the second; the reverse swaps them."""
-    prelude = ['judge d distinct a z under r from s scope "t"', "propose p1 rekey a -> b under r", "propose p2 rekey b -> z under r"]
+    prelude = [
+        'judge d distinct a z under r from s scope "t"',
+        "propose p1 rekey a -> b under r",
+        "propose p2 rekey b -> z under r",
+    ]
     forward = run_in_order([*prelude, "apply a1 p1", "apply a2 p2"], tmp_path)
     backward = run_in_order([*prelude, "apply a2 p2", "apply a1 p1"], tmp_path)
-    assert (forward.result("a1").word, forward.result("a2").word) == ("licensed", "blocked")
-    assert (backward.result("a2").word, backward.result("a1").word) == ("licensed", "blocked")
+    assert (forward.result("a1").word, forward.result("a2").word) == (
+        "licensed",
+        "blocked",
+    )
+    assert (backward.result("a2").word, backward.result("a1").word) == (
+        "licensed",
+        "blocked",
+    )
     assert classes(forward) != classes(backward)
 
 
-def test_every_order_of_four_operations_is_classified_not_assumed(tmp_path: Path) -> None:
+def test_every_order_of_four_operations_is_classified_not_assumed(
+    tmp_path: Path,
+) -> None:
     """Over all 24 orders, record which final class structures occur; more than one must occur."""
     operations = [
         'judge j1 same a b under r from s scope "t"',

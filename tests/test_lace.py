@@ -24,7 +24,9 @@ def test_lace_encodings_agree_with_the_interpreter_on_every_case_run() -> None:
         check=False,
     )
     assert completed.returncode == 0, completed.stderr
-    report = json.loads((ROOT / "lace" / "results" / "lace_attempts.json").read_text(encoding="utf-8"))
+    report = json.loads(
+        (ROOT / "lace" / "results" / "lace_attempts.json").read_text(encoding="utf-8")
+    )
     assert report["status_open_world"]["mismatch_count"] == 0
     assert report["status_open_world"]["compared_pairs"] == 27 * 3 + 729 * 6
     for body in report["chicago_audit"].values():
@@ -32,5 +34,7 @@ def test_lace_encodings_agree_with_the_interpreter_on_every_case_run() -> None:
     for body in report["sbom_audit"].values():
         assert body["agree"] is True
     assert report["persistence_gate"]["all_expressible_steps_agree"] is True
-    inexpressible = [s for s in report["persistence_gate"]["steps"] if s["agree"] is None]
+    inexpressible = [
+        s for s in report["persistence_gate"]["steps"] if s["agree"] is None
+    ]
     assert len(inexpressible) == 4  # a_f1, a_f2 (ign), a_split (brk), a_reorder (na)

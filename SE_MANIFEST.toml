@@ -1,0 +1,85 @@
+# ============================================================
+# SE_MANIFEST.toml (Repository Declaration)
+# ============================================================
+
+schema = "se-manifest-schema"
+schema_version = "0.5.2"
+schema_url = "https://raw.githubusercontent.com/structural-explainability/se-manifest-schema/main/manifest-schema.toml"
+
+# === Framework Context ===
+
+[meta]
+framework = "Structural Explainability"
+framework_url = "https://github.com/structural-explainability"
+purpose = "Declares this repository's role in the Structural Explainability ecosystem."
+
+# === Repository Identity ===
+
+[repository]
+organization = "structural-explainability"
+name = "se-identity-ops"
+class = "pilot"
+kind = "identity-operations-language"
+status = "active"
+since = "2026"
+summary = "Research experiment: a small language for specifying, executing, and auditing identity-relevant operations under declared criteria, with Lean 4 semantics and a Python reference interpreter, tested on three settings."
+
+# === Layer Position ===
+
+[layer]
+space = "research"
+role = "pilot"
+
+# === Dependency Declarations ===
+
+[depends]
+required = []
+optional = []
+
+# === Provided Artifacts ===
+
+[provides]
+artifacts = [
+    "SPEC.md",
+    "SEMANTICS.md",
+    "DOUBTS.md",
+    "DECISIONS.md",
+    "SE/IdentityOps",
+    "src/se_identity_ops",
+    "examples",
+    "lace",
+    "tests",
+    "docs",
+    "README.md",
+]
+
+# === Scope ===
+
+[scope]
+includes = [
+    "a typed command language for judging, proposing, applying, checking, and explaining identity-relevant operations",
+    "Lean 4 statement of the command semantics over the Persistence commitment calculus, with proved properties",
+    "a deterministic Python reference interpreter with immutable snapshots and structured explanations",
+    "audit of an implementation mechanism against a declared criterion",
+    "three experiments with recorded expectations, controls, and independent verification",
+    "an attempt to express each experiment in a LACE-style formulation",
+]
+
+excludes = [
+    "an entity-resolution or merge engine, similarity functions, soft rules, or optimality criteria",
+    "any claim about which identity criterion is correct, or about real-world referents",
+    "any claim of novelty relative to LACE, LACE+, or ASPEN+",
+    "Freeze 02 or generalization material of the identity-preservation pilot",
+    "verification of the Python interpreter by the Lean development",
+]
+
+# === Citation ===
+
+[citation]
+cff = "CITATION.cff"
+preferred = "CITATION.cff"
+
+# === Traceability ===
+
+[traceability]
+identifier_map = "none"

@@ -17,7 +17,9 @@ from pathlib import Path
 import re
 import tomllib
 
-_REFERENCE = re.compile(r"^(?:(?P<program>[A-Za-z0-9_]+)\.)?(?P<label>[A-Za-z0-9_]+)\.(?P<field>[A-Za-z0-9_]+)$")
+_REFERENCE = re.compile(
+    r"^(?:(?P<program>[A-Za-z0-9_]+)\.)?(?P<label>[A-Za-z0-9_]+)\.(?P<field>[A-Za-z0-9_]+)$"
+)
 _COMPARISON = re.compile(r"^\s*(?P<left>\S+)\s*(?P<op><=|>=|==)\s*(?P<right>\S+)\s*$")
 
 
@@ -84,7 +86,9 @@ def _number(text: str, runs: dict[str, dict]) -> int | None:
     return int(value) if value is not None else None
 
 
-def _evaluate_relation(statement: str, runs: dict[str, dict]) -> tuple[bool | None, str]:
+def _evaluate_relation(
+    statement: str, runs: dict[str, dict]
+) -> tuple[bool | None, str]:
     """Evaluate `a OP b [and a OP b ...]`; return (holds, rendered)."""
     parts = [part.strip() for part in statement.split(" and ")]
     rendered: list[str] = []
@@ -124,22 +128,36 @@ def compare(expected_path: Path, run_paths: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for entry in expected.get("expect", []):
         program = Path(entry.get("program", "")).stem
-        run = runs.get(program) if program else (next(iter(runs.values())) if len(runs) == 1 else None)
+        run = (
+            runs.get(program)
+            if program
+            else (next(iter(runs.values())) if len(runs) == 1 else None)
+        )
         name = f"{program}.{entry['label']}" if program else entry["label"]
         wanted = f"{entry['outcome']}/{entry['word']}"
         result = _operation_result(run, entry["label"]) if run is not None else None
         if result is None:
-            findings.append(Finding(name, entry["kind"], "unresolved", wanted, "no such result"))
+            findings.append(
+                Finding(name, entry["kind"], "unresolved", wanted, "no such result")
+            )
             continue
         actual = f"{result['outcome']}/{result['word']}"
         findings.append(
-            Finding(name, entry["kind"], "met" if actual == wanted else "not_met", wanted, actual)
+            Finding(
+                name,
+                entry["kind"],
+                "met" if actual == wanted else "not_met",
+                wanted,
+                actual,
+            )
         )
     for relation in expected.get("relation", []):
         holds, rendered = _evaluate_relation(relation["statement"], runs)
         status = "unresolved" if holds is None else ("holds" if holds else "fails")
         findings.append(
-            Finding(relation["name"], "relation", status, relation["statement"], rendered)
+            Finding(
+                relation["name"], "relation", status, relation["statement"], rendered
+            )
         )
     return findings
 

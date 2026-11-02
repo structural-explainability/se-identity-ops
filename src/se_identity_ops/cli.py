@@ -19,7 +19,7 @@ from .interpreter import RunError, run_program
 from .parser import ParseError, parse
 
 
-def _read_program(path: Path):  # noqa: ANN202
+def _read_program(path: Path):
     """Parse a program file."""
     return parse(path.read_text(encoding="utf-8"), path.name)
 
@@ -39,19 +39,25 @@ def main(argv: list[str] | None = None) -> int:
     check_command.add_argument("file", type=Path)
     run_command = commands.add_parser("run", help="execute a program")
     run_command.add_argument("file", type=Path)
-    run_command.add_argument("--json", type=Path, default=None, help="write full results here")
+    run_command.add_argument(
+        "--json", type=Path, default=None, help="write full results here"
+    )
     expect_command = commands.add_parser(
         "expect", help="compare recorded expectations with run JSON files"
     )
     expect_command.add_argument("expected", type=Path)
     expect_command.add_argument("runs", type=Path, nargs="+")
-    expect_command.add_argument("--out", type=Path, default=None, help="write findings here")
+    expect_command.add_argument(
+        "--out", type=Path, default=None, help="write findings here"
+    )
     args = parser.parse_args(argv)
 
     if args.command == "expect":
         findings = compare(args.expected, list(args.runs))
         for found in findings:
-            sys.stdout.write(f"{found.status:10} {found.kind:22} {found.name}: expected {found.expected}; actual {found.actual}\n")
+            sys.stdout.write(
+                f"{found.status:10} {found.kind:22} {found.name}: expected {found.expected}; actual {found.actual}\n"
+            )
         if args.out is not None:
             args.out.parent.mkdir(parents=True, exist_ok=True)
             args.out.write_text(to_json(findings), encoding="utf-8")
@@ -68,7 +74,9 @@ def main(argv: list[str] | None = None) -> int:
             sys.stderr.write(f"{args.file}: {diagnostic}\n")
         return 1
     if args.command == "check":
-        sys.stdout.write(f"{args.file}: {len(program.statements)} statements, no diagnostics\n")
+        sys.stdout.write(
+            f"{args.file}: {len(program.statements)} statements, no diagnostics\n"
+        )
         return 0
     try:
         run = run_program(program, args.file.resolve().parent)
@@ -76,11 +84,14 @@ def main(argv: list[str] | None = None) -> int:
         sys.stderr.write(f"{args.file}: {error}\n")
         return 1
     for result in run.results:
-        sys.stdout.write(f"{result.operation:8} {result.label:24} {result.outcome.value:12} {result.word}\n")
+        sys.stdout.write(
+            f"{result.operation:8} {result.label:24} {result.outcome.value:12} {result.word}\n"
+        )
     if args.json is not None:
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(
-            json.dumps(run.to_dict(), indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+            json.dumps(run.to_dict(), indent=2, sort_keys=True, ensure_ascii=False)
+            + "\n",
             encoding="utf-8",
         )
     return 0

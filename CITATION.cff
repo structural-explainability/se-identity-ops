@@ -1,0 +1,44 @@
+# ============================================================
+# CITATION.cff (How to cite this project)
+# ============================================================
+# REQ.UNIVERSAL: Professional open projects SHOULD include this file.
+# May reference upstream dependencies, but must not refer to downstream.
+# USAGE: See https://citation-file-format.github.io/ for details.
+# check with:
+# uvx cffconvert --validate
+
+cff-version: "1.2.0"
+message: "If you use this work, please cite it using the metadata in CITATION.cff."
+type: software
+
+title: "SE IdentityOps"
+version: "0.1.0" # CUSTOM: Updated to match the current release version of the project
+date-released: "2026-11-02" # CUSTOM: Updated to match the current release date of the project
+
+authors:
+  - family-names: Case
+    given-names: Denise M.
+    orcid: "https://orcid.org/0000-0001-6165-7389"
+    affiliation: "Northwest Missouri State University, School of Computer Science and Information Systems, Maryville, MO, USA"
+
+repository-code: "https://github.com/structural-explainability/se-identity-ops"
+url: "https://github.com/structural-explainability/se-identity-ops"
+
+license: Apache-2.0
+
+abstract: >
+  A research experiment: a small language for specifying, executing, and
+  auditing identity-relevant operations under declared criteria, with a Lean 4
+  statement of its semantics and a deterministic Python reference interpreter.
+  It is tested on Chicago vendor records, an SBOM and PURL conversion, and
+  synthetic persistence controls. It is not an entity-resolution engine and
+  makes no claim of novelty relative to LACE, LACE+, or ASPEN+.
+
+keywords:
+  - structural-explainability
+  - identity
+  - operational-identity
+  - domain-specific-language
+  - entity-resolution
+  - lean4
+  - research-software

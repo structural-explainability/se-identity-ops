@@ -51,7 +51,9 @@ def main() -> int:
     names = [row["Vendor Name"] for row in rows]
     for name in names:
         if "\n" in name or "\r" in name:
-            sys.stderr.write("A vendor name contains a line break; the harness is line based.\n")
+            sys.stderr.write(
+                "A vendor name contains a line break; the harness is line based.\n"
+            )
             return 1
 
     completed = subprocess.run(
@@ -71,8 +73,12 @@ def main() -> int:
     with args.output.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle, lineterminator="\n")
         writer.writerow(["row", "vendor_id", "vendor_name", "localized_name"])
-        for index, (row, localized) in enumerate(zip(rows, outputs, strict=True), start=1):
-            writer.writerow([f"r{index:05d}", row["Vendor ID"], row["Vendor Name"], localized])
+        for index, (row, localized) in enumerate(
+            zip(rows, outputs, strict=True), start=1
+        ):
+            writer.writerow(
+                [f"r{index:05d}", row["Vendor ID"], row["Vendor Name"], localized]
+            )
 
     sys.stdout.write(f"sample sha256: {sha256_of(args.sample)}\n")
     sys.stdout.write(f"output sha256: {sha256_of(args.output)}\n")

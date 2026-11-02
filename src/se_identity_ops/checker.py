@@ -59,8 +59,13 @@ class _Scope:
         self.applied: set[str] = set()
 
 
-def _declare_once(
-    table: dict[str, object], name: str, value: object, kind: str, line: int, out: list[Diagnostic]
+def _declare_once[Declaration](
+    table: dict[str, Declaration],
+    name: str,
+    value: Declaration,
+    kind: str,
+    line: int,
+    out: list[Diagnostic],
 ) -> None:
     """Record a declaration or report a duplicate."""
     if name in table:
@@ -92,7 +97,10 @@ def _check_regime(scope: _Scope, stmt: RegimeDecl, out: list[Diagnostic]) -> Non
         out.append(Diagnostic(stmt.line, f"unknown carrier '{stmt.carrier}'"))
     elif stmt.kind == "key" and not carrier.source:
         out.append(
-            Diagnostic(stmt.line, f"key regime '{stmt.name}' needs a carrier loaded from a source")
+            Diagnostic(
+                stmt.line,
+                f"key regime '{stmt.name}' needs a carrier loaded from a source",
+            )
         )
     _need_source(scope, stmt.source, stmt.line, out)
 
@@ -105,7 +113,10 @@ def _check_surface(scope: _Scope, stmt: SurfaceDecl, out: list[Diagnostic]) -> N
         out.append(Diagnostic(stmt.line, f"unknown carrier '{stmt.carrier}'"))
     elif not carrier.source:
         out.append(
-            Diagnostic(stmt.line, f"{stmt.role} '{stmt.name}' needs a carrier loaded from a source")
+            Diagnostic(
+                stmt.line,
+                f"{stmt.role} '{stmt.name}' needs a carrier loaded from a source",
+            )
         )
     elif carrier.source != stmt.source:
         out.append(
@@ -125,7 +136,9 @@ def _check_operator(scope: _Scope, stmt: OperatorDecl, out: list[Diagnostic]) ->
         out.append(Diagnostic(stmt.line, f"unknown regime '{stmt.regime}'"))
 
 
-def _claim_label(scope: _Scope, label: str, kind: str, line: int, out: list[Diagnostic]) -> None:
+def _claim_label(
+    scope: _Scope, label: str, kind: str, line: int, out: list[Diagnostic]
+) -> None:
     """Record an operation label or report a duplicate."""
     if label in scope.labels:
         out.append(Diagnostic(line, f"label '{label}' is already used"))
@@ -134,7 +147,11 @@ def _claim_label(scope: _Scope, label: str, kind: str, line: int, out: list[Diag
 
 
 def _check_item_inline(
-    scope: _Scope, regime_name: str, items: tuple[str, ...], line: int, out: list[Diagnostic]
+    scope: _Scope,
+    regime_name: str,
+    items: tuple[str, ...],
+    line: int,
+    out: list[Diagnostic],
 ) -> None:
     """Check item names against an inline carrier when the carrier is inline."""
     regime = scope.regimes.get(regime_name)
@@ -145,7 +162,9 @@ def _check_item_inline(
         return
     for item in items:
         if item not in carrier.inline_items:
-            out.append(Diagnostic(line, f"'{item}' is not an item of carrier '{carrier.name}'"))
+            out.append(
+                Diagnostic(line, f"'{item}' is not an item of carrier '{carrier.name}'")
+            )
 
 
 def _check_judge(scope: _Scope, stmt: Judge, out: list[Diagnostic]) -> None:
@@ -188,7 +207,9 @@ def _check_apply(scope: _Scope, stmt: Apply, out: list[Diagnostic]) -> None:
     if stmt.proposal not in scope.proposals:
         out.append(Diagnostic(stmt.line, f"unknown proposal '{stmt.proposal}'"))
     elif stmt.proposal in scope.applied:
-        out.append(Diagnostic(stmt.line, f"proposal '{stmt.proposal}' is already applied"))
+        out.append(
+            Diagnostic(stmt.line, f"proposal '{stmt.proposal}' is already applied")
+        )
     else:
         scope.applied.add(stmt.proposal)
 
@@ -202,8 +223,14 @@ def _check_check(scope: _Scope, stmt: Check, out: list[Diagnostic]) -> None:
         if regime is None:
             out.append(Diagnostic(stmt.line, f"unknown regime '{stmt.subject}'"))
         if surface is None:
-            out.append(Diagnostic(stmt.line, f"unknown surface or probe '{stmt.object}'"))
-        if regime is not None and surface is not None and regime.carrier != surface.carrier:
+            out.append(
+                Diagnostic(stmt.line, f"unknown surface or probe '{stmt.object}'")
+            )
+        if (
+            regime is not None
+            and surface is not None
+            and regime.carrier != surface.carrier
+        ):
             out.append(
                 Diagnostic(
                     stmt.line,
@@ -218,11 +245,18 @@ def _check_check(scope: _Scope, stmt: Check, out: list[Diagnostic]) -> None:
             out.append(Diagnostic(stmt.line, f"unknown surface '{stmt.subject}'"))
         elif surface.role != "surface":
             out.append(
-                Diagnostic(stmt.line, f"'{surface.name}' is a probe; collisions applies to surfaces")
+                Diagnostic(
+                    stmt.line,
+                    f"'{surface.name}' is a probe; collisions applies to surfaces",
+                )
             )
         if regime is None:
             out.append(Diagnostic(stmt.line, f"unknown regime '{stmt.object}'"))
-        if regime is not None and surface is not None and regime.carrier != surface.carrier:
+        if (
+            regime is not None
+            and surface is not None
+            and regime.carrier != surface.carrier
+        ):
             out.append(
                 Diagnostic(
                     stmt.line,
@@ -234,7 +268,9 @@ def _check_check(scope: _Scope, stmt: Check, out: list[Diagnostic]) -> None:
         if stmt.subject not in scope.regimes:
             out.append(Diagnostic(stmt.line, f"unknown regime '{stmt.subject}'"))
         if stmt.kind == "status":
-            _check_item_inline(scope, stmt.subject, (stmt.first, stmt.second), stmt.line, out)
+            _check_item_inline(
+                scope, stmt.subject, (stmt.first, stmt.second), stmt.line, out
+            )
 
 
 def _check_explain(scope: _Scope, stmt: Explain, out: list[Diagnostic]) -> None:

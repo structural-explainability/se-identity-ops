@@ -17,11 +17,9 @@ from .syntax import (
     CarrierDecl,
     Check,
     CheckKind,
-    Classification,
     Explain,
     Judge,
     OperatorDecl,
-    Polarity,
     Program,
     Propose,
     RegimeDecl,
@@ -158,7 +156,9 @@ class _Cursor:
     def finish(self) -> None:
         """Require that no tokens remain."""
         if not self.at_end():
-            raise ParseError(self.line, f"unexpected extra input {self.tokens[self.index].text!r}")
+            raise ParseError(
+                self.line, f"unexpected extra input {self.tokens[self.index].text!r}"
+            )
 
 
 def _optional_clauses(cursor: _Cursor, allowed: dict[str, bool]) -> dict[str, str]:
@@ -179,7 +179,9 @@ def _optional_clauses(cursor: _Cursor, allowed: dict[str, bool]) -> dict[str, st
     while not cursor.at_end():
         name = cursor.peek_word()
         if name not in allowed:
-            raise ParseError(cursor.line, f"unexpected input {cursor.tokens[cursor.index].text!r}")
+            raise ParseError(
+                cursor.line, f"unexpected input {cursor.tokens[cursor.index].text!r}"
+            )
         if name in found:
             raise ParseError(cursor.line, f"clause '{name}' given twice")
         cursor.keyword(name)
@@ -232,7 +234,13 @@ def _parse_regime(cursor: _Cursor) -> Statement:
         kind = "explicit"
     found = _read_regime_clauses(cursor)
     return RegimeDecl(
-        name, carrier, kind, column, found.get("source", ""), found.get("meaning", ""), cursor.line
+        name,
+        carrier,
+        kind,
+        column,
+        found.get("source", ""),
+        found.get("meaning", ""),
+        cursor.line,
     )
 
 
@@ -242,11 +250,17 @@ def _read_regime_clauses(cursor: _Cursor) -> dict[str, str]:
     while not cursor.at_end():
         clause = cursor.peek_word()
         if clause not in ("source", "meaning"):
-            raise ParseError(cursor.line, f"unexpected input {cursor.tokens[cursor.index].text!r}")
+            raise ParseError(
+                cursor.line, f"unexpected input {cursor.tokens[cursor.index].text!r}"
+            )
         if clause in found:
             raise ParseError(cursor.line, f"clause '{clause}' given twice")
         cursor.keyword(clause)
-        found[clause] = cursor.word("source name") if clause == "source" else cursor.string("meaning")
+        found[clause] = (
+            cursor.word("source name")
+            if clause == "source"
+            else cursor.string("meaning")
+        )
     return found
 
 
@@ -273,7 +287,7 @@ def _parse_operator(cursor: _Cursor) -> Statement:
     cursor.keyword("under")
     regime = cursor.word("regime name")
     cursor.finish()
-    return OperatorDecl(name, cast("Classification", classification), regime, cursor.line)
+    return OperatorDecl(name, classification, regime, cursor.line)
 
 
 def _parse_judge(cursor: _Cursor) -> Statement:
@@ -290,14 +304,18 @@ def _parse_judge(cursor: _Cursor) -> Statement:
     while not cursor.at_end():
         clause = cursor.peek_word()
         if clause not in ("from", "scope"):
-            raise ParseError(cursor.line, f"unexpected input {cursor.tokens[cursor.index].text!r}")
+            raise ParseError(
+                cursor.line, f"unexpected input {cursor.tokens[cursor.index].text!r}"
+            )
         if clause in found:
             raise ParseError(cursor.line, f"clause '{clause}' given twice")
         cursor.keyword(clause)
-        found[clause] = cursor.word("source name") if clause == "from" else cursor.string("scope")
+        found[clause] = (
+            cursor.word("source name") if clause == "from" else cursor.string("scope")
+        )
     return Judge(
         label,
-        cast("Polarity", polarity),
+        polarity,
         first,
         second,
         regime,
@@ -360,7 +378,8 @@ def _parse_check(cursor: _Cursor) -> Statement:
         cursor.finish()
         return Check(label, "status", regime, "", first, second, cursor.line)
     raise ParseError(
-        cursor.line, "check kind must be faithful, collisions, consistent, coverage, or status"
+        cursor.line,
+        "check kind must be faithful, collisions, consistent, coverage, or status",
     )
 
 
@@ -385,7 +404,9 @@ def _split_statements(text: str) -> list[tuple[int, str]]:
             continue
         if raw[0] in " \t":
             if not current:
-                raise ParseError(number, "continuation line with no statement to continue")
+                raise ParseError(
+                    number, "continuation line with no statement to continue"
+                )
             current.append(raw)
             continue
         if current:

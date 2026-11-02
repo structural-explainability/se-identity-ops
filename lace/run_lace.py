@@ -19,6 +19,7 @@ import json
 from pathlib import Path
 import sys
 import time
+from typing import Any
 
 import clingo
 
@@ -29,6 +30,10 @@ from se_identity_ops.syntax import Apply, Judge, OperatorDecl, Propose
 HERE = Path(__file__).parent
 ROOT = HERE.parent
 OUT = HERE / "results" / "lace_attempts.json"
+TIMINGS = HERE / "results" / "timings.json"  # not committed: depends on the machine
+
+
+TIMES: dict[str, float] = {}
 
 
 def solve(control: clingo.Control) -> list[set[str]]:
@@ -41,7 +46,9 @@ def solve(control: clingo.Control) -> list[set[str]]:
     return models
 
 
-def lace_status(size: int, same: list[tuple[int, int]], distinct: list[tuple[int, int]]) -> dict[tuple[int, int], str]:
+def lace_status(
+    size: int, same: list[tuple[int, int]], distinct: list[tuple[int, int]]
+) -> dict[tuple[int, int], str]:
     """Return pair statuses from cautious and brave reasoning over the open-world encoding."""
     program = (HERE / "open_world_status.lp").read_text(encoding="utf-8")
     facts = [f"item({n})." for n in range(size)]
@@ -76,12 +83,16 @@ def section_status() -> dict[str, object]:
         pairs = list(combinations(range(size), 2))
         for choice in product((0, 1, 2), repeat=len(pairs)):
             same = [pair for pair, mark in zip(pairs, choice, strict=True) if mark == 1]
-            distinct = [pair for pair, mark in zip(pairs, choice, strict=True) if mark == 2]
+            distinct = [
+                pair for pair, mark in zip(pairs, choice, strict=True) if mark == 2
+            ]
             relation = Relation(
                 names,
                 None,
                 "",
-                tuple(SamePair(names[a], names[b], "judgment", "s", "") for a, b in same),
+                tuple(
+                    SamePair(names[a], names[b], "judgment", "s", "") for a, b in same
+                ),
                 tuple(DistinctPair(names[a], names[b], "d", "") for a, b in distinct),
             )
             lace = lace_status(size, same, distinct)
@@ -89,7 +100,9 @@ def section_status() -> dict[str, object]:
                 compared += 1
                 theirs = relation.status(names[a], names[b])
                 if lace[(a, b)] != theirs:
-                    mismatches.append(f"n={size} same={same} distinct={distinct} pair={(a, b)} lace={lace[(a, b)]} interpreter={theirs}")
+                    mismatches.append(
+                        f"n={size} same={same} distinct={distinct} pair={(a, b)} lace={lace[(a, b)]} interpreter={theirs}"
+                    )
     return {
         "compared_pairs": compared,
         "mismatches": mismatches[:5],
@@ -106,20 +119,15 @@ def section_status() -> dict[str, object]:
 def section_growth() -> list[dict[str, object]]:
     """Measure ground size and time of the open-world encoding as the carrier grows."""
     program = (HERE / "open_world_status.lp").read_text(encoding="utf-8")
-    rows = []
+    rows: list[dict[str, object]] = []
     for size in (10, 20, 40, 80):
         control = clingo.Control(["--warn=none"])
         control.add("base", [], program + "\n".join(f"item({n})." for n in range(size)))
         started = time.perf_counter()
         control.ground([("base", [])])
         elapsed = time.perf_counter() - started
-        rows.append(
-            {
-                "items": size,
-                "ground_atoms": len(list(control.symbolic_atoms)),
-                "ground_seconds": round(elapsed, 3),
-            }
-        )
+        TIMES[f"grounding_{size}_items"] = round(elapsed, 3)
+        rows.append({"items": size, "ground_atoms": len(list(control.symbolic_atoms))})
     return rows
 
 
@@ -139,16 +147,23 @@ def audit(rows: list[tuple[str, str, str]]) -> dict[str, int]:
     return {
         "divergent_items": sum(1 for atom in shown if atom.startswith("div_item(")),
         "divergent_classes": sum(1 for atom in shown if atom.startswith("div_class(")),
-        "cross_class_pairs_distinct": sum(1 for atom in shown if atom.startswith("cross(")),
+        "cross_class_pairs_distinct": sum(
+            1 for atom in shown if atom.startswith("cross(")
+        ),
     }
 
 
-def read_csv(path: Path, key_column: str, value_column: str, item_column: str) -> list[tuple[str, str, str]]:
+def read_csv(
+    path: Path, key_column: str, value_column: str, item_column: str
+) -> list[tuple[str, str, str]]:
     """Read (item, key, value) rows from a CSV."""
-    import csv  # noqa: PLC0415
+    import csv
 
     with path.open(newline="", encoding="utf-8") as handle:
-        return [(row[item_column], row[key_column], row[value_column]) for row in csv.DictReader(handle)]
+        return [
+            (row[item_column], row[key_column], row[value_column])
+            for row in csv.DictReader(handle)
+        ]
 
 
 def distinct_cross_pairs(rows: list[tuple[str, str, str]]) -> int:
@@ -168,25 +183,37 @@ def distinct_cross_pairs(rows: list[tuple[str, str, str]]) -> int:
 def section_chicago() -> dict[str, object]:
     """Run the Chicago audit as two LACE-style hard-rule sets."""
     path = ROOT / "examples" / "chicago" / "data" / "vendors_20k_observed.csv"
-    run = json.loads((ROOT / "examples" / "chicago" / "results" / "run.json").read_text(encoding="utf-8"))
+    run = json.loads(
+        (ROOT / "examples" / "chicago" / "results" / "run.json").read_text(
+            encoding="utf-8"
+        )
+    )
     result: dict[str, object] = {}
-    for label, column in (("localized_name", "a_faithful_localized"), ("vendor_name", "a_faithful_raw")):
+    for label, column in (
+        ("localized_name", "a_faithful_localized"),
+        ("vendor_name", "a_faithful_raw"),
+    ):
         rows = read_csv(path, "vendor_id", label, "row")
         started = time.perf_counter()
         counts = audit(rows)
-        seconds = round(time.perf_counter() - started, 2)
-        reported = next(r for r in run["results"] if r["label"] == column and r["operation"] == "check")["counts"]
+        TIMES[f"chicago_audit_{label}"] = round(time.perf_counter() - started, 2)
+        reported = next(
+            r
+            for r in run["results"]
+            if r["label"] == column and r["operation"] == "check"
+        )["counts"]
         expected_pairs = distinct_cross_pairs(rows)
         result[label] = {
             "lace": counts,
-            "interpreter": {k: reported[k] for k in ("divergent_classes", "divergent_items")},
+            "interpreter": {
+                k: reported[k] for k in ("divergent_classes", "divergent_items")
+            },
             "distinct_class_pairs_by_plain_python": expected_pairs,
             "agree": (
                 counts["divergent_classes"] == reported["divergent_classes"]
                 and counts["divergent_items"] == reported["divergent_items"]
                 and counts["cross_class_pairs_distinct"] == expected_pairs
             ),
-            "seconds": seconds,
         }
     return result
 
@@ -196,13 +223,23 @@ def section_sbom() -> dict[str, object]:
     result: dict[str, object] = {}
     for case in ("known_bad", "known_good"):
         path = ROOT / "examples" / "sbom" / "data" / f"components_{case}.csv"
-        run = json.loads((ROOT / "examples" / "sbom" / "results" / f"{case}.json").read_text(encoding="utf-8"))
-        reported = next(r for r in run["results"] if r["label"] == "b_canonical" and r["operation"] == "check")["counts"]
+        run = json.loads(
+            (ROOT / "examples" / "sbom" / "results" / f"{case}.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        reported = next(
+            r
+            for r in run["results"]
+            if r["label"] == "b_canonical" and r["operation"] == "check"
+        )["counts"]
         rows = read_csv(path, "anchor_hash", "canonical_purl", "frame")
         counts = audit(rows)
         result[case] = {
             "lace": counts,
-            "interpreter": {k: reported[k] for k in ("divergent_classes", "divergent_items")},
+            "interpreter": {
+                k: reported[k] for k in ("divergent_classes", "divergent_items")
+            },
             "agree": (
                 counts["divergent_classes"] == reported["divergent_classes"]
                 and counts["divergent_items"] == reported["divergent_items"]
@@ -213,10 +250,20 @@ def section_sbom() -> dict[str, object]:
 
 def section_persistence() -> dict[str, object]:
     """Replay the synthetic persistence program's apply steps with a LACE gate driver."""
-    program = parse((ROOT / "examples" / "persistence" / "program.ido").read_text(encoding="utf-8"))
-    run = json.loads((ROOT / "examples" / "persistence" / "results" / "run.json").read_text(encoding="utf-8"))
+    program = parse(
+        (ROOT / "examples" / "persistence" / "program.ido").read_text(encoding="utf-8")
+    )
+    run = json.loads(
+        (ROOT / "examples" / "persistence" / "results" / "run.json").read_text(
+            encoding="utf-8"
+        )
+    )
     gate = (HERE / "licensing_gate.lp").read_text(encoding="utf-8")
-    classification = {s.name: s.classification for s in program.statements if isinstance(s, OperatorDecl)}
+    classification = {
+        s.name: s.classification
+        for s in program.statements
+        if isinstance(s, OperatorDecl)
+    }
     proposals = {s.label: s for s in program.statements if isinstance(s, Propose)}
     licensed: list[tuple[str, str]] = []
     distinct: list[tuple[str, str]] = []
@@ -228,7 +275,11 @@ def section_persistence() -> dict[str, object]:
             continue
         proposal = proposals[statement.proposal]
         kind = classification[proposal.operator]
-        interpreter_word = next(r for r in run["results"] if r["label"] == statement.label and r["operation"] == "apply")["word"]
+        interpreter_word = next(
+            r
+            for r in run["results"]
+            if r["label"] == statement.label and r["operation"] == "apply"
+        )["word"]
         if kind != "prs":
             rows.append(
                 {
@@ -258,13 +309,18 @@ def section_persistence() -> dict[str, object]:
                 "note": "",
             }
         )
-    return {"steps": rows, "all_expressible_steps_agree": all(r["agree"] for r in rows if r["agree"] is not None)}
+    return {
+        "steps": rows,
+        "all_expressible_steps_agree": all(
+            r["agree"] for r in rows if r["agree"] is not None
+        ),
+    }
 
 
 def main() -> int:
     """Run every section and write the results."""
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    report = {
+    report: dict[str, Any] = {
         "clingo": clingo.__version__,
         "status_open_world": section_status(),
         "grounding_growth": section_growth(),
@@ -272,14 +328,25 @@ def main() -> int:
         "sbom_audit": section_sbom(),
         "persistence_gate": section_persistence(),
     }
-    OUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    OUT.write_text(
+        json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    TIMINGS.write_text(
+        json.dumps(TIMES, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     status = report["status_open_world"]
-    sys.stdout.write(f"status: compared {status['compared_pairs']} pairs, mismatches {status['mismatch_count']}\n")  # type: ignore[index]
+    sys.stdout.write(
+        f"status: compared {status['compared_pairs']} pairs, mismatches {status['mismatch_count']}\n"
+    )  # type: ignore[index]
     sys.stdout.write(f"growth: {report['grounding_growth']}\n")
     for name in ("chicago_audit", "sbom_audit"):
         for case, body in report[name].items():  # type: ignore[union-attr]
-            sys.stdout.write(f"{name} {case}: agree={body['agree']} lace={body['lace']}\n")
-    sys.stdout.write(f"persistence: all expressible steps agree = {report['persistence_gate']['all_expressible_steps_agree']}\n")  # type: ignore[index]
+            sys.stdout.write(
+                f"{name} {case}: agree={body['agree']} lace={body['lace']}\n"
+            )
+    sys.stdout.write(
+        f"persistence: all expressible steps agree = {report['persistence_gate']['all_expressible_steps_agree']}\n"
+    )  # type: ignore[index]
     return 0
 
 

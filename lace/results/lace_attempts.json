@@ -11,8 +11,7 @@
         "cross_class_pairs_distinct": 55,
         "divergent_classes": 2,
         "divergent_items": 3
-      },
-      "seconds": 2.98
+      }
     },
     "vendor_name": {
       "agree": true,
@@ -25,30 +24,25 @@
         "cross_class_pairs_distinct": 16,
         "divergent_classes": 4,
         "divergent_items": 7
-      },
-      "seconds": 2.38
+      }
     }
   },
   "clingo": "5.8.2",
   "grounding_growth": [
     {
       "ground_atoms": 100,
-      "ground_seconds": 0.001,
       "items": 10
     },
     {
       "ground_atoms": 400,
-      "ground_seconds": 0.006,
       "items": 20
     },
     {
       "ground_atoms": 1600,
-      "ground_seconds": 0.046,
       "items": 40
     },
     {
       "ground_atoms": 6400,
-      "ground_seconds": 0.587,
       "items": 80
     }
   ],

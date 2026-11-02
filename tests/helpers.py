@@ -12,7 +12,9 @@ from pathlib import Path
 from se_identity_ops import Run, parse, run_program
 
 
-def write_table(folder: Path, name: str, header: list[str], rows: list[list[str]]) -> str:
+def write_table(
+    folder: Path, name: str, header: list[str], rows: list[list[str]]
+) -> str:
     """Write a CSV file and return its SHA-256 digest."""
     path = folder / f"{name}.csv"
     with path.open("w", newline="", encoding="utf-8") as handle:

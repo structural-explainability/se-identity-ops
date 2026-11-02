@@ -98,7 +98,9 @@ def test_continuation_lines_join_the_previous_statement() -> None:
         ('carrier c from s key "k" extra', "unexpected extra input"),
     ],
 )
-def test_malformed_statements_report_a_line_and_reason(text: str, fragment: str) -> None:
+def test_malformed_statements_report_a_line_and_reason(
+    text: str, fragment: str
+) -> None:
     """Malformed input raises ParseError naming the problem."""
     with pytest.raises(ParseError) as caught:
         parse(text)

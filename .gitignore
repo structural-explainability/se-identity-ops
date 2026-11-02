@@ -367,3 +367,4 @@ docs/assets/data/view-analytics.json
 docs/assets/data/guide-context.json
 # marimo WASM export; built at deploy time, not committed
 docs/app/
+lace/results/timings.json
