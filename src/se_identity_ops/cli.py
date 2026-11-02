@@ -14,6 +14,7 @@ from pathlib import Path
 import sys
 
 from .checker import check_program
+from .expectations import compare, to_json
 from .interpreter import RunError, run_program
 from .parser import ParseError, parse
 
@@ -39,7 +40,22 @@ def main(argv: list[str] | None = None) -> int:
     run_command = commands.add_parser("run", help="execute a program")
     run_command.add_argument("file", type=Path)
     run_command.add_argument("--json", type=Path, default=None, help="write full results here")
+    expect_command = commands.add_parser(
+        "expect", help="compare recorded expectations with run JSON files"
+    )
+    expect_command.add_argument("expected", type=Path)
+    expect_command.add_argument("runs", type=Path, nargs="+")
+    expect_command.add_argument("--out", type=Path, default=None, help="write findings here")
     args = parser.parse_args(argv)
+
+    if args.command == "expect":
+        findings = compare(args.expected, list(args.runs))
+        for found in findings:
+            sys.stdout.write(f"{found.status:10} {found.kind:22} {found.name}: expected {found.expected}; actual {found.actual}\n")
+        if args.out is not None:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(to_json(findings), encoding="utf-8")
+        return 0
 
     try:
         program = _read_program(args.file)

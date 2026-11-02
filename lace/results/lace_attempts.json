@@ -1,0 +1,169 @@
+{
+  "chicago_audit": {
+    "localized_name": {
+      "agree": true,
+      "distinct_class_pairs_by_plain_python": 55,
+      "interpreter": {
+        "divergent_classes": 2,
+        "divergent_items": 3
+      },
+      "lace": {
+        "cross_class_pairs_distinct": 55,
+        "divergent_classes": 2,
+        "divergent_items": 3
+      },
+      "seconds": 2.98
+    },
+    "vendor_name": {
+      "agree": true,
+      "distinct_class_pairs_by_plain_python": 16,
+      "interpreter": {
+        "divergent_classes": 4,
+        "divergent_items": 7
+      },
+      "lace": {
+        "cross_class_pairs_distinct": 16,
+        "divergent_classes": 4,
+        "divergent_items": 7
+      },
+      "seconds": 2.38
+    }
+  },
+  "clingo": "5.8.2",
+  "grounding_growth": [
+    {
+      "ground_atoms": 100,
+      "ground_seconds": 0.001,
+      "items": 10
+    },
+    {
+      "ground_atoms": 400,
+      "ground_seconds": 0.006,
+      "items": 20
+    },
+    {
+      "ground_atoms": 1600,
+      "ground_seconds": 0.046,
+      "items": 40
+    },
+    {
+      "ground_atoms": 6400,
+      "ground_seconds": 0.587,
+      "items": 80
+    }
+  ],
+  "persistence_gate": {
+    "all_expressible_steps_agree": true,
+    "steps": [
+      {
+        "agree": true,
+        "interpreter": "licensed",
+        "lace": "licensed",
+        "note": "",
+        "step": "a_rekey"
+      },
+      {
+        "agree": null,
+        "interpreter": "ignoring",
+        "lace": "not expressible",
+        "note": "operator classified ign; LACE has no ignoring, breaking, or inapplicable steps",
+        "step": "a_f1"
+      },
+      {
+        "agree": null,
+        "interpreter": "ignoring",
+        "lace": "not expressible",
+        "note": "operator classified ign; LACE has no ignoring, breaking, or inapplicable steps",
+        "step": "a_f2"
+      },
+      {
+        "agree": true,
+        "interpreter": "licensed",
+        "lace": "licensed",
+        "note": "",
+        "step": "a_g1"
+      },
+      {
+        "agree": true,
+        "interpreter": "blocked",
+        "lace": "blocked",
+        "note": "",
+        "step": "a_g2"
+      },
+      {
+        "agree": true,
+        "interpreter": "licensed",
+        "lace": "licensed",
+        "note": "",
+        "step": "a_h1"
+      },
+      {
+        "agree": true,
+        "interpreter": "licensed",
+        "lace": "licensed",
+        "note": "",
+        "step": "a_h2"
+      },
+      {
+        "agree": true,
+        "interpreter": "licensed",
+        "lace": "licensed",
+        "note": "",
+        "step": "a_m1"
+      },
+      {
+        "agree": true,
+        "interpreter": "blocked",
+        "lace": "blocked",
+        "note": "",
+        "step": "a_m2"
+      },
+      {
+        "agree": null,
+        "interpreter": "broken",
+        "lace": "not expressible",
+        "note": "operator classified brk; LACE has no ignoring, breaking, or inapplicable steps",
+        "step": "a_split"
+      },
+      {
+        "agree": null,
+        "interpreter": "inapplicable",
+        "lace": "not expressible",
+        "note": "operator classified na; LACE has no ignoring, breaking, or inapplicable steps",
+        "step": "a_reorder"
+      }
+    ]
+  },
+  "sbom_audit": {
+    "known_bad": {
+      "agree": true,
+      "interpreter": {
+        "divergent_classes": 3,
+        "divergent_items": 3
+      },
+      "lace": {
+        "cross_class_pairs_distinct": 3,
+        "divergent_classes": 3,
+        "divergent_items": 3
+      }
+    },
+    "known_good": {
+      "agree": true,
+      "interpreter": {
+        "divergent_classes": 0,
+        "divergent_items": 0
+      },
+      "lace": {
+        "cross_class_pairs_distinct": 0,
+        "divergent_classes": 0,
+        "divergent_items": 0
+      }
+    }
+  },
+  "status_open_world": {
+    "compared_pairs": 4455,
+    "finding": "With one soft rule offering every pair as a candidate merge, cautious/brave reasoning reproduces required/forbidden/undetermined on every assignment for 3 and 4 items. Without that quadratic soft rule, LACE-style derivation leaves unmerged pairs unmerged, so 'undetermined' and 'forbidden' cannot be told apart from 'not merged'.",
+    "mismatch_count": 0,
+    "mismatches": []
+  }
+}

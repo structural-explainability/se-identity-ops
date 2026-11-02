@@ -1,0 +1,273 @@
+{
+  "final_state": {
+    "index": 0,
+    "judgments": [],
+    "log": [],
+    "steps": []
+  },
+  "program": "known_good.ido",
+  "results": [
+    {
+      "counts": {
+        "items": 14,
+        "silent_items": 8
+      },
+      "detail": "coverage component_anchor: partial",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "case"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "b_coverage",
+        "summary": "component_anchor says nothing about 8 items: they have no key value and appear in no same-commitment. They stay unanchored; they are not declared distinct.",
+        "witness": {
+          "silent_01": "s01",
+          "silent_02": "s03",
+          "silent_03": "s05",
+          "silent_04": "s07",
+          "silent_05": "t01",
+          "silent_06": "t03",
+          "silent_07": "t05",
+          "silent_08": "t07"
+        }
+      },
+      "label": "b_coverage",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 0,
+      "word": "partial"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 14,
+        "related_classes": 3
+      },
+      "detail": "faithful component_anchor against canonical_slot_purl: satisfied",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "canonical_slot_purl",
+          "case",
+          "case"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "b_canonical",
+        "summary": "Every class related by component_anchor has one value under canonical_slot_purl.",
+        "witness": {}
+      },
+      "label": "b_canonical",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 14,
+        "related_classes": 3
+      },
+      "detail": "faithful component_anchor against any_slot_purl: satisfied",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "any_slot_purl",
+          "case",
+          "case"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "b_any_slot",
+        "summary": "Every class related by component_anchor has one value under any_slot_purl.",
+        "witness": {}
+      },
+      "label": "b_any_slot",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 14,
+        "related_classes": 3
+      },
+      "detail": "faithful component_anchor against anchor_value: satisfied",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "anchor_value",
+          "case",
+          "case"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_pos",
+        "summary": "Every class related by component_anchor has one value under anchor_value.",
+        "witness": {}
+      },
+      "label": "c_pos",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "divergent_classes": 3,
+        "divergent_items": 3,
+        "items": 14,
+        "related_classes": 3
+      },
+      "detail": "faithful component_anchor against frame_role: violated",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "frame_role",
+          "case",
+          "case"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "anchor_hash=sha256:1a6413c69d865036b6c3ffc90c92f8c028e4b9fd942fb62befe55ec04e8a362d",
+              "first": "s02",
+              "ground": "key",
+              "second": "t02",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "anchor_hash=sha256:29b23c48c0fe6f878e56c5ddc9f65d1c05d729360f3690a593a8c795031cd867",
+              "first": "s04",
+              "ground": "key",
+              "second": "t04",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "anchor_hash=sha256:a17042cb951b80d0c9462a73dec6ad31fc6adeae4ed92209601dc97d1019d7f2",
+              "first": "s06",
+              "ground": "key",
+              "second": "t06",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "c_neg",
+        "summary": "frame_role gives different values to items that component_anchor relates (3 related classes affected).",
+        "witness": {
+          "example_01.first": "s02",
+          "example_01.first_value": "source",
+          "example_01.second": "t02",
+          "example_01.second_value": "target",
+          "example_02.first": "s04",
+          "example_02.first_value": "source",
+          "example_02.second": "t04",
+          "example_02.second_value": "target",
+          "example_03.first": "s06",
+          "example_03.first_value": "source",
+          "example_03.second": "t06",
+          "example_03.second_value": "target",
+          "kind": "incoherence"
+        }
+      },
+      "label": "c_neg",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 14,
+        "related_classes": 3
+      },
+      "detail": "Every class related by component_anchor has one value under canonical_slot_purl.",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "canonical_slot_purl",
+          "case",
+          "case"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "b_canonical",
+        "summary": "Every class related by component_anchor has one value under canonical_slot_purl.",
+        "witness": {}
+      },
+      "label": "b_canonical",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "derivation"
+    },
+    {
+      "counts": {
+        "items": 14,
+        "silent_items": 8
+      },
+      "detail": "component_anchor says nothing about 8 items: they have no key value and appear in no same-commitment. They stay unanchored; they are not declared distinct.",
+      "explanation": {
+        "inputs": [
+          "component_anchor",
+          "case"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "b_coverage",
+        "summary": "component_anchor says nothing about 8 items: they have no key value and appear in no same-commitment. They stay unanchored; they are not declared distinct.",
+        "witness": {
+          "silent_01": "s01",
+          "silent_02": "s03",
+          "silent_03": "s05",
+          "silent_04": "s07",
+          "silent_05": "t01",
+          "silent_06": "t03",
+          "silent_07": "t05",
+          "silent_08": "t07"
+        }
+      },
+      "label": "b_coverage",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "limitation"
+    }
+  ],
+  "sources": [
+    {
+      "name": "case",
+      "rows": 14,
+      "sha256": "315dd68d0a197ca4b0a65b8ae5f262a9565f6f805129f8e8b65ab7b962968ce9"
+    }
+  ]
+}

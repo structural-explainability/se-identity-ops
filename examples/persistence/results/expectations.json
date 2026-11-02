@@ -1,0 +1,107 @@
+[
+  {
+    "actual": "established/licensed",
+    "expected": "established/licensed",
+    "kind": "control_positive",
+    "name": "a_rekey",
+    "status": "met"
+  },
+  {
+    "actual": "established/required",
+    "expected": "established/required",
+    "kind": "control_positive",
+    "name": "c_rekey",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/ignoring",
+    "expected": "undetermined/ignoring",
+    "kind": "indeterminate",
+    "name": "a_f1",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/undetermined",
+    "expected": "undetermined/undetermined",
+    "kind": "indeterminate",
+    "name": "c_lineage_not_identity",
+    "status": "met"
+  },
+  {
+    "actual": "established/licensed",
+    "expected": "established/licensed",
+    "kind": "control_positive",
+    "name": "a_g1",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/blocked",
+    "expected": "refuted/blocked",
+    "kind": "control_negative",
+    "name": "a_g2",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/forbidden",
+    "expected": "refuted/forbidden",
+    "kind": "control_negative",
+    "name": "c_g_siblings",
+    "status": "met"
+  },
+  {
+    "actual": "established/licensed",
+    "expected": "established/licensed",
+    "kind": "control_positive",
+    "name": "a_h2",
+    "status": "met"
+  },
+  {
+    "actual": "established/required",
+    "expected": "established/required",
+    "kind": "control_positive",
+    "name": "c_h_siblings",
+    "status": "met"
+  },
+  {
+    "actual": "established/licensed",
+    "expected": "established/licensed",
+    "kind": "control_positive",
+    "name": "a_m1",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/blocked",
+    "expected": "refuted/blocked",
+    "kind": "control_negative",
+    "name": "a_m2",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/broken",
+    "expected": "refuted/broken",
+    "kind": "control_negative",
+    "name": "a_split",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/undetermined",
+    "expected": "undetermined/undetermined",
+    "kind": "indeterminate",
+    "name": "c_split",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/inapplicable",
+    "expected": "undetermined/inapplicable",
+    "kind": "indeterminate",
+    "name": "a_reorder",
+    "status": "met"
+  },
+  {
+    "actual": "established/consistent",
+    "expected": "established/consistent",
+    "kind": "control_positive",
+    "name": "c_consistent",
+    "status": "met"
+  }
+]

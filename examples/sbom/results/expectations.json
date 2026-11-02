@@ -1,0 +1,86 @@
+[
+  {
+    "actual": "undetermined/partial",
+    "expected": "undetermined/partial",
+    "kind": "indeterminate",
+    "name": "known_bad.b_coverage",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "engineering_validation",
+    "name": "known_bad.b_canonical",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "engineering_validation",
+    "name": "known_bad.b_any_slot",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "control_positive",
+    "name": "known_bad.c_pos",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "control_negative",
+    "name": "known_bad.c_neg",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/partial",
+    "expected": "undetermined/partial",
+    "kind": "indeterminate",
+    "name": "known_good.b_coverage",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "engineering_validation",
+    "name": "known_good.b_canonical",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "engineering_validation",
+    "name": "known_good.b_any_slot",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "control_positive",
+    "name": "known_good.c_pos",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "control_negative",
+    "name": "known_good.c_neg",
+    "status": "met"
+  },
+  {
+    "actual": "3 == 3 and 3 == 3",
+    "expected": "known_bad.b_canonical.related_classes == 3 and known_good.b_canonical.related_classes == 3",
+    "kind": "relation",
+    "name": "R1_three_anchored_classes",
+    "status": "holds"
+  },
+  {
+    "actual": "3 == 3",
+    "expected": "known_bad.b_canonical.divergent_classes == 3",
+    "kind": "relation",
+    "name": "R2_bad_case_diverges_in_three_classes",
+    "status": "holds"
+  }
+]

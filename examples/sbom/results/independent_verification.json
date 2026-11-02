@@ -1,0 +1,71 @@
+{
+  "all_agree": true,
+  "cases": {
+    "known_bad": {
+      "any_slot_outcome": "established/satisfied",
+      "components": [
+        {
+          "agree": true,
+          "independent_decision": "relocated",
+          "interpreter_canonical_probe_splits_pair": true,
+          "pilot_recorded_verdict": "VIOLATED_RELOCATED",
+          "source_frame": "s02"
+        },
+        {
+          "agree": true,
+          "independent_decision": "relocated",
+          "interpreter_canonical_probe_splits_pair": true,
+          "pilot_recorded_verdict": "VIOLATED_RELOCATED",
+          "source_frame": "s04"
+        },
+        {
+          "agree": true,
+          "independent_decision": "relocated",
+          "interpreter_canonical_probe_splits_pair": true,
+          "pilot_recorded_verdict": "VIOLATED_RELOCATED",
+          "source_frame": "s06"
+        }
+      ],
+      "digests": {
+        "source_actual": "969e75ab32bb499957298365c43896b6a2f204951d7ef9fa12db9482ab7504e2",
+        "source_declared": "969e75ab32bb499957298365c43896b6a2f204951d7ef9fa12db9482ab7504e2",
+        "target_actual": "fa6dec1e9e78c5c12741d54a4c2146a4278a20e26a4a864aa1d8bd04171f521a",
+        "target_declared": "6dd83f2617a01169e0efc8758fa18fd099000d5d070a6b673ba61e79123331fb",
+        "target_matches_declared": false
+      }
+    },
+    "known_good": {
+      "any_slot_outcome": "established/satisfied",
+      "components": [
+        {
+          "agree": true,
+          "independent_decision": "preserved",
+          "interpreter_canonical_probe_splits_pair": false,
+          "pilot_recorded_verdict": "PRESERVED",
+          "source_frame": "s02"
+        },
+        {
+          "agree": true,
+          "independent_decision": "preserved",
+          "interpreter_canonical_probe_splits_pair": false,
+          "pilot_recorded_verdict": "PRESERVED",
+          "source_frame": "s04"
+        },
+        {
+          "agree": true,
+          "independent_decision": "preserved",
+          "interpreter_canonical_probe_splits_pair": false,
+          "pilot_recorded_verdict": "PRESERVED",
+          "source_frame": "s06"
+        }
+      ],
+      "digests": {
+        "source_actual": "969e75ab32bb499957298365c43896b6a2f204951d7ef9fa12db9482ab7504e2",
+        "source_declared": "969e75ab32bb499957298365c43896b6a2f204951d7ef9fa12db9482ab7504e2",
+        "target_actual": "59a22b7dddddc4987f754e3baa693a75b41255b1b4047f9b9c0df29432c87a7a",
+        "target_declared": "984315e7ea24dd43d1dd5ff1daf26e1fba82427c6e77b792a33bdd04253a6a5b",
+        "target_matches_declared": false
+      }
+    }
+  }
+}

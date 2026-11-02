@@ -1,0 +1,269 @@
+{
+  "all_agree": true,
+  "comparisons": [
+    {
+      "agree": true,
+      "interpreter": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "label": "a_faithful_localized",
+      "python": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "sql": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      }
+    },
+    {
+      "agree": true,
+      "interpreter": {
+        "divergent_classes": 4,
+        "divergent_items": 7,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "label": "a_faithful_raw",
+      "python": {
+        "divergent_classes": 4,
+        "divergent_items": 7,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "sql": {
+        "divergent_classes": 4,
+        "divergent_items": 7,
+        "items": 20000,
+        "related_classes": 2073
+      }
+    },
+    {
+      "agree": true,
+      "interpreter": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "label": "c_pos_faithful",
+      "python": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "sql": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 20000,
+        "related_classes": 2073
+      }
+    },
+    {
+      "agree": true,
+      "interpreter": {
+        "divergent_classes": 2073,
+        "divergent_items": 16274,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "label": "c_neg_faithful",
+      "python": {
+        "divergent_classes": 2073,
+        "divergent_items": 16274,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "sql": {
+        "divergent_classes": 2073,
+        "divergent_items": 16274,
+        "items": 20000,
+        "related_classes": 2073
+      }
+    },
+    {
+      "agree": true,
+      "interpreter": {
+        "cross_class_groups": 51,
+        "cross_class_pairs": 55,
+        "merging_groups": 2050,
+        "required_groups": 1999,
+        "surface_values": 3675
+      },
+      "label": "a_collisions_localized",
+      "python": {
+        "cross_class_groups": 51,
+        "cross_class_pairs": 55,
+        "merging_groups": 2050,
+        "required_groups": 1999,
+        "surface_values": 3675
+      },
+      "sql": {
+        "cross_class_groups": 51,
+        "cross_class_pairs": 55,
+        "merging_groups": 2050,
+        "required_groups": 1999,
+        "surface_values": 3675
+      }
+    },
+    {
+      "agree": true,
+      "interpreter": {
+        "cross_class_groups": 16,
+        "cross_class_pairs": 16,
+        "merging_groups": 2063,
+        "required_groups": 2047,
+        "surface_values": 3714
+      },
+      "label": "a_collisions_raw",
+      "python": {
+        "cross_class_groups": 16,
+        "cross_class_pairs": 16,
+        "merging_groups": 2063,
+        "required_groups": 2047,
+        "surface_values": 3714
+      },
+      "sql": {
+        "cross_class_groups": 16,
+        "cross_class_pairs": 16,
+        "merging_groups": 2063,
+        "required_groups": 2047,
+        "surface_values": 3714
+      }
+    },
+    {
+      "agree": true,
+      "interpreter": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "merging_groups": 2073,
+        "required_groups": 2073,
+        "surface_values": 3726
+      },
+      "label": "c_pos_collisions",
+      "python": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "merging_groups": 2073,
+        "required_groups": 2073,
+        "surface_values": 3726
+      },
+      "sql": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "merging_groups": 2073,
+        "required_groups": 2073,
+        "surface_values": 3726
+      }
+    }
+  ],
+  "git": {
+    "expected_added_in_commit": "8e6885e9d2013e5cdcf3335c32ee02531063717c",
+    "results_already_committed": "no (committed after verification)"
+  },
+  "post_hoc_breakdown_not_a_recorded_expectation": {
+    "cross_class_groups": 51,
+    "induced_examples": [
+      {
+        "localized": "arthur andersen limited liability partnership",
+        "raw_names": [
+          "ARTHUR ANDERSEN LLP",
+          "ARTHUR ANDERSEN LLP 01"
+        ],
+        "vendor_ids": [
+          "21962540E",
+          "31329349Z"
+        ]
+      },
+      {
+        "localized": "asi incorporated",
+        "raw_names": [
+          "ASI, INC",
+          "ASI, INC."
+        ],
+        "vendor_ids": [
+          "22188778X",
+          "93792297Z"
+        ]
+      },
+      {
+        "localized": "bethel new life",
+        "raw_names": [
+          "BETHEL NEW LIFE 01",
+          "BETHEL NEW LIFE INC|CLEANED-UP"
+        ],
+        "vendor_ids": [
+          "85246203M",
+          "93433263M"
+        ]
+      },
+      {
+        "localized": "blinderman construction incorporated",
+        "raw_names": [
+          "BLINDERMAN CONSTRUCTION COMPANY INC",
+          "BLINDERMAN CONSTRUCTION COMPANY, INC."
+        ],
+        "vendor_ids": [
+          "105473617H",
+          "38785860Z"
+        ]
+      },
+      {
+        "localized": "career academy incorporated",
+        "raw_names": [
+          "CAREER ACADEMY, INC.",
+          "CAREER ACADEMY, INC. 01"
+        ],
+        "vendor_ids": [
+          "31309604V",
+          "31343987Z"
+        ]
+      },
+      {
+        "localized": "christopher house",
+        "raw_names": [
+          "CHRISTOPHER HOUSE",
+          "CHRISTOPHER HOUSE 02"
+        ],
+        "vendor_ids": [
+          "99076549Z",
+          "99076565L"
+        ]
+      },
+      {
+        "localized": "claretian associates",
+        "raw_names": [
+          "CLARETIAN ASSOCIATES",
+          "CLARETIAN ASSOCIATES|CLEANED-UP"
+        ],
+        "vendor_ids": [
+          "105472863X",
+          "93175047L"
+        ]
+      },
+      {
+        "localized": "community investment",
+        "raw_names": [
+          "COMMUNITY INVESTMENT CORP",
+          "COMMUNITY INVESTMENT CORP 01"
+        ],
+        "vendor_ids": [
+          "31353200P",
+          "93427784A"
+        ]
+      }
+    ],
+    "localization_induced": 35,
+    "raw_equal": 16
+  },
+  "replay_problems": [],
+  "rows": 20000
+}

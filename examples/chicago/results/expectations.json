@@ -1,0 +1,121 @@
+[
+  {
+    "actual": "established/complete",
+    "expected": "established/complete",
+    "kind": "control_positive",
+    "name": "a_coverage",
+    "status": "met"
+  },
+  {
+    "actual": "established/consistent",
+    "expected": "established/consistent",
+    "kind": "control_positive",
+    "name": "a_consistent",
+    "status": "met"
+  },
+  {
+    "actual": "established/satisfied",
+    "expected": "established/satisfied",
+    "kind": "control_positive",
+    "name": "c_pos_faithful",
+    "status": "met"
+  },
+  {
+    "actual": "established/supported",
+    "expected": "established/supported",
+    "kind": "control_positive",
+    "name": "c_pos_collisions",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "control_negative",
+    "name": "c_neg_faithful",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/unwarranted",
+    "expected": "undetermined/unwarranted",
+    "kind": "indeterminate",
+    "name": "c_unwarranted",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/unsupported",
+    "expected": "undetermined/unsupported",
+    "kind": "prediction",
+    "name": "a_collisions_localized",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "a_faithful_localized",
+    "status": "met"
+  },
+  {
+    "actual": "refuted/violated",
+    "expected": "refuted/violated",
+    "kind": "prediction",
+    "name": "a_faithful_raw",
+    "status": "met"
+  },
+  {
+    "actual": "undetermined/unsupported",
+    "expected": "undetermined/unsupported",
+    "kind": "prediction",
+    "name": "a_collisions_raw",
+    "status": "met"
+  },
+  {
+    "actual": "2 <= 2073",
+    "expected": "a_faithful_localized.divergent_classes <= a_faithful_localized.related_classes",
+    "kind": "relation",
+    "name": "R1_divergent_classes_bounded",
+    "status": "holds"
+  },
+  {
+    "actual": "2073 == 2073",
+    "expected": "c_neg_faithful.divergent_classes == c_neg_faithful.related_classes",
+    "kind": "relation",
+    "name": "R2_negative_control_splits_every_related_class",
+    "status": "holds"
+  },
+  {
+    "actual": "0 == 0",
+    "expected": "a_collisions_localized.forbidden_class_pairs == 0",
+    "kind": "relation",
+    "name": "R3_no_forbidden_without_distinct_judgments",
+    "status": "holds"
+  },
+  {
+    "actual": "3675 <= 3714",
+    "expected": "a_collisions_localized.surface_values <= a_collisions_raw.surface_values",
+    "kind": "relation",
+    "name": "R4_localization_is_a_function_of_the_raw_name",
+    "status": "holds"
+  },
+  {
+    "actual": "0 == 0",
+    "expected": "c_pos_collisions.cross_class_groups == 0",
+    "kind": "relation",
+    "name": "R5_positive_control_has_no_cross_class_groups",
+    "status": "holds"
+  },
+  {
+    "actual": "20000 == 20000",
+    "expected": "a_faithful_localized.items == 20000",
+    "kind": "relation",
+    "name": "R6_all_checks_see_20000_items",
+    "status": "holds"
+  },
+  {
+    "actual": "55 >= 51",
+    "expected": "a_collisions_localized.unsupported_class_pairs >= a_collisions_localized.cross_class_groups",
+    "kind": "relation",
+    "name": "R7_unsupported_pairs_at_least_groups",
+    "status": "holds"
+  }
+]

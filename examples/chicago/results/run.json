@@ -1,0 +1,1113 @@
+{
+  "final_state": {
+    "index": 0,
+    "judgments": [],
+    "log": [],
+    "steps": []
+  },
+  "program": "program.ido",
+  "results": [
+    {
+      "counts": {
+        "items": 20000,
+        "silent_items": 0
+      },
+      "detail": "coverage city_vendor_registration: complete",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "chicago_observed"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_coverage",
+        "summary": "city_vendor_registration places every item in a class.",
+        "witness": {}
+      },
+      "label": "a_coverage",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "complete"
+    },
+    {
+      "counts": {
+        "conflicts": 0,
+        "distinct_judgments": 0,
+        "same_judgments": 0
+      },
+      "detail": "consistent city_vendor_registration: consistent",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "chicago_observed"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_consistent",
+        "summary": "No distinct judgment lies inside a same-class. There are no distinct judgments, so consistency is vacuous.",
+        "witness": {}
+      },
+      "label": "a_consistent",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "consistent"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "faithful city_vendor_registration against us_il_localized_name: violated",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "us_il_localized_name",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "vendor_id=3624927P",
+              "first": "r00640",
+              "ground": "key",
+              "second": "r10956",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=105503486X",
+              "first": "r01681",
+              "ground": "key",
+              "second": "r01695",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_faithful_localized",
+        "summary": "us_il_localized_name gives different values to items that city_vendor_registration relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r00640",
+          "example_01.first_value": "industrial council of near west city of chicago",
+          "example_01.second": "r10956",
+          "example_01.second_value": "kinzie industrial. development.",
+          "example_02.first": "r01681",
+          "example_02.first_value": "above & beyond family recovery center",
+          "example_02.second": "r01695",
+          "example_02.second_value": "above and beyond family recovery center",
+          "kind": "divergence"
+        }
+      },
+      "label": "a_faithful_localized",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 51,
+        "cross_class_pairs": 55,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 2050,
+        "required_groups": 1999,
+        "surface_values": 3675,
+        "unsupported_class_pairs": 55
+      },
+      "detail": "collisions us_il_localized_name against city_vendor_registration: unsupported",
+      "explanation": {
+        "inputs": [
+          "us_il_localized_name",
+          "city_vendor_registration",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 31,
+        "steps": [],
+        "subject": "a_collisions_localized",
+        "summary": "us_il_localized_name merges items across 55 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+        "witness": {
+          "example_01.criterion_classes": "2",
+          "example_01.first": "r00023",
+          "example_01.first_key": "85240731V",
+          "example_01.second": "r00190",
+          "example_01.second_key": "31301301V",
+          "example_01.surface_value": "unisource",
+          "example_02.criterion_classes": "3",
+          "example_02.first": "r00027",
+          "example_02.first_key": "9137861Z",
+          "example_02.second": "r09242",
+          "example_02.second_key": "99076569E",
+          "example_02.surface_value": "erie neighborhood house",
+          "example_03.criterion_classes": "2",
+          "example_03.first": "r00032",
+          "example_03.first_key": "102603122X",
+          "example_03.second": "r13666",
+          "example_03.second_key": "102603126H",
+          "example_03.surface_value": "metropolitan family service",
+          "example_04.criterion_classes": "2",
+          "example_04.first": "r00056",
+          "example_04.first_key": "105460385M",
+          "example_04.second": "r11695",
+          "example_04.second_key": "93406526Z",
+          "example_04.surface_value": "primo center for women & children",
+          "example_05.criterion_classes": "2",
+          "example_05.first": "r00057",
+          "example_05.first_key": "105500686M",
+          "example_05.second": "r02609",
+          "example_05.second_key": "105510180M",
+          "example_05.surface_value": "seventy-seven communities meal services limited liability",
+          "example_06.criterion_classes": "2",
+          "example_06.first": "r00062",
+          "example_06.first_key": "105470138T",
+          "example_06.second": "r06079",
+          "example_06.second_key": "99409084T",
+          "example_06.surface_value": "city of chicago house & social service agency",
+          "example_07.criterion_classes": "2",
+          "example_07.first": "r00100",
+          "example_07.first_key": "93792297Z",
+          "example_07.second": "r06741",
+          "example_07.second_key": "22188778X",
+          "example_07.surface_value": "asi incorporated",
+          "example_08.criterion_classes": "2",
+          "example_08.first": "r00299",
+          "example_08.first_key": "102485360M",
+          "example_08.second": "r02655",
+          "example_08.second_key": "6316260Z",
+          "example_08.surface_value": "heartland human care services incorporated",
+          "example_09.criterion_classes": "2",
+          "example_09.first": "r00410",
+          "example_09.first_key": "55226227V",
+          "example_09.second": "r00464",
+          "example_09.second_key": "93977356X",
+          "example_09.surface_value": "puerto rican cultural center",
+          "example_10.criterion_classes": "2",
+          "example_10.first": "r00539",
+          "example_10.first_key": "93875753V",
+          "example_10.second": "r01163",
+          "example_10.second_key": "93816753T",
+          "example_10.surface_value": "extended home living services",
+          "example_11.criterion_classes": "2",
+          "example_11.first": "r00713",
+          "example_11.first_key": "93175047L",
+          "example_11.second": "r04623",
+          "example_11.second_key": "105472863X",
+          "example_11.surface_value": "claretian associates",
+          "example_12.criterion_classes": "2",
+          "example_12.first": "r00724",
+          "example_12.first_key": "90197670M",
+          "example_12.second": "r17490",
+          "example_12.second_key": "33667437Z",
+          "example_12.surface_value": "st anthony hospital",
+          "example_13.criterion_classes": "2",
+          "example_13.first": "r00868",
+          "example_13.first_key": "105476617X",
+          "example_13.second": "r08397",
+          "example_13.second_key": "97057943X",
+          "example_13.surface_value": "ann & robert h. lurie children's hospital of city of chicago",
+          "example_14.criterion_classes": "2",
+          "example_14.first": "r00971",
+          "example_14.first_key": "102636875V",
+          "example_14.second": "r17637",
+          "example_14.second_key": "31303150X",
+          "example_14.surface_value": "hektoen institute for medical research limited liability",
+          "example_15.criterion_classes": "2",
+          "example_15.first": "r00993",
+          "example_15.first_key": "105510644P",
+          "example_15.second": "r02061",
+          "example_15.second_key": "92086166P",
+          "example_15.surface_value": "greater auburn gresham development",
+          "example_16.criterion_classes": "2",
+          "example_16.first": "r01032",
+          "example_16.first_key": "38544823A",
+          "example_16.second": "r04280",
+          "example_16.second_key": "91969516M",
+          "example_16.surface_value": "asian human services incorporated",
+          "example_17.criterion_classes": "2",
+          "example_17.first": "r01072",
+          "example_17.first_key": "93568827H",
+          "example_17.second": "r12250",
+          "example_17.second_key": "85240878V",
+          "example_17.surface_value": "parsons transportation grou",
+          "example_18.criterion_classes": "2",
+          "example_18.first": "r01171",
+          "example_18.first_key": "94387210X",
+          "example_18.second": "r01580",
+          "example_18.second_key": "102903767L",
+          "example_18.surface_value": "f.h. paschen s.n. nielsen & associates limited liability",
+          "example_19.criterion_classes": "2",
+          "example_19.first": "r01258",
+          "example_19.first_key": "5135960E",
+          "example_19.second": "r02826",
+          "example_19.second_key": "15055418E",
+          "example_19.surface_value": "greater s.w. development",
+          "example_20.criterion_classes": "2",
+          "example_20.first": "r01354",
+          "example_20.first_key": "102485421X",
+          "example_20.second": "r06348",
+          "example_20.second_key": "102485429T",
+          "example_20.surface_value": "board of trustees of community college district #508 county of cook & state of state of illinois"
+        }
+      },
+      "label": "a_collisions_localized",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 0,
+      "word": "unsupported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 4,
+        "divergent_items": 7,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "faithful city_vendor_registration against raw_vendor_name: violated",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "raw_vendor_name",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "vendor_id=3624927P",
+              "first": "r00640",
+              "ground": "key",
+              "second": "r10956",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=105503486X",
+              "first": "r01681",
+              "ground": "key",
+              "second": "r01695",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=15244443L",
+              "first": "r01983",
+              "ground": "key",
+              "second": "r02467",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=3612573H",
+              "first": "r02460",
+              "ground": "key",
+              "second": "r15034",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_faithful_raw",
+        "summary": "raw_vendor_name gives different values to items that city_vendor_registration relates (4 related classes affected).",
+        "witness": {
+          "example_01.first": "r00640",
+          "example_01.first_value": "INDUSTRIAL COUNCIL OF NEAR WEST CHICAGO",
+          "example_01.second": "r10956",
+          "example_01.second_value": "KINZIE INDUSTRIAL. DEVELOPMENT. CORPORATION",
+          "example_02.first": "r01681",
+          "example_02.first_value": "ABOVE & BEYOND FAMILY RECOVERY CENTER",
+          "example_02.second": "r01695",
+          "example_02.second_value": "Above and Beyond Family Recovery Center",
+          "example_03.first": "r01983",
+          "example_03.first_value": "CAPITOL CEMENT CO INC 01",
+          "example_03.second": "r02467",
+          "example_03.second_value": "CAPITOL CEMENT CO INC",
+          "example_04.first": "r02460",
+          "example_04.first_value": "HABILITATIVES SYSTEMS, INC.",
+          "example_04.second": "r15034",
+          "example_04.second_value": "HABILITATIVES SYSTEMS , INC",
+          "kind": "divergence"
+        }
+      },
+      "label": "a_faithful_raw",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 16,
+        "cross_class_pairs": 16,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 2063,
+        "required_groups": 2047,
+        "surface_values": 3714,
+        "unsupported_class_pairs": 16
+      },
+      "detail": "collisions raw_vendor_name against city_vendor_registration: unsupported",
+      "explanation": {
+        "inputs": [
+          "raw_vendor_name",
+          "city_vendor_registration",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_collisions_raw",
+        "summary": "raw_vendor_name merges items across 16 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+        "witness": {
+          "example_01.criterion_classes": "2",
+          "example_01.first": "r00062",
+          "example_01.first_key": "105470138T",
+          "example_01.second": "r06079",
+          "example_01.second_key": "99409084T",
+          "example_01.surface_value": "CHICAGO HOUSE & SOCIAL SERVICE AGENCY",
+          "example_02.criterion_classes": "2",
+          "example_02.first": "r00299",
+          "example_02.first_key": "102485360M",
+          "example_02.second": "r02655",
+          "example_02.second_key": "6316260Z",
+          "example_02.surface_value": "HEARTLAND HUMAN CARE SERVICES, INC.",
+          "example_03.criterion_classes": "2",
+          "example_03.first": "r00410",
+          "example_03.first_key": "55226227V",
+          "example_03.second": "r00464",
+          "example_03.second_key": "93977356X",
+          "example_03.surface_value": "PUERTO RICAN CULTURAL CENTER",
+          "example_04.criterion_classes": "2",
+          "example_04.first": "r00868",
+          "example_04.first_key": "105476617X",
+          "example_04.second": "r08397",
+          "example_04.second_key": "97057943X",
+          "example_04.surface_value": "ANN & ROBERT H. LURIE CHILDREN'S HOSPITAL OF CHICAGO",
+          "example_05.criterion_classes": "2",
+          "example_05.first": "r00971",
+          "example_05.first_key": "102636875V",
+          "example_05.second": "r17637",
+          "example_05.second_key": "31303150X",
+          "example_05.surface_value": "HEKTOEN INSTITUTE FOR MEDICAL RESEARCH LLC.",
+          "example_06.criterion_classes": "2",
+          "example_06.first": "r00993",
+          "example_06.first_key": "105510644P",
+          "example_06.second": "r02061",
+          "example_06.second_key": "92086166P",
+          "example_06.surface_value": "GREATER AUBURN GRESHAM DEVELOPMENT CORPORATION",
+          "example_07.criterion_classes": "2",
+          "example_07.first": "r01032",
+          "example_07.first_key": "38544823A",
+          "example_07.second": "r04280",
+          "example_07.second_key": "91969516M",
+          "example_07.surface_value": "ASIAN HUMAN SERVICES, INC.",
+          "example_08.criterion_classes": "2",
+          "example_08.first": "r01258",
+          "example_08.first_key": "5135960E",
+          "example_08.second": "r02826",
+          "example_08.second_key": "15055418E",
+          "example_08.surface_value": "GREATER S.W. DEVELOPMENT CORP.",
+          "example_09.criterion_classes": "2",
+          "example_09.first": "r01354",
+          "example_09.first_key": "102485421X",
+          "example_09.second": "r06348",
+          "example_09.second_key": "102485429T",
+          "example_09.surface_value": "BOARD OF TRUSTEES OF COMMUNITY COLLEGE DISTRICT #508, COUNTY OF COOK & STATE OF ILLINOIS",
+          "example_10.criterion_classes": "2",
+          "example_10.first": "r01571",
+          "example_10.first_key": "24051664V",
+          "example_10.second": "r02413",
+          "example_10.second_key": "105458927P",
+          "example_10.surface_value": "BOYS & GIRLS CLUBS OF CHICAGO",
+          "example_11.criterion_classes": "2",
+          "example_11.first": "r01589",
+          "example_11.first_key": "105459776M",
+          "example_11.second": "r11288",
+          "example_11.second_key": "9391253E",
+          "example_11.surface_value": "CAROLE ROBERTSON CENTER FOR LEARNING",
+          "example_12.criterion_classes": "2",
+          "example_12.first": "r01748",
+          "example_12.first_key": "105489213V",
+          "example_12.second": "r19651",
+          "example_12.second_key": "10595966",
+          "example_12.surface_value": "CHICAGO AUSTIN YOUTH TRAVEL ADVENTURES, INC.",
+          "example_13.criterion_classes": "2",
+          "example_13.first": "r01895",
+          "example_13.first_key": "105457835H",
+          "example_13.second": "r03229",
+          "example_13.second_key": "105511271T",
+          "example_13.surface_value": "TOGETHER CHICAGO INC",
+          "example_14.criterion_classes": "2",
+          "example_14.first": "r02103",
+          "example_14.first_key": "105487449V",
+          "example_14.second": "r08359",
+          "example_14.second_key": "54766027",
+          "example_14.surface_value": "Community Education Network DBA It Takes a Village Family of Schools",
+          "example_15.criterion_classes": "2",
+          "example_15.first": "r05810",
+          "example_15.first_key": "33646293X",
+          "example_15.second": "r07790",
+          "example_15.second_key": "102550495P",
+          "example_15.surface_value": "VERIZON WIRELESS",
+          "example_16.criterion_classes": "2",
+          "example_16.first": "r09181",
+          "example_16.first_key": "31288368Z",
+          "example_16.second": "r14701",
+          "example_16.second_key": "105469102E",
+          "example_16.surface_value": "HEIDELBERG USA INC."
+        }
+      },
+      "label": "a_collisions_raw",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 0,
+      "word": "unsupported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 0,
+        "divergent_items": 0,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "faithful city_vendor_registration against vendor_id_value: satisfied",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "vendor_id_value",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_pos_faithful",
+        "summary": "Every class related by city_vendor_registration has one value under vendor_id_value.",
+        "witness": {}
+      },
+      "label": "c_pos_faithful",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "satisfied"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 0,
+        "cross_class_pairs": 0,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 2073,
+        "required_groups": 2073,
+        "surface_values": 3726,
+        "unsupported_class_pairs": 0
+      },
+      "detail": "collisions vendor_id_value against city_vendor_registration: supported",
+      "explanation": {
+        "inputs": [
+          "vendor_id_value",
+          "city_vendor_registration",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_pos_collisions",
+        "summary": "Every merge made by vendor_id_value lies inside one class of city_vendor_registration.",
+        "witness": {}
+      },
+      "label": "c_pos_collisions",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "supported"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2073,
+        "divergent_items": 16274,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "faithful city_vendor_registration against row_key_value: violated",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "row_key_value",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 2053,
+        "steps": [
+          [
+            {
+              "detail": "vendor_id=41617145V",
+              "first": "r00001",
+              "ground": "key",
+              "second": "r00070",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=14878414T",
+              "first": "r00002",
+              "ground": "key",
+              "second": "r00015",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=22085024V",
+              "first": "r00003",
+              "ground": "key",
+              "second": "r00090",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=22414299V",
+              "first": "r00004",
+              "ground": "key",
+              "second": "r00005",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=23105142M",
+              "first": "r00006",
+              "ground": "key",
+              "second": "r00007",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=95196348A",
+              "first": "r00010",
+              "ground": "key",
+              "second": "r17007",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=31327530H",
+              "first": "r00012",
+              "ground": "key",
+              "second": "r00013",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=38790980A",
+              "first": "r00014",
+              "ground": "key",
+              "second": "r00251",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=93225537L",
+              "first": "r00016",
+              "ground": "key",
+              "second": "r00045",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=102667254E",
+              "first": "r00017",
+              "ground": "key",
+              "second": "r00301",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=31365154A",
+              "first": "r00018",
+              "ground": "key",
+              "second": "r10606",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=86820326H",
+              "first": "r00019",
+              "ground": "key",
+              "second": "r00024",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=21973746A",
+              "first": "r00020",
+              "ground": "key",
+              "second": "r00022",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=85239780V",
+              "first": "r00021",
+              "ground": "key",
+              "second": "r00707",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=85240731V",
+              "first": "r00023",
+              "ground": "key",
+              "second": "r00154",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=99822855H",
+              "first": "r00025",
+              "ground": "key",
+              "second": "r00029",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=87075014A",
+              "first": "r00026",
+              "ground": "key",
+              "second": "r01250",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=9137861Z",
+              "first": "r00027",
+              "ground": "key",
+              "second": "r01642",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=93284854T",
+              "first": "r00028",
+              "ground": "key",
+              "second": "r00068",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=85241000Z",
+              "first": "r00030",
+              "ground": "key",
+              "second": "r00670",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "c_neg_faithful",
+        "summary": "row_key_value gives different values to items that city_vendor_registration relates (2073 related classes affected).",
+        "witness": {
+          "example_01.first": "r00001",
+          "example_01.first_value": "r00001",
+          "example_01.second": "r00070",
+          "example_01.second_value": "r00070",
+          "example_02.first": "r00002",
+          "example_02.first_value": "r00002",
+          "example_02.second": "r00015",
+          "example_02.second_value": "r00015",
+          "example_03.first": "r00003",
+          "example_03.first_value": "r00003",
+          "example_03.second": "r00090",
+          "example_03.second_value": "r00090",
+          "example_04.first": "r00004",
+          "example_04.first_value": "r00004",
+          "example_04.second": "r00005",
+          "example_04.second_value": "r00005",
+          "example_05.first": "r00006",
+          "example_05.first_value": "r00006",
+          "example_05.second": "r00007",
+          "example_05.second_value": "r00007",
+          "example_06.first": "r00010",
+          "example_06.first_value": "r00010",
+          "example_06.second": "r17007",
+          "example_06.second_value": "r17007",
+          "example_07.first": "r00012",
+          "example_07.first_value": "r00012",
+          "example_07.second": "r00013",
+          "example_07.second_value": "r00013",
+          "example_08.first": "r00014",
+          "example_08.first_value": "r00014",
+          "example_08.second": "r00251",
+          "example_08.second_value": "r00251",
+          "example_09.first": "r00016",
+          "example_09.first_value": "r00016",
+          "example_09.second": "r00045",
+          "example_09.second_value": "r00045",
+          "example_10.first": "r00017",
+          "example_10.first_value": "r00017",
+          "example_10.second": "r00301",
+          "example_10.second_value": "r00301",
+          "example_11.first": "r00018",
+          "example_11.first_value": "r00018",
+          "example_11.second": "r10606",
+          "example_11.second_value": "r10606",
+          "example_12.first": "r00019",
+          "example_12.first_value": "r00019",
+          "example_12.second": "r00024",
+          "example_12.second_value": "r00024",
+          "example_13.first": "r00020",
+          "example_13.first_value": "r00020",
+          "example_13.second": "r00022",
+          "example_13.second_value": "r00022",
+          "example_14.first": "r00021",
+          "example_14.first_value": "r00021",
+          "example_14.second": "r00707",
+          "example_14.second_value": "r00707",
+          "example_15.first": "r00023",
+          "example_15.first_value": "r00023",
+          "example_15.second": "r00154",
+          "example_15.second_value": "r00154",
+          "example_16.first": "r00025",
+          "example_16.first_value": "r00025",
+          "example_16.second": "r00029",
+          "example_16.second_value": "r00029",
+          "example_17.first": "r00026",
+          "example_17.first_value": "r00026",
+          "example_17.second": "r01250",
+          "example_17.second_value": "r01250",
+          "example_18.first": "r00027",
+          "example_18.first_value": "r00027",
+          "example_18.second": "r01642",
+          "example_18.second_value": "r01642",
+          "example_19.first": "r00028",
+          "example_19.first_value": "r00028",
+          "example_19.second": "r00068",
+          "example_19.second_value": "r00068",
+          "example_20.first": "r00030",
+          "example_20.first_value": "r00030",
+          "example_20.second": "r00670",
+          "example_20.second_value": "r00670",
+          "kind": "divergence"
+        }
+      },
+      "label": "c_neg_faithful",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 0,
+      "word": "violated"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "faithful unsourced_registration against us_il_localized_name: unwarranted",
+      "explanation": {
+        "inputs": [
+          "unsourced_registration",
+          "us_il_localized_name",
+          "chicago_observed"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_unwarranted",
+        "summary": "A divergence was computed but the check is not warranted: regime unsourced_registration names no source.",
+        "witness": {}
+      },
+      "label": "c_unwarranted",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 0,
+      "word": "unwarranted"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "us_il_localized_name gives different values to items that city_vendor_registration relates (2 related classes affected).",
+      "explanation": {
+        "inputs": [
+          "city_vendor_registration",
+          "us_il_localized_name",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "vendor_id=3624927P",
+              "first": "r00640",
+              "ground": "key",
+              "second": "r10956",
+              "source": ""
+            }
+          ],
+          [
+            {
+              "detail": "vendor_id=105503486X",
+              "first": "r01681",
+              "ground": "key",
+              "second": "r01695",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_faithful_localized",
+        "summary": "us_il_localized_name gives different values to items that city_vendor_registration relates (2 related classes affected).",
+        "witness": {
+          "example_01.first": "r00640",
+          "example_01.first_value": "industrial council of near west city of chicago",
+          "example_01.second": "r10956",
+          "example_01.second_value": "kinzie industrial. development.",
+          "example_02.first": "r01681",
+          "example_02.first_value": "above & beyond family recovery center",
+          "example_02.second": "r01695",
+          "example_02.second_value": "above and beyond family recovery center",
+          "kind": "divergence"
+        }
+      },
+      "label": "a_faithful_localized",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "witness"
+    },
+    {
+      "counts": {
+        "cross_class_groups": 51,
+        "cross_class_pairs": 55,
+        "forbidden_class_pairs": 0,
+        "merging_groups": 2050,
+        "required_groups": 1999,
+        "surface_values": 3675,
+        "unsupported_class_pairs": 55
+      },
+      "detail": "us_il_localized_name merges items across 55 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+      "explanation": {
+        "inputs": [
+          "us_il_localized_name",
+          "city_vendor_registration",
+          "chicago_observed",
+          "chicago_observed"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 31,
+        "steps": [],
+        "subject": "a_collisions_localized",
+        "summary": "us_il_localized_name merges items across 55 class pairs that city_vendor_registration neither requires nor forbids. The criterion is silent; the merges are commitments of the surface that the criterion does not support.",
+        "witness": {
+          "example_01.criterion_classes": "2",
+          "example_01.first": "r00023",
+          "example_01.first_key": "85240731V",
+          "example_01.second": "r00190",
+          "example_01.second_key": "31301301V",
+          "example_01.surface_value": "unisource",
+          "example_02.criterion_classes": "3",
+          "example_02.first": "r00027",
+          "example_02.first_key": "9137861Z",
+          "example_02.second": "r09242",
+          "example_02.second_key": "99076569E",
+          "example_02.surface_value": "erie neighborhood house",
+          "example_03.criterion_classes": "2",
+          "example_03.first": "r00032",
+          "example_03.first_key": "102603122X",
+          "example_03.second": "r13666",
+          "example_03.second_key": "102603126H",
+          "example_03.surface_value": "metropolitan family service",
+          "example_04.criterion_classes": "2",
+          "example_04.first": "r00056",
+          "example_04.first_key": "105460385M",
+          "example_04.second": "r11695",
+          "example_04.second_key": "93406526Z",
+          "example_04.surface_value": "primo center for women & children",
+          "example_05.criterion_classes": "2",
+          "example_05.first": "r00057",
+          "example_05.first_key": "105500686M",
+          "example_05.second": "r02609",
+          "example_05.second_key": "105510180M",
+          "example_05.surface_value": "seventy-seven communities meal services limited liability",
+          "example_06.criterion_classes": "2",
+          "example_06.first": "r00062",
+          "example_06.first_key": "105470138T",
+          "example_06.second": "r06079",
+          "example_06.second_key": "99409084T",
+          "example_06.surface_value": "city of chicago house & social service agency",
+          "example_07.criterion_classes": "2",
+          "example_07.first": "r00100",
+          "example_07.first_key": "93792297Z",
+          "example_07.second": "r06741",
+          "example_07.second_key": "22188778X",
+          "example_07.surface_value": "asi incorporated",
+          "example_08.criterion_classes": "2",
+          "example_08.first": "r00299",
+          "example_08.first_key": "102485360M",
+          "example_08.second": "r02655",
+          "example_08.second_key": "6316260Z",
+          "example_08.surface_value": "heartland human care services incorporated",
+          "example_09.criterion_classes": "2",
+          "example_09.first": "r00410",
+          "example_09.first_key": "55226227V",
+          "example_09.second": "r00464",
+          "example_09.second_key": "93977356X",
+          "example_09.surface_value": "puerto rican cultural center",
+          "example_10.criterion_classes": "2",
+          "example_10.first": "r00539",
+          "example_10.first_key": "93875753V",
+          "example_10.second": "r01163",
+          "example_10.second_key": "93816753T",
+          "example_10.surface_value": "extended home living services",
+          "example_11.criterion_classes": "2",
+          "example_11.first": "r00713",
+          "example_11.first_key": "93175047L",
+          "example_11.second": "r04623",
+          "example_11.second_key": "105472863X",
+          "example_11.surface_value": "claretian associates",
+          "example_12.criterion_classes": "2",
+          "example_12.first": "r00724",
+          "example_12.first_key": "90197670M",
+          "example_12.second": "r17490",
+          "example_12.second_key": "33667437Z",
+          "example_12.surface_value": "st anthony hospital",
+          "example_13.criterion_classes": "2",
+          "example_13.first": "r00868",
+          "example_13.first_key": "105476617X",
+          "example_13.second": "r08397",
+          "example_13.second_key": "97057943X",
+          "example_13.surface_value": "ann & robert h. lurie children's hospital of city of chicago",
+          "example_14.criterion_classes": "2",
+          "example_14.first": "r00971",
+          "example_14.first_key": "102636875V",
+          "example_14.second": "r17637",
+          "example_14.second_key": "31303150X",
+          "example_14.surface_value": "hektoen institute for medical research limited liability",
+          "example_15.criterion_classes": "2",
+          "example_15.first": "r00993",
+          "example_15.first_key": "105510644P",
+          "example_15.second": "r02061",
+          "example_15.second_key": "92086166P",
+          "example_15.surface_value": "greater auburn gresham development",
+          "example_16.criterion_classes": "2",
+          "example_16.first": "r01032",
+          "example_16.first_key": "38544823A",
+          "example_16.second": "r04280",
+          "example_16.second_key": "91969516M",
+          "example_16.surface_value": "asian human services incorporated",
+          "example_17.criterion_classes": "2",
+          "example_17.first": "r01072",
+          "example_17.first_key": "93568827H",
+          "example_17.second": "r12250",
+          "example_17.second_key": "85240878V",
+          "example_17.surface_value": "parsons transportation grou",
+          "example_18.criterion_classes": "2",
+          "example_18.first": "r01171",
+          "example_18.first_key": "94387210X",
+          "example_18.second": "r01580",
+          "example_18.second_key": "102903767L",
+          "example_18.surface_value": "f.h. paschen s.n. nielsen & associates limited liability",
+          "example_19.criterion_classes": "2",
+          "example_19.first": "r01258",
+          "example_19.first_key": "5135960E",
+          "example_19.second": "r02826",
+          "example_19.second_key": "15055418E",
+          "example_19.surface_value": "greater s.w. development",
+          "example_20.criterion_classes": "2",
+          "example_20.first": "r01354",
+          "example_20.first_key": "102485421X",
+          "example_20.second": "r06348",
+          "example_20.second_key": "102485429T",
+          "example_20.surface_value": "board of trustees of community college district #508 county of cook & state of state of illinois"
+        }
+      },
+      "label": "a_collisions_localized",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "limitation"
+    },
+    {
+      "counts": {
+        "divergent_classes": 2,
+        "divergent_items": 3,
+        "items": 20000,
+        "related_classes": 2073
+      },
+      "detail": "A divergence was computed but the check is not warranted: regime unsourced_registration names no source.",
+      "explanation": {
+        "inputs": [
+          "unsourced_registration",
+          "us_il_localized_name",
+          "chicago_observed"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_unwarranted",
+        "summary": "A divergence was computed but the check is not warranted: regime unsourced_registration names no source.",
+        "witness": {}
+      },
+      "label": "c_unwarranted",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "limitation"
+    }
+  ],
+  "sources": [
+    {
+      "name": "chicago_observed",
+      "rows": 20000,
+      "sha256": "6a821da98aaedc2011f011d4c8ecb05786eed9256eda295f7510129660a618f5"
+    }
+  ]
+}

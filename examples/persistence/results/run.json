@@ -1,0 +1,1069 @@
+{
+  "final_state": {
+    "index": 13,
+    "judgments": [
+      {
+        "conflicting": false,
+        "first": "g1",
+        "label": "j_g",
+        "polarity": "distinct",
+        "regime": "persistent_asset",
+        "scope": "synthetic: the kind of object keeps its two branches distinct",
+        "second": "g2",
+        "source": "note"
+      },
+      {
+        "conflicting": false,
+        "first": "m0",
+        "label": "j_m",
+        "polarity": "distinct",
+        "regime": "persistent_asset",
+        "scope": "synthetic: the two predecessors are distinct",
+        "second": "m1",
+        "source": "note"
+      }
+    ],
+    "log": [
+      [
+        "a_rekey",
+        "licensed"
+      ],
+      [
+        "a_f1",
+        "ignoring"
+      ],
+      [
+        "a_f2",
+        "ignoring"
+      ],
+      [
+        "j_g",
+        "recorded"
+      ],
+      [
+        "a_g1",
+        "licensed"
+      ],
+      [
+        "a_g2",
+        "blocked"
+      ],
+      [
+        "a_h1",
+        "licensed"
+      ],
+      [
+        "a_h2",
+        "licensed"
+      ],
+      [
+        "j_m",
+        "recorded"
+      ],
+      [
+        "a_m1",
+        "licensed"
+      ],
+      [
+        "a_m2",
+        "blocked"
+      ],
+      [
+        "a_split",
+        "broken"
+      ],
+      [
+        "a_reorder",
+        "inapplicable"
+      ]
+    ],
+    "steps": [
+      {
+        "first": "r0",
+        "label": "a_rekey",
+        "licensed": true,
+        "operator": "rename",
+        "regime": "persistent_asset",
+        "second": "r1",
+        "source": ""
+      },
+      {
+        "first": "f0",
+        "label": "a_f1",
+        "licensed": false,
+        "operator": "copy_out",
+        "regime": "persistent_asset",
+        "second": "f1",
+        "source": ""
+      },
+      {
+        "first": "f0",
+        "label": "a_f2",
+        "licensed": false,
+        "operator": "copy_out",
+        "regime": "persistent_asset",
+        "second": "f2",
+        "source": ""
+      },
+      {
+        "first": "g0",
+        "label": "a_g1",
+        "licensed": true,
+        "operator": "rename",
+        "regime": "persistent_asset",
+        "second": "g1",
+        "source": ""
+      },
+      {
+        "first": "h0",
+        "label": "a_h1",
+        "licensed": true,
+        "operator": "rename",
+        "regime": "persistent_asset",
+        "second": "h1",
+        "source": ""
+      },
+      {
+        "first": "h0",
+        "label": "a_h2",
+        "licensed": true,
+        "operator": "rename",
+        "regime": "persistent_asset",
+        "second": "h2",
+        "source": ""
+      },
+      {
+        "first": "m0",
+        "label": "a_m1",
+        "licensed": true,
+        "operator": "rename",
+        "regime": "persistent_asset",
+        "second": "m2",
+        "source": ""
+      },
+      {
+        "first": "k0",
+        "label": "a_split",
+        "licensed": false,
+        "operator": "split",
+        "regime": "persistent_asset",
+        "second": "k1",
+        "source": ""
+      }
+    ]
+  },
+  "program": "program.ido",
+  "results": [
+    {
+      "counts": {},
+      "detail": "rename: r0 -> r1 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_rekey",
+        "summary": "Proposed step r0 -> r1 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_rekey",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 0,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_rekey (rename: r0 -> r1): licensed",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_rekey",
+              "first": "r0",
+              "ground": "step",
+              "second": "r1",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_rekey",
+        "summary": "Operator rename is preserving under persistent_asset and no distinct judgment forbids r0 and r1; the step is licensed.",
+        "witness": {}
+      },
+      "label": "a_rekey",
+      "operation": "apply",
+      "outcome": "established",
+      "snapshot": 1,
+      "word": "licensed"
+    },
+    {
+      "counts": {},
+      "detail": "status r0, r1 under persistent_asset: required",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_rekey",
+              "first": "r0",
+              "ground": "step",
+              "second": "r1",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "c_rekey",
+        "summary": "r0 and r1 are joined by a chain of same-commitments.",
+        "witness": {}
+      },
+      "label": "c_rekey",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 1,
+      "word": "required"
+    },
+    {
+      "counts": {},
+      "detail": "copy_out: f0 -> f1 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "copy_out"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_f1",
+        "summary": "Proposed step f0 -> f1 by operator copy_out, classified ign under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "ign",
+          "operator": "copy_out"
+        }
+      },
+      "label": "p_f1",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 1,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "copy_out: f0 -> f2 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "copy_out"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_f2",
+        "summary": "Proposed step f0 -> f2 by operator copy_out, classified ign under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "ign",
+          "operator": "copy_out"
+        }
+      },
+      "label": "p_f2",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 1,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_f1 (copy_out: f0 -> f1): ignoring",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "copy_out"
+        ],
+        "kind": "limitation",
+        "limitation": "operator_underdetermination",
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_f1",
+        "summary": "Operator copy_out is identity-ignoring under persistent_asset; the step was recorded, but the classification alone neither licenses nor breaks continuation.",
+        "witness": {}
+      },
+      "label": "a_f1",
+      "operation": "apply",
+      "outcome": "undetermined",
+      "snapshot": 2,
+      "word": "ignoring"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_f2 (copy_out: f0 -> f2): ignoring",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "copy_out"
+        ],
+        "kind": "limitation",
+        "limitation": "operator_underdetermination",
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_f2",
+        "summary": "Operator copy_out is identity-ignoring under persistent_asset; the step was recorded, but the classification alone neither licenses nor breaks continuation.",
+        "witness": {}
+      },
+      "label": "a_f2",
+      "operation": "apply",
+      "outcome": "undetermined",
+      "snapshot": 3,
+      "word": "ignoring"
+    },
+    {
+      "counts": {},
+      "detail": "status f1, f2 under persistent_asset: undetermined",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_lineage_not_identity",
+        "summary": "Some admissible identity relation identifies f1 and f2 and some separates them. Not required is not the same as distinct.",
+        "witness": {}
+      },
+      "label": "c_lineage_not_identity",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 3,
+      "word": "undetermined"
+    },
+    {
+      "counts": {},
+      "detail": "rename: g0 -> g1 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_g1",
+        "summary": "Proposed step g0 -> g1 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_g1",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 3,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "rename: g0 -> g2 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_g2",
+        "summary": "Proposed step g0 -> g2 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_g2",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 3,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "distinct judgment on g1, g2 under persistent_asset: recorded",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "j_g",
+        "summary": "Recorded as a distinct judgment under persistent_asset from note.",
+        "witness": {
+          "polarity": "distinct",
+          "scope": "synthetic: the kind of object keeps its two branches distinct"
+        }
+      },
+      "label": "j_g",
+      "operation": "judge",
+      "outcome": "established",
+      "snapshot": 4,
+      "word": "recorded"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_g1 (rename: g0 -> g1): licensed",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_g1",
+              "first": "g0",
+              "ground": "step",
+              "second": "g1",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_g1",
+        "summary": "Operator rename is preserving under persistent_asset and no distinct judgment forbids g0 and g1; the step is licensed.",
+        "witness": {}
+      },
+      "label": "a_g1",
+      "operation": "apply",
+      "outcome": "established",
+      "snapshot": 5,
+      "word": "licensed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_g2 (rename: g0 -> g2): blocked",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_g1",
+              "first": "g1",
+              "ground": "step",
+              "second": "g0",
+              "source": ""
+            }
+          ],
+          []
+        ],
+        "subject": "a_g2",
+        "summary": "Identifying g0 and g2 would identify g1 and g2, which judgment j_g asserts distinct.",
+        "witness": {
+          "distinct_first": "g1",
+          "distinct_judgment": "j_g",
+          "distinct_second": "g2"
+        }
+      },
+      "label": "a_g2",
+      "operation": "apply",
+      "outcome": "refuted",
+      "snapshot": 6,
+      "word": "blocked"
+    },
+    {
+      "counts": {},
+      "detail": "status g1, g2 under persistent_asset: forbidden",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [],
+          []
+        ],
+        "subject": "c_g_siblings",
+        "summary": "Identifying g1 and g2 would identify g1 and g2, which judgment j_g asserts distinct.",
+        "witness": {
+          "distinct_first": "g1",
+          "distinct_judgment": "j_g",
+          "distinct_second": "g2"
+        }
+      },
+      "label": "c_g_siblings",
+      "operation": "check",
+      "outcome": "refuted",
+      "snapshot": 6,
+      "word": "forbidden"
+    },
+    {
+      "counts": {},
+      "detail": "rename: h0 -> h1 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_h1",
+        "summary": "Proposed step h0 -> h1 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_h1",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 6,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "rename: h0 -> h2 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_h2",
+        "summary": "Proposed step h0 -> h2 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_h2",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 6,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_h1 (rename: h0 -> h1): licensed",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_h1",
+              "first": "h0",
+              "ground": "step",
+              "second": "h1",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_h1",
+        "summary": "Operator rename is preserving under persistent_asset and no distinct judgment forbids h0 and h1; the step is licensed.",
+        "witness": {}
+      },
+      "label": "a_h1",
+      "operation": "apply",
+      "outcome": "established",
+      "snapshot": 7,
+      "word": "licensed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_h2 (rename: h0 -> h2): licensed",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_h2",
+              "first": "h0",
+              "ground": "step",
+              "second": "h2",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_h2",
+        "summary": "Operator rename is preserving under persistent_asset and no distinct judgment forbids h0 and h2; the step is licensed.",
+        "witness": {}
+      },
+      "label": "a_h2",
+      "operation": "apply",
+      "outcome": "established",
+      "snapshot": 8,
+      "word": "licensed"
+    },
+    {
+      "counts": {},
+      "detail": "status h1, h2 under persistent_asset: required",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_h1",
+              "first": "h1",
+              "ground": "step",
+              "second": "h0",
+              "source": ""
+            },
+            {
+              "detail": "a_h2",
+              "first": "h0",
+              "ground": "step",
+              "second": "h2",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "c_h_siblings",
+        "summary": "h1 and h2 are joined by a chain of same-commitments.",
+        "witness": {}
+      },
+      "label": "c_h_siblings",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 8,
+      "word": "required"
+    },
+    {
+      "counts": {},
+      "detail": "rename: m0 -> m2 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_m1",
+        "summary": "Proposed step m0 -> m2 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_m1",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 8,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "rename: m1 -> m2 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_m2",
+        "summary": "Proposed step m1 -> m2 by operator rename, classified prs under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "prs",
+          "operator": "rename"
+        }
+      },
+      "label": "p_m2",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 8,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "distinct judgment on m0, m1 under persistent_asset: recorded",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "j_m",
+        "summary": "Recorded as a distinct judgment under persistent_asset from note.",
+        "witness": {
+          "polarity": "distinct",
+          "scope": "synthetic: the two predecessors are distinct"
+        }
+      },
+      "label": "j_m",
+      "operation": "judge",
+      "outcome": "established",
+      "snapshot": 9,
+      "word": "recorded"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_m1 (rename: m0 -> m2): licensed",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_m1",
+              "first": "m0",
+              "ground": "step",
+              "second": "m2",
+              "source": ""
+            }
+          ]
+        ],
+        "subject": "a_m1",
+        "summary": "Operator rename is preserving under persistent_asset and no distinct judgment forbids m0 and m2; the step is licensed.",
+        "witness": {}
+      },
+      "label": "a_m1",
+      "operation": "apply",
+      "outcome": "established",
+      "snapshot": 10,
+      "word": "licensed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_m2 (rename: m1 -> m2): blocked",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_m1",
+              "first": "m0",
+              "ground": "step",
+              "second": "m2",
+              "source": ""
+            }
+          ],
+          []
+        ],
+        "subject": "a_m2",
+        "summary": "Identifying m1 and m2 would identify m0 and m1, which judgment j_m asserts distinct.",
+        "witness": {
+          "distinct_first": "m0",
+          "distinct_judgment": "j_m",
+          "distinct_second": "m1"
+        }
+      },
+      "label": "a_m2",
+      "operation": "apply",
+      "outcome": "refuted",
+      "snapshot": 11,
+      "word": "blocked"
+    },
+    {
+      "counts": {},
+      "detail": "split: k0 -> k1 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "split"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_split",
+        "summary": "Proposed step k0 -> k1 by operator split, classified brk under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "brk",
+          "operator": "split"
+        }
+      },
+      "label": "p_split",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 11,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_split (split: k0 -> k1): broken",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "split"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_split",
+        "summary": "Operator split is identity-breaking under persistent_asset; the step was recorded and continuation is not licensed. Breaking does not assert that the two items are distinct.",
+        "witness": {
+          "classification": "brk",
+          "operator": "split"
+        }
+      },
+      "label": "a_split",
+      "operation": "apply",
+      "outcome": "refuted",
+      "snapshot": 12,
+      "word": "broken"
+    },
+    {
+      "counts": {},
+      "detail": "status k0, k1 under persistent_asset: undetermined",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_split",
+        "summary": "Some admissible identity relation identifies k0 and k1 and some separates them. Not required is not the same as distinct.",
+        "witness": {}
+      },
+      "label": "c_split",
+      "operation": "check",
+      "outcome": "undetermined",
+      "snapshot": 12,
+      "word": "undetermined"
+    },
+    {
+      "counts": {},
+      "detail": "reorder: n0 -> n1 under persistent_asset; state unchanged",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "reorder"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "p_reorder",
+        "summary": "Proposed step n0 -> n1 by operator reorder, classified na under persistent_asset. No state changed.",
+        "witness": {
+          "classification": "na",
+          "operator": "reorder"
+        }
+      },
+      "label": "p_reorder",
+      "operation": "propose",
+      "outcome": "established",
+      "snapshot": 12,
+      "word": "proposed"
+    },
+    {
+      "counts": {},
+      "detail": "apply p_reorder (reorder: n0 -> n1): inapplicable",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "reorder"
+        ],
+        "kind": "limitation",
+        "limitation": "inapplicability",
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_reorder",
+        "summary": "Operator reorder is inapplicable under persistent_asset; the step was not executed.",
+        "witness": {}
+      },
+      "label": "a_reorder",
+      "operation": "apply",
+      "outcome": "undetermined",
+      "snapshot": 13,
+      "word": "inapplicable"
+    },
+    {
+      "counts": {
+        "conflicts": 0,
+        "distinct_judgments": 2,
+        "same_judgments": 5
+      },
+      "detail": "consistent persistent_asset: consistent",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "derivation",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_consistent",
+        "summary": "No distinct judgment lies inside a same-class.",
+        "witness": {}
+      },
+      "label": "c_consistent",
+      "operation": "check",
+      "outcome": "established",
+      "snapshot": 13,
+      "word": "consistent"
+    },
+    {
+      "counts": {},
+      "detail": "Identifying g0 and g2 would identify g1 and g2, which judgment j_g asserts distinct.",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "rename"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [
+          [
+            {
+              "detail": "a_g1",
+              "first": "g1",
+              "ground": "step",
+              "second": "g0",
+              "source": ""
+            }
+          ],
+          []
+        ],
+        "subject": "a_g2",
+        "summary": "Identifying g0 and g2 would identify g1 and g2, which judgment j_g asserts distinct.",
+        "witness": {
+          "distinct_first": "g1",
+          "distinct_judgment": "j_g",
+          "distinct_second": "g2"
+        }
+      },
+      "label": "a_g2",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 13,
+      "word": "witness"
+    },
+    {
+      "counts": {},
+      "detail": "Some admissible identity relation identifies f1 and f2 and some separates them. Not required is not the same as distinct.",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "note"
+        ],
+        "kind": "limitation",
+        "limitation": "insufficient_information",
+        "omitted": 0,
+        "steps": [],
+        "subject": "c_lineage_not_identity",
+        "summary": "Some admissible identity relation identifies f1 and f2 and some separates them. Not required is not the same as distinct.",
+        "witness": {}
+      },
+      "label": "c_lineage_not_identity",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 13,
+      "word": "limitation"
+    },
+    {
+      "counts": {},
+      "detail": "Operator split is identity-breaking under persistent_asset; the step was recorded and continuation is not licensed. Breaking does not assert that the two items are distinct.",
+      "explanation": {
+        "inputs": [
+          "persistent_asset",
+          "split"
+        ],
+        "kind": "witness",
+        "limitation": null,
+        "omitted": 0,
+        "steps": [],
+        "subject": "a_split",
+        "summary": "Operator split is identity-breaking under persistent_asset; the step was recorded and continuation is not licensed. Breaking does not assert that the two items are distinct.",
+        "witness": {
+          "classification": "brk",
+          "operator": "split"
+        }
+      },
+      "label": "a_split",
+      "operation": "explain",
+      "outcome": "established",
+      "snapshot": 13,
+      "word": "witness"
+    }
+  ],
+  "sources": [
+    {
+      "name": "note",
+      "rows": 1,
+      "sha256": "80a05492bfe0995008d8bc799d4ebd9721617a7ca7178ca04e889f03e378f735"
+    }
+  ]
+}
