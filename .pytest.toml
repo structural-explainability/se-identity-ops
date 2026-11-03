@@ -50,7 +50,7 @@ pythonpath = ["src"]
 
 addopts = [
     "--cov=src",                 # WHY: Measure coverage of Python source code.
-    "--cov-fail-under=20",       # WHY: Establish a minimum coverage threshold.
+    "--cov-fail-under=80",       # WHY: Establish a minimum coverage threshold.
     "--cov-report=term-missing", # WHY: Report lines not exercised by tests.
 ]
 
