@@ -2,7 +2,7 @@
 
 WHAT: Runs the encodings in this folder and compares their answers with the
       IdentityOps interpreter and with the recorded run output.
-WHY: The prior-art boundary requires trying equivalent formulations before
+WHY: The related-work boundary requires trying equivalent formulations before
      claiming that IdentityOps does something LACE or ASPEN+ cannot. Each section
      below records what could be expressed, what needed an awkward encoding, and
      what could not be expressed.

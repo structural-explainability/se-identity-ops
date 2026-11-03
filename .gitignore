@@ -1,7 +1,7 @@
 # ============================================================
-# .gitignore (ALL-REPOS)
+# .gitignore (CUSTOM)
 # ============================================================
-# Updated: 2026-10-11
+# Updated: 2026-11-03
 #
 # WHAT: A Git configuration file that identifies files and directories
 #       that should not be included in the repository's version history.
@@ -368,3 +368,5 @@ docs/assets/data/guide-context.json
 # marimo WASM export; built at deploy time, not committed
 docs/app/
 lace/results/timings.json
+# Local experimental reproduction outputs
+/tmp/

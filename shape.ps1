@@ -14,6 +14,25 @@
 # Run in a PowerShell terminal (available cross platform) with:
 # .\shape.ps1
 
+# As Needed:
+
+# Windows PowerShell ERROR: Execution Policy / Not Digitally Signed
+# When running a PowerShell script (.ps1) on Windows, you may see:
+
+# File cannot be loaded because it is not digitally signed.
+# You cannot run this script on the current system.
+
+# If you have reviewed the script and trust its source,
+# you can temporarily allow it to run in the current PowerShell session.
+
+# Run:
+
+# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+# Then:
+
+# .\shape.ps1
+
 
 # === CONFIGURE EXCLUDED DIRECTORIES ===
 

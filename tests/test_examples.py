@@ -1,4 +1,4 @@
-"""Tests that re-run the three experiments and compare with recorded expectations.
+"""Tests that re-run the experiments and compare with recorded expectations.
 
 These tests run the committed programs on the committed data. They fail if an
 actual outcome stops matching a recorded expectation, or if a run stops
@@ -85,6 +85,16 @@ def test_rerun_reproduces_the_committed_result_file(
 def test_expected_files_were_committed_before_results() -> None:
     """The recorded order is visible in git: expected.toml precedes its results."""
     import subprocess
+
+    shallow = subprocess.run(
+        ["git", "rev-parse", "--is-shallow-repository"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    ).stdout.strip()
+    if shallow == "true":
+        pytest.skip("shallow clone: the git history this check needs is not present")
 
     for experiment in PROGRAMS:
         added = subprocess.run(

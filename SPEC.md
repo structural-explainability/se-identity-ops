@@ -2,46 +2,50 @@
 
 This document says what the IdentityOps language is for, what it contains, and what it
 leaves out. [SEMANTICS.md](./SEMANTICS.md) says exactly what each construct means.
-[docs/en/prior-art.md](./docs/en/prior-art.md) says how it relates to existing work.
+[docs/en/related-work.md](./docs/en/related-work.md) says how it relates to existing work.
 
 ## Status
 
-IdentityOps is a research experiment, not a product and not a claim of novelty.
+IdentityOps is a research experiment, not a product.
 
 The question under test is whether one small language can specify, execute, and
 audit identity-relevant operations under declared criteria in three different
-settings, and where it fails. Version 0.1.0 is acceptable only as an honest
-record of that test. See [Acceptance](#acceptance).
+settings, and where it fails.
+Version 0.1.0 is a record of that test.
+See [Acceptance](#acceptance).
 
 Sections marked **Proposed** were designed before the experiments and may be
-revised by their results. Sections marked **Implemented** are in the reference
+revised by their results.
+Sections marked **Implemented** are in the reference
 interpreter and are exercised by tests.
 
-## What IdentityOps Is
+## Included
 
-IdentityOps is a language for **specifying, executing, and auditing
-identity-relevant operations under declared criteria**.
+IdentityOps is a language for **specifying, executing, and auditing**
+**identity-relevant operations under declared criteria**.
 
-- *Specifying*: declaring a criterion of identity, an implementation behavior
+- _Specifying_: declaring a criterion of identity, an implementation behavior
   that is claimed to respect it, and the evidence that grounds each.
-- *Executing*: running judgments and proposed transformations against a model
+- _Executing_: running judgments and proposed transformations against a model
   state, with explicit outcomes and immutable snapshots.
-- *Auditing*: comparing declared commitments with observed treatment, and
+- _Auditing_: comparing declared commitments with observed treatment, and
   returning a derivation, a witness, or an explicit limitation.
 
-## What IdentityOps Is Not
+## Intentionally Excluded
 
-- It is not an entity-resolution or merge engine. It has no similarity function, no
+- IdentityOps is **not** an entity-resolution or merge engine.
+  It has no similarity function, no
   soft rules, no optimality criteria, and no search for a best set of merges.
-  [LACE, LACE+, and ASPEN+](./docs/en/prior-art.md) already provide declarative
+  [LACE, LACE+, and ASPEN+](./docs/en/related-work.md) provide declarative
   merge rules, denial constraints, dynamic merge semantics, justifications,
-  alternative resolutions, and local and global merges. IdentityOps does not
-  reimplement them and does not claim them.
-- It is not a decision procedure for what things really are. It reports
+  alternative resolutions, and local and global merges.
+  IdentityOps does not reimplement them.
+- It is **not** a decision procedure for what things really are. It reports
   commitments, differences between commitments, and the consequences of
   commitments. It does not certify ground truth and does not say which regime
   is correct.
-- It is not a new foundational theory. The commitment calculus is
+- It is **not** a new foundational theory.
+  The commitment calculus is
   [`se-theory-persistence`](https://github.com/structural-explainability/se-theory-persistence).
   The comparison of a declared relation with implementation treatment is
   [`se-theory-operational-identity`](https://github.com/structural-explainability/se-theory-operational-identity).
@@ -121,7 +125,7 @@ Nothing is included for completeness.
   - `consistent R`: no distinct judgment lies inside a same-class.
   - `status X Y under R`: required, forbidden, or undetermined.
   - `coverage R`: every item is placed in some class.
-  Used by: all three targets.
+    Used by: all three targets.
 - **explain**: return the deterministic explanation produced with an operation: a
   derivation, a witness, or an explicit limitation.
   Used by: all three targets.
@@ -179,11 +183,11 @@ version 0.1.0 and whether the language enforces it or only follows a convention.
 - **Unknown and false.** Enforced: a pair that is neither required nor forbidden
   is undetermined. Only a recorded distinct judgment forbids anything.
 - **A failed obligation and a violated obligation.** Enforced:
-  - *violated* means the obligation was evaluated, and a witness shows it fails
+  - _violated_ means the obligation was evaluated, and a witness shows it fails
     (outcome `refuted`);
-  - *failed* means the obligation could not be discharged because its inputs do
+  - _failed_ means the obligation could not be discharged because its inputs do
     not warrant a verdict (outcome `undetermined`, with a limitation cause).
-  A failed obligation is not evidence of a violation.
+    A failed obligation is not evidence of a violation.
 
 ## Results
 
@@ -202,11 +206,12 @@ version 0.1.0, so it is not implemented (see [DECISIONS.md](./DECISIONS.md)).
 
 ## Experiments
 
-Each experiment records, before it runs: a research question, input provenance,
-declared criteria, positive controls, negative controls, an indeterminate case,
-and expected results. Expected results are committed before the first run on the
-real data. A disagreement that is typed into a program is a unit test, not a
-discovery.
+Each experiment records, before it runs:
+a research question, input provenance,
+declared criteria, positive controls, negative controls,
+an indeterminate case, and expected results.
+Expected results are committed before the first run on
+real data.
 
 - **A. Chicago vendor identity** (operational identity). Compares the
   criterion "same published Vendor ID" (a source-provided identifier whose referential
@@ -226,10 +231,13 @@ discovery.
 
 ## Novelty
 
-No claim of novelty is made. A capability is called different from LACE, LACE+,
-or ASPEN+ only where a specific difference was demonstrated by comparison, and
+No claim of novelty is made.
+A capability is called different from the LACE family
+only where a specific difference was demonstrated by comparison, and
 even then the difference may be one of vocabulary or cost rather than of
-expressive power. See [docs/en/prior-art.md](./docs/en/prior-art.md).
+expressive power.
+See [docs/en/related-work.md](./docs/en/related-work.md)
+and [docs/en/lace-attempts.md](./docs/en/lace-attempts.md).
 
 ## Three Kinds of Evidence
 
@@ -256,7 +264,7 @@ reported as partial.
 - Unknown and contradictory evidence remain visible.
 - At least one meaningful Lean property is proved.
 - Independent checks are reproducible.
-- A prior-art comparison is documented.
+- A related-work comparison is documented.
 - Unresolved questions are recorded and not presented as successes.
 
 Whether each condition holds is stated in [README.md](./README.md).

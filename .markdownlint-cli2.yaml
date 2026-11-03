@@ -56,10 +56,15 @@ ignores:
   - "**/build/**"
   - "dist/**"
   - "**/dist/**"
+  - "lint/**"
+  - "**/lint/**"
   - "site/**"
   - "**/site/**"
 
   # WHY: Tool caches and coverage output are generated.
+  - "**/.lake/**"
+  - ".lake/**"
+  - "**/.mypy_cache/**"
   - ".mypy_cache/**"
   - "**/.mypy_cache/**"
   - ".nox/**"

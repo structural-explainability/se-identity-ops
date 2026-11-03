@@ -1,117 +1,170 @@
 # Decisions
 
-Design decisions, rejected designs, and failures during construction. Entries are
-added; they are not rewritten.
+Design decisions, rejected designs, and failures during construction.
+Entries are added, not rewritten.
 
 ## Decisions
 
 ### D-001. A standalone repository
 
 IdentityOps lives in its own repository with its own language, semantics, interpreter,
-tests, documentation, and Lean files. Reason: a language that is tested on three
-domains should not be mistaken for a part of any one of them, and one-way layering over
+tests, documentation, and Lean files.
+Reason: a language that is tested on three
+domains should not be mistaken for a
+part of any one of them, and one-way layering over
 the SE theory repositories keeps those unchanged.
 
 ### D-002. Five operations, kept where each is used
 
-`judge`, `propose`, `apply`, `check`, `explain`. Each is used by at least one experiment.
+`judge`, `propose`, `apply`, `check`, `explain`.
+Each is used by at least one experiment.
 `apply` is restricted to a model state and carries no authority over referents.
 `propose` exists only so that `apply` can be gated and inspected before it runs.
 
 ### D-003. Declarations are separate from operations
 
-`source`, `carrier`, `regime`, `surface`, `probe`, and `operator` bind names and never
-change state. This replaces the first proposal's seven mixed constructs.
+`source`, `carrier`, `regime`, `surface`, `probe`, and `operator`
+bind names and never change state.
+This replaces the first proposal's seven mixed constructs.
 
 ### D-004. Reuse Persistence, adapt Operational Identity
 
-Persistence is imported (pinned release) for the commitment calculus. Operational
-Identity is not imported because it has no release tag to pin; its `Faithful` is restated
-with a docstring that says so. Neutral Substrate, Individuation, and Coreference are not
-needed and are not imported.
+Persistence is imported (pinned release) for the commitment calculus.
+Operational Identity is not imported because it has no release tag to pin;
+its `Faithful` is restated with a docstring that says so.
+Neutral Substrate, Individuation, and Coreference are not
+needed.
 
 ### D-005. A key regime relates equal non-empty values only
 
-An empty key places the item in no class. The criterion is silent about it; it is not
-related to other empty-key items and not declared distinct.
+An empty key places the item in no class.
+The criterion is silent about it;
+it is not related to other empty-key items and not declared distinct.
 
 ### D-006. Nothing is distinct by default
 
-Only a recorded `distinct` judgment forbids anything. Different keys are undetermined.
+Only a recorded `distinct` judgment forbids anything.
+Different keys are undetermined.
 
 ### D-007. Judgments are always recorded
 
-A contradicting judgment is kept, marked conflicting, and makes the state inconsistent.
+A contradicting judgment is kept, marked conflicting,
+and makes the state inconsistent.
 The interpreter does not choose a side.
 
 ### D-008. Every `apply` makes a snapshot
 
-Including blocked and inapplicable ones, so the log records the attempt.
+Including blocked and inapplicable ones,
+so the log records the attempt.
 
 ### D-009. Three limitation causes
 
-Insufficient information, inapplicability, operator underdetermination. SE also
-distinguishes semantic disagreement. No experiment reaches it, so it is not
+Insufficient information, inapplicability, operator underdetermination.
+SE also distinguishes semantic disagreement.
+No experiment reaches it, so it is not
 implemented rather than defined and unused.
 
 ### D-010. A verdict needs a grounded regime
 
-A `check` whose regime names no source returns `unwarranted`. A verdict from an ungrounded
+A `check` whose regime names no source returns `unwarranted`.
+A verdict from an ungrounded
 criterion is not reported as a result.
 
 ### D-011. Expected results are committed first
 
-For each experiment, `expected.toml` is committed before the results file, and a test
-checks the order in git history.
+For each experiment, `expected.toml` is committed before the results file.
+A test checks the order in git history.
+For Experiments A to D, the original local history shows this order.
 
 ### D-012. No `vcgen` in 0.1.0
 
-`vcgen` is experimental in the Lean toolchain used, and its syntax has moved between
-modules within months. The semantics is a pure function on a state, so properties are
-proved directly.
+`vcgen` is experimental in the Lean toolchain used,
+and its syntax has moved between modules within months.
+The semantics is a pure function on a state, so properties are proved directly.
 
 #### How a weakest-precondition reading could support it later
 
 Write `run` as a monadic program over `StateM (State C T)`, with one action per command.
 Give each command a weakest-precondition specification as a `@[spec]` lemma (the
 existing `step_propose`, `same_step_cases`, and `step_preserves_consistency` have the right
-shape). State a postcondition such as `Consistent` and let `vcgen` generate the
-verification conditions for a straight-line program, discharging them with the Persistence
-lemmas. For a program with no `judge`, the generated condition is
-`run_preserves_consistency`. This would prove properties of programs written in the monad
+shape).
+State a postcondition such as `Consistent` and
+let `vcgen` generate the verification conditions for a straight-line program,
+discharging them with the Persistence lemmas.
+For a program with no `judge`, the generated condition is
+`run_preserves_consistency`.
+This would prove properties of programs written in the monad
 rather than of the Python interpreter.
 
 ### D-013. Domain semantics come from external authorities
 
-IdentityOps is domain neutral. It owns the structure of its operations, the meaning of
-its outcomes, and the interface contract through which a domain connects. It does not
-define what any domain's identifiers, names, or encodings mean. Where an experiment
-needs such semantics, an adapter supplies them from an external authority: a
+IdentityOps is domain neutral.
+It owns the structure of its operations, the meaning of its outcomes,
+and the interface contract through which a domain connects.
+It does not define what any domain's identifiers, names, or encodings mean.
+Where an experiment needs such semantics, an adapter supplies them from an external authority: a
 specification, a reference implementation, or an existing mechanism whose behavior is
 under audit.
 
-Each adapter states its authority, implementation, exact version or digest, operation,
-input and output evidence, and limitations (`adapter.toml` beside each experiment). The
-mapping to the authority is an explicit, testable obligation: a test checks that the
-recorded version is the one used. Equal normalized forms are evidence for a declared
-criterion; they are not by themselves a claim that two things are the same thing.
+An external source or mechanism does not necessarily provide an
+authoritative interpretation of the identifiers it uses.
+When the referential meaning is unavailable or unverified,
+the adapter records that limitation rather than supplying an interpretation.
+Version and provenance checks do not establish semantic conformance.
 
-This is a standing principle, not a record of findings. Findings stay in the experiment
+Each adapter states its authority, implementation, exact version or digest, operation,
+input and output evidence, and limitations (`adapter.toml` beside each experiment).
+The mapping to the authority is an explicit, testable obligation: a test checks that the
+recorded version is the one used.
+Equal normalized forms are evidence for a declared criterion;
+they are not a claim that two things are the same thing.
+
+This is a standing principle, not a record of findings.
+Findings stay in the experiment
 READMEs and `DOUBTS.md`.
+
+### D-014. Model state is not real-world identity
+
+A class is described as generated by the declared criterion, the judgments, and the licensed steps.
+`apply` changes a model state.
+It does not resolve a referent and does not imply authority to.
+Reports state commitments and differences.
+Reports do not say which regime is correct.
+
+### D-015. Unsupported is not wrong
+
+An `unsupported` collision means the criterion neither requires nor forbids the merge.
+The audited mechanism is not called wrong on the basis of an `unsupported` result.
+
+### D-016. Reproducing a known case is not generalization
+
+Cases that were known when the pilot was designed are described as engineering validation.
+They are not used as evidence of generalization.
+Freeze 02 material is not opened until Freeze 02 has been established and executed.
+Any later use of its outputs is a separate, dated, exploratory experiment.
+
+### D-017. Execution is not novelty
+
+A capability is called different from the LACE family
+only where a specific difference was demonstrated.
+The report says whether the difference is vocabulary, cost, or power.
+Successful execution is not taken as a contribution.
 
 ## Rejected Designs
 
 ### R-001. The first seven-construct proposal
 
-`carrier`, `regime`, `commit`, `observe`, `transition`, `audit`, `explain`. It dropped
-`apply` (nothing executed or licensed a transition), mixed declarations with operations,
+`carrier`, `regime`, `commit`, `observe`, `transition`, `audit`, `explain`.
+It dropped `apply` (nothing executed or licensed a transition),
+mixed declarations with operations,
 and used `surface` and `probe` in its examples without defining them.
 
 ### R-002. Programs that state their own disagreement
 
 The first sketches asserted a "distinct" judgment and then observed equal normalized
-names, so the expected witness was built into the input. Such a program is an interpreter
-test. It is not evidence that the language found anything.
+names, so the expected witness was built into the input.
+Such a program is an interpreter test.
+It is not evidence that the language found anything.
 
 ### R-003. A general merge engine
 
@@ -120,29 +173,37 @@ Re-implementing them as a contribution was rejected.
 
 ### R-004. Distinct by default for different keys
 
-Rejected: it would invent certainty. See D-006.
+Rejected: it would invent certainty.
+See D-006.
 
 ### R-005. Chicago vendor names as the persistence dataset
 
-Rejected for now: contract dates are not vendor-state dates. See
+Rejected for now: contract dates are not vendor-state dates.
+See
 [examples/persistence/LIMITATION.md](./examples/persistence/LIMITATION.md).
 
 ### R-006. Pinning the pilot's recorded target digests
 
-Rejected: they do not match the files. See UM-003.
+Rejected: they do not match the files.
+See UM-003.
 
 ## Failures During Construction
 
 - The upstream `out/us_il_normalized_sample.csv` was first used as an oracle for the
-  harness. It is a reviewed sheet with unaligned columns, so a row comparison failed
-  (558 of 654 rows differed). The multiset comparison replaced it.
+  harness.
+  It is a reviewed sheet with unaligned columns, so a row comparison failed
+  (558 of 654 rows differed).
+  The multiset comparison replaced it.
 - A first test of empty-key behavior asserted a result its own program did not produce.
   The test was wrong and was rewritten.
 - The first LACE class-pair count halved the number of atoms by mistake and disagreed
-  with the interpreter. The count of ground atoms was first read before grounding and
-  was zero. Both were fixed.
+  with the interpreter.
+  The count of ground atoms was first read before grounding and
+  was zero.
+  Both were fixed.
 - A test expected three inexpressible persistence steps; there are four.
 - `lake env lean` cannot resolve `SE.*` modules across packages because several packages
-  share the `SE` root, and `leanchecker` cannot either. As in the other SE theory
+  share the `SE` root, and `leanchecker` cannot either.
+  As in the other SE theory
   repositories, the axiom check falls back to a source scan, and axioms were
   printed with `lake lean`.

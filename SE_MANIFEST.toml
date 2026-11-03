@@ -61,7 +61,7 @@ includes = [
     "Lean 4 statement of the command semantics over the Persistence commitment calculus, with proved properties",
     "a deterministic Python reference interpreter with immutable snapshots and structured explanations",
     "audit of an implementation mechanism against a declared criterion",
-    "three experiments with recorded expectations, controls, and independent verification",
+    "three research-target experiments with recorded expectations, controls, and independent verification, plus one exploratory authority-substitution experiment",
     "an attempt to express each experiment in a LACE-style formulation",
 ]
 

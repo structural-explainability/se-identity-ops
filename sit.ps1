@@ -16,6 +16,25 @@ To get situated, run this script in your PowerShell terminal:
 
 .\sit.ps1
 
+As Needed:
+
+Windows PowerShell ERROR: Execution Policy / Not Digitally Signed
+When running a PowerShell script (.ps1) on Windows, you may see:
+
+File cannot be loaded because it is not digitally signed.
+You cannot run this script on the current system.
+
+If you have reviewed the script and trust its source,
+you can temporarily allow it to run in the current PowerShell session.
+
+Run:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+Then:
+
+.\sit.ps1
+
 #>
 
 Set-StrictMode -Version Latest
@@ -25,7 +44,21 @@ $ErrorActionPreference = "Stop"
 uvx pup-clean --delete
 uv self update
 uv python install
-uv lock --upgrade
+
+# RESEARCH-FREEZE: do not run "uv lock --upgrade" in this repository.
+# WHY: This is research software. The locked dependency versions are part of the
+#      experimental record. Adapters name exact library versions in adapter.toml,
+#      tests check them, and result files are reproduced byte for byte. An upgrade can
+#      change a library's behavior or a result without any change to our own code.
+# IF NEWER VERSIONS ARE NEEDED (for example, uv audit reports a vulnerability):
+#   1. Make the change in its own commit and record WHY in CHANGELOG.md and DOUBTS.md.
+#   2. Upgrade only what is needed: uv lock --upgrade-package NAME
+#   3. Run uv sync, then the tests.
+#   4. If an adapter library changed, update its version and digests in the
+#      adapter.toml files. Do not edit or regenerate committed results; a rerun is a
+#      new result and is recorded separately.
+# uv lock --upgrade
+
 uv sync
 uv audit
 

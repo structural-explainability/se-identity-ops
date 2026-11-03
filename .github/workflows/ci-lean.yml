@@ -1,7 +1,7 @@
 # ============================================================
 # .github/workflows/ci-lean.yml (ALL-SE-LEAN-REPOS)
 # ============================================================
-# UPDATED: 2026-10-29
+# UPDATED: 2026-11-02
 
 name: CI (SE Lean)
 
@@ -42,14 +42,14 @@ jobs:
         # WHY: Required so all subsequent steps can access repo files.
 
       - name: A2) Set up Lean toolchain
-        uses: leanprover/lean-action@24581d74d674803a25a81b10b059c5c0cdd344c6 # v1
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1
         with:
           build: false
           test: false
           lint: false
 
       - name: A3) Install uv (with caching and uv.lock awareness)
-        uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
         with:
           enable-cache: true
           # WHY: Cache uv-managed artifacts for faster subsequent runs.
@@ -66,6 +66,13 @@ jobs:
       - name: B2) Build Lean test surface
         run: lake test
         # WHY: Confirms the declared Lean test imports and public surface compile.
+
+      # B3) DEFERRED: Independent kernel checking
+      # WHY: lake check --paranoid currently resolves SE.IdentityOps.Syntax
+      # under the se-theory-persistence dependency rather than this package.
+      # Revisit when cross-package module resolution supports shared SE roots.
+      # - name: B3) Independently check Lean declarations
+      #   run: lake check --paranoid
 
       # ============================================================
       # C) VERIFY: Re-check compiled proofs and audit axioms
@@ -87,7 +94,7 @@ jobs:
 
       - name: C3) Audit axioms
         if: steps.se-deps.outputs.has_se_deps == 'false'
-        uses: leanprover/lean-action@24581d74d674803a25a81b10b059c5c0cdd344c6 # v1
+        uses: leanprover/lean-action@fe408643ea7367d8c0404a8be3975bb145f5fb64 # v1
         with:
           build: false
           test: false

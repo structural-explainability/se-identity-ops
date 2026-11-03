@@ -28,6 +28,25 @@ OBS: This repository depends on se-theory-persistence, which shares the SE modul
      The source scan runs instead, as in ci-lean.yml.
 OBS: #Requires 7.3 because $PSNativeCommandUseErrorActionPreference needs it.
 CUSTOM: Update the axiom-audit tag together with ci-lean.yml.
+
+As Needed:
+
+Windows PowerShell ERROR: Execution Policy / Not Digitally Signed
+When running a PowerShell script (.ps1) on Windows, you may see:
+
+File cannot be loaded because it is not digitally signed.
+You cannot run this script on the current system.
+
+If you have reviewed the script and trust its source,
+you can temporarily allow it to run in the current PowerShell session.
+
+Run:
+
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+Then:
+
+.\rel.ps1
 #>
 
 Set-StrictMode -Version Latest

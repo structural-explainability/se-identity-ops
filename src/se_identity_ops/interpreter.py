@@ -2,7 +2,7 @@
 
 WHAT: Executes a checked program statement by statement against an immutable
       model state, and returns one result per operation plus every state snapshot.
-WHY: This is the smallest interpreter that can run the three experiments. It is
+WHY: This is the smallest interpreter that can run the experiments. It is
      the executable reading of SEMANTICS.md.
 OBS: `judge` and `apply` each create a new snapshot. `propose`, `check`, and
      `explain` never change state.

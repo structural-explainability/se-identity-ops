@@ -67,6 +67,7 @@ dev = [
 ]
 docs = [
   "zensical",
+  "mkdocstrings[python]", # WHY: Auto-generate API docs from docstrings.
 ]
 
 [project.scripts]

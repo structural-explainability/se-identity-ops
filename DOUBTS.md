@@ -12,11 +12,11 @@ status definitions, and procedures, see the
 
 This assessment is a summary of the present evidence.
 
-| Criterion                | Current assessment                                                                                                                                                                                                                                                                              |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mathematical Correctness | The Lean files state the command semantics and prove properties of it, using only the standard axioms. The Python interpreter is checked against Persistence-level definitions by exhaustive small-state comparison, not by proof. Correspondence between Lean and Python is an open obligation. |
-| Scientific Adequacy      | Open. The meaning of a Vendor ID is not established. The SBOM run reproduces known cases. The persistence experiment used only synthetic controls and has no real data.                                                                                                                           |
-| Theoretical Contribution | None established. Each audit capability was reproduced by a LACE-style encoding. The differences demonstrated are of vocabulary and cost. See [Prior Art](./docs/en/prior-art.md).                                                                                                              |
+| Criterion                | Current assessment                                                                                                                                                                                                                                                                                                               |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mathematical Correctness | The Lean development proves properties of its stated semantics. Python pair statuses are checked against an independent admissible-relation oracle, exhaustively for carriers of 3 and 4 items and on fixed samples for 5 and 6. Command effects are tested separately. Direct Lean-to-Python correspondence remains unverified. |
+| Scientific Adequacy      | Open. The meaning of a Vendor ID is not established. The SBOM run reproduces known cases. The persistence experiment used only synthetic controls and has no real data. Authority substitution was tested on a deliberately constructed synthetic corpus; conformance to the Package URL specification was not established.      |
+| Theoretical Contribution | None established. Each audit capability was reproduced by a LACE-style encoding. The differences demonstrated are of vocabulary and cost. See [Related Work](./docs/en/related-work.md).                                                                                                                                               |
 
 The doubts below identify specific issues affecting these assessments.
 
@@ -39,7 +39,8 @@ Scientific Adequacy
 
 Experiment A compares the localization step with "same published Vendor ID".
 Vendor ID is a source-provided identifier whose referential meaning has not yet been
-independently established. The experiment does not claim it denotes a registration, a
+independently established.
+The experiment does not claim it denotes a registration, a
 legal entity, or anything else.
 
 #### Current Knowledge
@@ -66,9 +67,10 @@ The mechanism was observed through a harness over a 20,000-row sample.
 
 #### Current Knowledge
 
-The harness calls the upstream function unmodified. It matched the multiset of
-normalized values in the upstream's reviewed sheet except for three blanked cells. How the
-20,000 rows were chosen from the full dataset (more than 182,000 rows) was not
+The harness calls the upstream function unmodified.
+It matched the multiset of
+normalized values in the upstream's reviewed sheet except for three blanked cells.
+How the 20,000 rows were chosen from the full dataset (more than 182,000 rows) was not
 examined.
 
 #### Remaining Work
@@ -84,13 +86,15 @@ Mathematical Correctness
 #### Concern
 
 In the cloned pilot, the SHA-256 recorded in `metadata.toml` for each case's
-`target.cdx.json` does not equal the file's digest, with either line-ending form. The
-source's digest matches.
+`target.cdx.json` does not equal the file's digest, with either line-ending form.
+The source's digest matches.
 
 #### Current Knowledge
 
-The pilot's tests check recorded hashes only for the sweeps. IdentityOps pins the digest of
-the bytes it read. The cause is not known.
+The pilot's tests check recorded hashes only for the sweeps.
+IdentityOps pins the digest of
+the bytes it read.
+The cause is not known.
 
 #### Remaining Work
 
@@ -105,7 +109,8 @@ Mathematical Correctness
 #### Concern
 
 A surface (implementation mechanism) and a probe (read-only observation) are separate
-declarations but are evaluated identically. If the roles differ in meaning, the
+declarations but are evaluated identically.
+If the roles differ in meaning, the
 interpreter does not yet express the difference.
 
 #### Current Knowledge
@@ -125,19 +130,23 @@ Mathematical Correctness
 
 #### Concern
 
-The Lean files are not a proof about the Python code. The obligation stated in
-[SEMANTICS.md](./SEMANTICS.md) is checked only by tests and by exhaustive comparison on
-carriers of 3 to 6 items.
+The Lean files are not a proof about the Python code.
+The obligation is partially checked through unit tests and
+independent finite-state enumeration:
+exhaustive for carriers of 3 and 4 items, sampled for 5 and 6.
+The Python interpreter has not been
+compared directly with an executable Lean model.
 
 #### Current Knowledge
 
-Lean's state has no log and no snapshot index. Blocked steps leave the Lean state
+Lean's state has no log and no snapshot index.
+Blocked steps leave the Lean state
 unchanged but add a log entry and a snapshot in Python.
 
 #### Remaining Work
 
-State the correspondence per command as a differential test against a compiled Lean
-executable, in the style of Cedar, or reduce the claim.
+State the correspondence per command as a differential test
+against a compiled Lean executable, in the style of Cedar, or reduce the claim.
 
 ### UM-006. (OPEN) Single Author
 
@@ -148,11 +157,13 @@ Scientific Adequacy
 #### Concern
 
 The interpreter, the programs, the expectations, and the LACE-style encodings were
-written by the same author. Agreement among them is a consistency check.
+written by the same author.
+Agreement among them is a consistency check.
 
 #### Current Knowledge
 
-Expectations were committed before results, and two independent recomputations plus the
+Expectations are committed before results.
+Two independent recomputations plus the
 pilot's recorded results were used where available.
 
 #### Remaining Work
@@ -167,8 +178,8 @@ Theoretical Contribution
 
 #### Concern
 
-The comparison with LACE rests on my plain-clingo encodings. ASPEN and ASPEN+ were not
-run.
+The comparison with LACE rests on my plain-clingo encodings.
+ASPEN and ASPEN+ were not run.
 
 #### Current Knowledge
 
@@ -187,23 +198,30 @@ Mathematical Correctness
 #### Concern
 
 Normalization is now delegated to `packageurl-python` (version recorded in
-`examples/sbom/adapter.toml`). That removes a script-local approximation, but the
-result depends on the library's behavior and version, and on whether the library
-matches the intended specification. It was exercised on 9 PURL occurrences, all
+`examples/sbom/adapter.toml`).
+That removes a script-local approximation, but the
+result depends on the library's behavior and version,
+and on whether the library
+matches the intended specification.
+It was exercised on 9 PURL occurrences, all
 `pkg:deb` with an `arch` qualifier.
 
 #### Current Knowledge
 
-The earlier script-local canonicalizer and the library gave identical output on all 9
-occurrences, so no value in the tables or the results changed; only the evidence
-columns (`original_purl`, `purl_errors`) and the pinned input digests did. Other types,
-namespaces, and qualifiers are untested. Which body now maintains the specification
+The earlier script-local canonicalizer and the
+library gave identical output on all 9 occurrences,
+so no value in the tables or the results changed;
+only the evidence columns (`original_purl`, `purl_errors`)
+and the pinned input digests did.
+Other types, namespaces, and qualifiers are untested.
+Which body now maintains the specification
 was not verified.
 
 #### Remaining Work
 
 Confirm the specification's current edition and the library's conformance to it.
-Compare the library with the pilot's frozen module under its freeze. Test other types.
+Compare the library with the pilot's frozen module under its freeze.
+Test other types.
 
 ### UM-009. (OPEN) The Authority Substitution Used a Synthetic Corpus and a Stipulated Criterion
 
@@ -214,16 +232,17 @@ Scientific Adequacy
 #### Concern
 
 Experiment D shows that three Package URL implementations differ on 37 hand-written
-inputs. The inputs were chosen to provoke differences, the declared spelling sets are
-the experimenter's stipulation, and `packageurl-java` was not run. The result says
-nothing about how often these cases occur or which behavior the specification requires.
+inputs.
+The inputs were chosen to provoke differences, the declared spelling sets are
+the experimenter's stipulation, and `packageurl-java` was not run.
+The result says nothing about how often these cases occur or which behavior the specification requires.
 
 #### Current Knowledge
 
 The differential checks (one implementation's output as the criterion for another) need
-no stipulation, and an independent recomputation agreed with every count. The Go module
-was fetched without the Go checksum database because it could not be reached; its h1
-hash is the one recorded at that fetch.
+no stipulation, and an independent recomputation agreed with every count.
+The Go module was fetched without the Go checksum database because it could not be reached;
+its h1 hash is the one recorded at that fetch.
 
 #### Remaining Work
 
@@ -245,8 +264,10 @@ Scientific Adequacy
 #### Concern
 
 The 51 localized cross-class groups are "unsupported" only relative to the
-declared Vendor ID criterion. A different criterion could require some of them or
-forbid some. The class-pair count (55) sums pairs per group, so a class pair meeting in two
+declared Vendor ID criterion.
+A different criterion could require some of them or
+forbid some.
+The class-pair count (55) sums pairs per group, so a class pair meeting in two
 groups is counted twice.
 
 #### Current Knowledge
@@ -267,7 +288,8 @@ Scientific Adequacy
 #### Concern
 
 Several expectations are controls whose answers follow from the table layout, and several
-Experiment B and C expectations are engineering validation or synthetic. Meeting them shows the
+Experiment B and C expectations are engineering validation or synthetic.
+Meeting them shows the
 interpreter behaves as specified, not that the language is useful.
 
 #### Current Knowledge
@@ -278,71 +300,11 @@ Only the Chicago predictions were informed guesses about real data; all four hel
 
 Predictions about data not yet seen, recorded before they are seen.
 
-## Register 3. Doubts About What Our Results Mean (Undercutting Doubts)
+## Register 3. Doubts About What Results Mean (Undercutting Doubts)
 
 These questions concern the connection between a result and the scientific claim made about it.
 
-### UC-001. (STANDING RULES) Model State Versus Real-World Identity
+**No open doubts of this kind are recorded.**
 
-#### Research criterion
-
-Scientific Adequacy
-
-#### Concern
-
-A reader might take a licensed `apply`, or a class of the generated relation, as identity
-of real-world referents.
-
-#### Standing Rules
-
-1. Describe a class as generated by the declared criterion, judgments, and licensed steps.
-2. `apply` changes a model state. It does not resolve a referent and does not imply
-   authority to.
-3. Report commitments and differences. Do not say which regime is correct.
-
-### UC-002. (STANDING RULES) Unsupported Is Not Wrong
-
-#### Research criterion
-
-Scientific Adequacy
-
-#### Concern
-
-An `unsupported` collision may be read as an error in the audited mechanism.
-
-#### Standing Rules
-
-1. State that the criterion neither requires nor forbids the merge.
-2. Do not call the mechanism wrong on the basis of an `unsupported` result.
-
-### UC-003. (STANDING RULES) Reproducing a Known Case Is Not Generalization
-
-#### Research criterion
-
-Scientific Adequacy
-
-#### Concern
-
-Experiment B reproduces cases that were known when the pilot was designed.
-
-#### Standing Rules
-
-1. Describe them as engineering validation.
-2. Do not use them as evidence of generalization.
-3. Do not open Freeze 02 material to extend them.
-
-### UC-004. (STANDING RULES) Execution Is Not Novelty
-
-#### Research criterion
-
-Theoretical Contribution
-
-#### Concern
-
-That programs run and pass their tests may be read as a contribution.
-
-#### Standing Rules
-
-1. Call a capability different from LACE, LACE+, or ASPEN+ only where a specific
-   difference was demonstrated, and say whether it is vocabulary, cost, or power.
-2. Do not infer a contribution from successful execution.
+The four standing rules that were listed here are decisions, not doubts.
+They are in [DECISIONS.md](./DECISIONS.md) as D-014 to D-017.
